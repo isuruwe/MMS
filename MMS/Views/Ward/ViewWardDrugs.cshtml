@@ -1,0 +1,364 @@
+﻿
+@{
+    ViewBag.Title = "ViewWardDrugs";
+}
+
+@section scripts
+{
+    <script src="~/Scripts/Episode/v6/Module.js"></script>
+    <script src="~/Scripts/Episode/v6/Service.js"></script>
+    <script src="~/Scripts/Episode/v6/Controller.js"></script>
+}
+<link href="~/Scripts/css/jquery.booklet.latest.css" type="text/css" rel="stylesheet" media="screen, projection, tv" />
+<script src="~/Scripts/js/jquery.js"></script>
+<script src="~/Scripts/jquery-ui.min.js"></script>
+<script src="~/Scripts/jquery.min.js"></script>
+<script src="~/Scripts/js/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/js/metisMenu.min.js"></script>
+<script src="~/Scripts/js/sb-admin-2.js"></script>
+<script src="~/Scripts/js/dataTables.bootstrap.min.js"></script>
+<script src="~/Scripts/js/dataTables.responsive.js"></script>
+<script src="~/Scripts/Angular/angular.js"></script>
+
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/jquery.easing.1.3.js"></script>
+<script src="~/Scripts/jquery.booklet.latest.js"></script>
+<script src="~/Scripts/angular-route.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/ui-bootstrap-tpls-1.3.3.min.js"></script>
+
+<link rel="stylesheet" href="~/Scripts/css/bootstrap.min.css">
+<link rel="stylesheet" href="~/Scripts/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/Scripts/css/animate.min.css">
+<link rel="stylesheet" href="~/Scripts/css/et-line-font.css">
+<link rel="stylesheet" href="~/Scripts/css/nivo-lightbox.css">
+@*<link rel="stylesheet" href="~/Scripts/css/nivo_themes/default/default.css">*@
+<link rel="stylesheet" href="~/Scripts/css/style.css">
+
+@*<script src="~/Scripts/js/bootstrap.min.js"></script>*@
+<script src="~/Scripts/js/smoothscroll.js"></script>
+<script src="~/Scripts/js/isotope.js"></script>
+<script src="~/Scripts/js/imagesloaded.min.js"></script>
+<script src="~/Scripts/js/nivo-lightbox.min.js"></script>
+<script src="~/Scripts/js/jquery.backstretch.min.js"></script>
+<script src="~/Scripts/js/wow.min.js"></script>
+<script src="~/Scripts/js/custom.js"></script>
+<script>
+    jQuery.extend(jQuery.expr[':'], {
+    focusable: function (el, index, selector) {
+        return $(el).is('a, button, :input, [tabindex]');
+    }
+});
+    $(document).ready(function () {
+
+       // document.getElementById('mdt').valueAsDate = new Date();
+
+    });
+
+    $(document).on('keypress', 'input,select', function (e) {
+        if (e.which == 13) {
+            debugger;
+            e.preventDefault();
+            // Get all focusable elements on the page
+            var $canfocus = $(':focusable');
+            var index = $canfocus.index(document.activeElement) + 1;
+            if (index >= $canfocus.length) index = 0;
+            $canfocus.eq(index).focus();
+        }
+    });
+
+    $(document).on('keypress', '#srch', function (e) {
+
+        if (e.which == 13) {
+            debugger;
+            // Enter key pressed
+            document.location = $("#change1").attr('href');
+        }
+    });
+    $(document).on('keypress', '#drdur', function (e) {
+
+        if (e.which == 13) {
+            debugger;
+            // Enter key pressed
+           $("#draddl").trigger('click');
+        }
+    });
+    $(document).on('keypress', '#mdt', function (e) {
+
+        if (e.which == 13) {
+            debugger;
+            // Enter key pressed
+            $("#mbtn").click();
+        }
+    });
+
+
+
+
+</script>
+@using PagedList.Mvc;
+@using PagedList;
+
+
+<div ng-app="EpisodeApp" class="container">
+
+    <div ng-controller="EpisodeCntrl" id="epicontrol" ng-init="initpatient()">
+
+        <div ng-show="divPor" class="form-horizontal">
+
+            <section class="navbar navbar-fixed-top custom-navbar" role="navigation">
+                <div class="container">
+
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li>
+                                <a href="@Url.Action("Index","Home")">HOME</a>
+
+                            </li>
+                            <li>
+                                <input type="submit" ng-click="" onclick="validate();" value="Save" class="btn-primary btn-sm" />
+
+
+
+                            </li>
+                            <li>
+                                <div ng-show="showerror">
+                                    <span style="background-color:black">Error!</span>
+                                </div>
+
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a id="tp" href="#work">TOP</a></li>
+                            @* <li><a href="#work" class="smoothScroll">NURSE</a></li>*@
+                            @*<li><a href="#about" class="smoothScroll">ABOUT</a></li>*@
+                            @*<li><a href="#portfolio">DOCTOR</a></li>
+                            <li><a href="#team">EXAMINATION</a></li>
+                            <li><a href="#pricing">INVESTIGATIONS</a></li>
+                            <li><a href="#about">DIAGNOSIS</a></li>
+                            <li><a href="#contact">DRUGS</a></li>
+                            <li><a href="#contact1">MEDICAL DISPOSAL</a></li>*@
+                        </ul>
+
+
+                    </div>
+
+
+
+                </div>
+            </section><div class="row">
+                <div class="col-ld-2">
+                </div>
+                <div class="col-ld-2">
+                    @Session["loginuser"].ToString()
+                </div>
+            </div>
+            <section id="work">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <h3>In Ward Patients</h3>
+                        </div><div class="form-group">
+                            <div class="col-md-7">
+                                <div class="col-md-6">
+                                    <input type="text" id="srch" class="form-control" style="color:blue" ng-model="SearchString" />
+                                </div>
+                                <div class="col-md-2"><a id="change1" type='submit' value='Search' name='Search' class="btn-primary btn text-uppercase " href="@Url.Action("ViewWardDrugs","Ward")?id={{SearchString}}">search</a></div>
+                            </div>
+                        </div>
+                        <div class="form-horizontal" style="border:1px solid #0094ff; overflow-y:hidden">
+                            @if (ViewBag.OnePageOfProducts.Count > 0)
+                            {
+                                <table id="asdfhg" class="table table-striped">
+                                    <tr>
+                                        <th>
+
+                                        </th>
+                                        <th>
+                                            Service No
+                                        </th>
+                                        <th>
+                                            Name
+                                        </th>
+                                        @*<th>
+                                            Present Complain
+                                        </th>*@
+                                        <th>
+                                            Date
+                                        </th>
+
+                                        @*<th>
+                                            Status
+                                        </th>*@
+                                    </tr>
+
+                                    @foreach (var item in (IEnumerable<MMS.Models.getdocdetail>)ViewBag.OnePageOfProducts)
+                                    {
+                                        <tr>
+                                            <td align="left">
+                                                @item.relasiondet
+                                            </td>
+                                            <td align="left">
+                                                <a href="#portfolio" ng-click="PatientHystoryWardDrugs('@item.pidp','@item.pdids');">@item.sno</a>
+                                            </td>
+                                            <td align="left">
+                                                <a href="#portfolio" ng-click="PatientHystoryWardDrugs('@item.pidp','@item.pdids');">
+                                                    @if (item.relasiont == 1)
+                                                    { @item.rnkname}
+                                                    @item.inililes @item.sname
+                                                </a>
+
+                                            </td>
+                                            @*<td align="left">
+                                                @item.pcomoplian
+                                            </td>*@
+                                            <td align="left">
+                                                @item.crdate
+                                            </td>
+
+                                            @*<td align="left">
+                                                @if (item.pstatus == "12")
+                                                { <label>Admit</label> }
+                                                else if (item.pstatus == "11")
+                                                {
+                                                    <label>Detain</label>
+                                                }
+                                            </td>*@
+                                        </tr>
+                                    }
+
+                                </table>
+                            }
+                            else
+                            {
+                                //Response.Redirect("~/Home/Index/");
+                                <div><center>No Results</center></div>
+                            }
+                            @Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("ViewWardDrugs", new { page, currentFilter = ViewBag.CurrentFilter }))
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+            <div ng-show="showloader" id="loading">
+                <img id="loading-image" src="~/Content/Images/loading.png" />
+            </div>
+
+            <section id="portfolio">
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="section-title">
+
+                                <h1 class="heading bold">PHARMACY</h1>
+                                <hr>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+            <section id="contact">
+                <div class="container">
+                    <div class="row">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                Drugs Management
+                            </div>
+                            <div class="panel-body">
+
+                                <table class="table table-striped " name="sd">
+                                    <thead>
+                                        <tr>
+                                            
+                                            <th width="40%" align="left">Drug Name </th>
+                                            <th width="20%" align="left">Dose </th>
+                                            <th width="20%" align="left">Route </th>
+                                            <th width="20%" align="left">Method </th>
+                                            <th width="20%" align="left">Issue Qty </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-repeat="field in h1">
+                                        <tr>
+                                           
+                                            <td width="40%" align="left">{{ field.itemdescription }}</td>
+                                            <td width="20%" align="left">{{ field.Dose }}</td>
+                                            <td width="20%" align="left"> {{field.RouteDetail}}</td>
+                                            <td width="20%" align="left">{{ field.MethodDetail }}</td>
+
+                                            <td width="20%" align="left"><input id="drdur" type="number" ng-model="Duration" /></td>
+
+                                            <td width="20%" align="left">
+                                                <input type="button" id="draddl" class="f1" ng-click="IssuDrug(field.ItemNo,Duration,field.PDID);" value="Issued" />                                                       
+                                            </td>
+                                        </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</div>
+<script>
+    $(function () {
+        //single book
+        debugger;
+
+        //$('#mybook').booklet({
+        //    width: '100%',
+        //    height: 800,
+        //   // closed: true,
+        //    autoCenter: true,
+        //    arrows: true,
+        //    direction: "RTL"
+
+        //});
+
+    });
+    function vwlb(id,id1) {
+        debugger;
+        angular.element(document.getElementById('epicontrol')).scope().viewlabtest(id,id1);
+    }
+    function validate1() {
+        debugger;
+        $('#mybook').booklet({
+            width: '100%',
+            height: '100%',
+            //closed: true,
+            autoCenter: true,
+            arrows: true,
+            direction: "RTL"
+
+        });
+    }
+    function validate() {
+        debugger;
+        var selectv = $("#dgcat").find(":selected").text();
+        //if (angular.element(document.getElementById('epicontrol')).scope().bitems.length < 1) {
+        //    alert("Please Select Daignosis catagory");
+        //    //$("#errormsgspan").text("Please Select Daignosis catagory");
+        //    return false;
+        //} else {
+        //    //$("#errormsgspan").text(" ");
+        //    angular.element(document.getElementById('epicontrol')).scope().SavepatientWard();
+        //    return true;
+        //}
+        angular.element(document.getElementById('epicontrol')).scope().SavepatientWard();
+
+    }
+    $("form").submit(function () {
+
+    });
+</script>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

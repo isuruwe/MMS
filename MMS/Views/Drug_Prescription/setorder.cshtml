@@ -1,0 +1,391 @@
+﻿
+
+@{
+    ViewBag.Title = "MMS";
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts
+{
+    <script src="~/Scripts/Episode/v6/Module.js"></script>
+    <script src="~/Scripts/Episode/v6/Service.js"></script>
+    <script src="~/Scripts/Episode/v6/Controller.js"></script>
+}
+<link href="~/Scripts/css/jquery.booklet.latest.css" type="text/css" rel="stylesheet" media="screen, projection, tv" />
+<script src="~/Scripts/js/jquery.js"></script>
+<script src="~/Scripts/jquery-ui.min.js"></script>
+<script src="~/Scripts/jquery.min.js"></script>
+<script src="~/Scripts/js/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/js/metisMenu.min.js"></script>
+<script src="~/Scripts/js/sb-admin-2.js"></script>
+<script src="~/Scripts/js/dataTables.bootstrap.min.js"></script>
+<script src="~/Scripts/js/dataTables.responsive.js"></script>
+<script src="~/Scripts/Angular/angular.js"></script>
+
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/jquery.easing.1.3.js"></script>
+<script src="~/Scripts/jquery.booklet.latest.js"></script>
+<script src="~/Scripts/angular-route.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/ui-bootstrap-tpls-1.3.3.min.js"></script>
+
+<link rel="stylesheet" href="~/Scripts/css/bootstrap.min.css">
+<link rel="stylesheet" href="~/Scripts/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/Scripts/css/animate.min.css">
+<link rel="stylesheet" href="~/Scripts/css/et-line-font.css">
+<link rel="stylesheet" href="~/Scripts/css/nivo-lightbox.css">
+@*<link rel="stylesheet" href="~/Scripts/css/nivo_themes/default/default.css">*@
+<link rel="stylesheet" href="~/Scripts/css/style.css">
+
+@*<script src="~/Scripts/js/bootstrap.min.js"></script>*@
+<script src="~/Scripts/js/smoothscroll.js"></script>
+<script src="~/Scripts/js/isotope.js"></script>
+<script src="~/Scripts/js/imagesloaded.min.js"></script>
+<script src="~/Scripts/js/nivo-lightbox.min.js"></script>
+<script src="~/Scripts/js/jquery.backstretch.min.js"></script>
+<script src="~/Scripts/js/wow.min.js"></script>
+<script src="~/Scripts/js/custom.js"></script>
+<script>
+    jQuery.extend(jQuery.expr[':'], {
+    focusable: function (el, index, selector) {
+        return $(el).is('a, button, :input, [tabindex]');
+    }
+});
+
+
+    $(document).on('keypress', 'input,select', function (e) {
+        if (e.which == 13) {
+            debugger;
+            e.preventDefault();
+            // Get all focusable elements on the page
+            var $canfocus = $(':focusable');
+            var index = $canfocus.index(document.activeElement) + 1;
+            if (index >= $canfocus.length) index = 0;
+            $canfocus.eq(index).focus();
+        }
+    });
+
+    $(document).on('keypress', '#srch', function (e) {
+
+        if (e.which == 13) {
+            debugger;
+            // Enter key pressed
+            document.location = $("#change1").attr('href');
+        }
+    });
+    $(document).on('keypress', '#drdur', function (e) {
+
+        if (e.which == 13) {
+            debugger;
+            // Enter key pressed
+           $("#draddl").trigger('click');
+        }
+    });
+    $(document).on('keypress', '#mdt', function (e) {
+
+        if (e.which == 13) {
+            debugger;
+            // Enter key pressed
+            $("#mbtn").click();
+        }
+    });
+
+
+
+
+</script>
+@using PagedList.Mvc;
+@using PagedList;
+
+
+<div ng-app="EpisodeApp" class="container">
+
+    <div ng-controller="EpisodeCntrl" id="epicontrol" ng-init="initphloc()">
+
+        <div ng-show="divPor" class="form-horizontal">
+            <div class="row">
+                <section class="navbar navbar-fixed-top custom-navbar" role="navigation">
+                    <div class="container">
+
+                        <div class="collapse navbar-collapse">
+                            <ul class="nav navbar-nav navbar-left">
+                                <li>
+                                    <a href="@Url.Action("Index","Home")">HOME</a>
+
+                                </li>
+                                <li>
+
+
+                                </li>
+                                <li>
+                                    <div ng-show="showerror">
+                                        <span style="background-color:black">Error!</span>
+                                    </div>
+
+                                </li>
+                            </ul>
+
+
+
+                        </div>
+
+
+
+                    </div>
+                </section>
+            </div>
+            <div class="row">
+                <section id="work">
+                    <div class="col-md-3"></div>
+                    <div class="form-horizontal" style="border:1px solid #0094ff; overflow-y:hidden">
+                        @if (ViewBag.gtclbatch.Count > 0)
+                        {
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>
+                                        Pharmacy
+                                    </th>
+                                    <th>
+                                        BATCH No
+                                    </th>
+                                    <th>
+                                        Status
+                                    </th>
+
+                                    <th>
+                                        Date
+                                    </th>
+
+
+                                </tr>
+
+                                @foreach (var item in (IEnumerable<MMS.Models.getsickdata2>)ViewBag.gtclbatch)
+                                {
+                                    <tr>
+                                        <td align="left">
+                                            @item.lname
+                                        </td>
+                                        <td align="left">
+
+                                            <a href="#work" ng-click="loaddorder('@item.svcid');">@item.svcid </a>
+                                        </td>
+                                        <td align="left">
+
+                                            @if (item.rt == 1)
+                                            { <label>Issued</label> }
+                                            else
+                                            {
+                                                <label>Pending</label>
+                                            }
+                                        </td>
+                                        <td align="left">
+                                            @item.modifieddate
+                                        </td>
+
+
+                                    </tr>
+                                }
+
+                            </table>
+                        }
+                        else
+                        {
+                            //Response.Redirect("~/Home/Index/");
+                            <div><ce3ter>No Results</ce3ter></div>
+                        }
+
+                    </div>
+                </section>
+            </div>
+            
+            <div class="row">
+                <section id="work">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-10">
+
+
+                        <span id="errormsgspan" asp-validation-for="Year"></span>
+                        <table class="table table-striped table-condensed">
+
+                            <thead class="panel-heading">
+                                <tr>
+                                    <th width="25%" align="left">Drug Name </th>
+
+                                    <th width="10%" align="left">Demand Qty </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+
+                                    <td width="25%" align="left"><input class="form-control" type="text" name="dn1" value="value=" {{loclisi.Clinic_ID}} " id="dn1" ng-model="DName1" uib-typeahead="g as g.itemdescription for g in DName | filter: $viewValue| limitTo:20" typeahead-on-select='Getdrugalldep(DName1.itemno)'><a class="clear" ng-click="DName1=null"><span class="glyphicon glyphicon-remove"></span></a></td>
+
+
+                                    <td width="5%" align="left"><input id="qnty1" name="qnty1" type="number" ng-model="qnty" /></td>
+
+                                </tr>
+                            </tbody>
+
+                        </table>
+
+
+
+                        <button type="submit" onclick="validate()">Save</button>
+
+                        @*<input type="hidden" name="gl" id="gl" value="{{loclisi.Clinic_ID}}" />*@
+
+                    </div>
+                    <div class="col-md-3"> </div>
+                </section>
+            </div>
+            
+            
+            <div class="row">
+                <section>
+
+                    <div class="form-horizontal" style="border:1px solid #0094ff; overflow-y:hidden">
+                        @if (ViewBag.stck.Count > 0)
+            {
+                            <table id="asdfhg" class="table table-striped">
+                                <tr>
+                                    <th>
+                                        Drug
+                                    </th>
+                                    <th>
+                                        Demand Quantity
+                                    </th>
+                                    <th>
+                                        Issued Quantity
+                                    </th>
+                                    <th>
+                                        Return Quantity
+                                    </th>
+                                    <th>
+                                        Status
+                                    </th>
+                                    <th>
+                                        Remarks
+                                    </th>
+                                   
+
+
+                                </tr>
+
+                                @foreach (var item in (IEnumerable<MMS.Models.getdrugdata>)ViewBag.stck)
+                                {
+                                    <tr>
+                                        <td align="left">
+                                            @item.itemdescription
+                                        </td>
+
+                                        <td align="left">
+                                            @item.DrugQuantity
+                                        </td>
+                                        <td align="left">
+                                            @item.StoreID
+                                        </td>
+                                        <td align="left">
+                                            @item.returnqty
+                                        </td>
+                                        <td align="left">
+                                            @item.ItemID
+                                        </td>
+                                        <td align="left">
+                                            @item.remarks
+                                        </td>
+                                       
+                                    </tr>
+                                }
+
+                            </table>
+                        }
+                        else
+                        {
+                            //Response.Redirect("~/Home/Index/");
+                            <div><center>No Results</center></div>
+                        }
+
+                    </div>
+
+
+
+                </section>
+            </div>
+            <div class="row">
+                <br>
+
+            </div>
+                <div class="row">
+                    <section>
+
+                        <div class="form-horizontal" style="border:1px solid #0094ff; overflow-y:hidden">
+                            <table class="table table-striped" name="sd">
+
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Drug
+                                        </th>
+                                        <th>
+                                            Demand Quantity
+                                        </th>
+                                        <th>
+                                            Issued Quantity
+                                        </th>
+                                        <th>
+                                            Return Quantity
+                                        </th>
+                                        <th>
+                                            Remarks
+                                        </th>
+
+
+                                    </tr>
+                                </thead>
+                                <tbody ng-repeat="field in loadlab">
+                                    <tr>
+                                        <td width="20%" align="left"> {{field.itemdescription}}</td>
+                                        <td width="20%" align="left"> {{field.DrugQuantity}}</td>
+                                        <td width="20%" align="left"> {{field.StoreID}}</td>
+                                        <td width="20%" align="left"> {{field.returnqty}}</td>
+                                        <td width="20%" align="left"> {{field.remarks}}</td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+
+
+                        </div>
+
+
+
+                    </section>
+                </div>
+            </div>
+
+    </div>
+
+</div>
+
+<script>
+
+
+    function validate() {
+        debugger;
+       // var selectv = $("#dgcat").find(":selected").text();
+        var selectv = $("#loclisi1").find(":selected").text();
+        var selectv1=  $("#loclisi1").find(":selected").val();
+        if (selectv == "-- Select Location --") {
+            $("#errormsgspan").text("Please Select Location");
+            return false;
+        } else {
+            $("#errormsgspan").text(" ");
+
+            angular.element(document.getElementById('epicontrol')).scope().Savedemand();
+            return true;
+        }
+    }
+
+</script>
+
+

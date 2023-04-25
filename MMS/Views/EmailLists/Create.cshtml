@@ -1,0 +1,74 @@
+﻿@model MMS.EmailList
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+<section class="navbar navbar-fixed-top custom-navbar" role="navigation">
+    <div class="container">
+
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-left">
+                <li>
+                    <a href="@Url.Action("Index","Home")">HOME</a>
+
+                </li>
+                <li>
+                    @*<div ng-show="showerror">
+                        <span style="background-color:white">Error!</span>
+                    </div>*@
+
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/MMS/EmailLists/Index">Back to Email List</a></li>
+
+                @*<li><a href="#work">Lab Report</a></li>*@
+                @*<li><a href="#about" class="smoothScroll">ABOUT</a></li>*@
+
+                @*<li><a href="#portfolio" class="smoothScroll">PORTFOLIO</a></li>*@
+
+            </ul>
+
+        </div>
+
+
+
+    </div>
+</section>
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+      
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.SvcID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SvcID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SvcID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

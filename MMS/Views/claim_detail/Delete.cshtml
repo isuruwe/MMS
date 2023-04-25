@@ -1,0 +1,463 @@
+﻿
+@{
+    ViewBag.Title = "MMS";
+}
+@using PagedList.Mvc;
+@using PagedList;
+
+@section scripts
+{
+    <script src="~/Scripts/Episode/v6/Module.js"></script>
+    <script src="~/Scripts/Episode/v6/Service.js"></script>
+    <script src="~/Scripts/Episode/v6/Controller.js"></script>
+}
+
+<script src="~/Scripts/js/jquery.js"></script>
+<script src="~/Scripts/js/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/js/metisMenu.min.js"></script>
+<script src="~/Scripts/js/sb-admin-2.js"></script>
+<script src="~/Scripts/js/dataTables.bootstrap.min.js"></script>
+<script src="~/Scripts/js/dataTables.responsive.js"></script>
+<script src="~/Scripts/Angular/angular.js"></script>
+<script src="~/Scripts/Angular/angular-sanitize.js"></script>
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/angular-route.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/ui-bootstrap-tpls-1.3.3.min.js"></script>
+
+<link rel="stylesheet" href="~/Scripts/css/bootstrap.min.css">
+<link rel="stylesheet" href="~/Scripts/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/Scripts/css/animate.min.css">
+<link rel="stylesheet" href="~/Scripts/css/et-line-font.css">
+<link rel="stylesheet" href="~/Scripts/css/nivo-lightbox.css">
+@*<link rel="stylesheet" href="~/Scripts/css/nivo_themes/default/default.css">*@
+<link rel="stylesheet" href="~/Scripts/css/style.css">
+@*<script src="~/Scripts/js/bootstrap.min.js"></script>*@
+<script src="~/Scripts/js/smoothscroll.js"></script>
+<script src="~/Scripts/js/isotope.js"></script>
+<script src="~/Scripts/js/imagesloaded.min.js"></script>
+<script src="~/Scripts/js/nivo-lightbox.min.js"></script>
+<script src="~/Scripts/js/jquery.backstretch.min.js"></script>
+<script src="~/Scripts/js/wow.min.js"></script>
+<script src="~/Scripts/js/custom.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        document.getElementById('datest').valueAsDate = new Date();
+
+    });
+
+    function loadold() {
+
+
+        angular.element(document.getElementById('epicontrol')).scope().Getclaim();
+
+
+
+ }</script>
+
+<div ng-app="EpisodeApp" class="container">
+
+    <div ng-controller="EpisodeCntrl" id="epicontrol" ng-init="initclaim()">
+
+        <div ng-show="divPor" class="form-horizontal">
+
+            <section class="navbar navbar-fixed-top custom-navbar" role="navigation">
+                <div class="container">
+
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li>
+                                <a href="@Url.Action("Index","Home")">HOME</a>
+                            </li>
+                            <li><input type="submit" ng-click="Submitgvs();" value="Save" class="btn-sm btn-primary" /></li>
+                            <li>
+                                <div ng-show="showerror">
+                                    <span style="background-color:white">Error!</span>
+                                </div>
+
+                            </li>
+
+
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#team">TOP</a></li>
+                            <li><a href="#work">CLAIM</a></li>
+                          
+
+
+                            @*<li><a href="#about" class="smoothScroll">ABOUT</a></li>*@
+
+                            @*<li><a href="#portfolio" class="smoothScroll">PORTFOLIO</a></li>*@
+
+                        </ul>
+
+                    </div>
+
+
+
+
+                </div>
+            </section>
+            <div ng-show="showloader" id="loading">
+                <img id="loading-image" src="~/Content/Images/loading.png" />
+            </div>
+            <section id="team">
+                <div class="container">
+                    <div class="row">
+                        <script>
+                            $(document).ready(function () {
+
+                                document.getElementById('datest').valueAsDate = new Date();
+                            });
+
+                        </script>
+                        <div class="col-md-12 col-sm-12">
+                            <div class="section-title">
+
+                                <h1 class="heading bold">Claim Management</h1>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="form-horizontal" style="height:150px;   border:1px solid #0094ff; overflow-y:auto;">
+                            @if (ViewBag.gtclbatch.Count > 0)
+            {
+                                <table id="asdfhg" class="table table-striped">
+                                    <tr>
+                                        <th>
+                                            Claim Batch
+                                        </th>
+                                        <th>
+                                            View Batch
+                                        </th>
+
+
+
+                                    </tr>
+
+                                    @foreach (var item in (IEnumerable<MMS.Models.getsickdata2>)ViewBag.gtclbatch)
+                                    {
+                                        <tr>
+                                            <td align="left">
+
+
+                                                <a href="~/claim_detail/getclbatch?id=@item.svcid">
+                                                    @item.svcid
+                                                </a>
+
+
+                                            </td>
+                                            <td align="left">
+
+
+                                                <a href="~/claim_detail/getclbatch?id=@item.svcid">
+                                                    View
+                                                </a>
+
+
+                                            </td>
+
+
+
+                                        </tr>
+                                    }
+
+                                </table>
+                            }
+                            else
+                            {
+                                //Response.Redirect("~/Home/Index/");
+                                <div><center>No Results</center></div>
+                            }
+
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                <div class="col-md-4">
+                                    Service No<input type="text" class="form-control" style="color:blue" ng-model="SearchString" />
+                                </div>
+                                @*<div class="col-md-4">
+
+                                        Date<input id="datest" type="date" class="form-control" style="color:blue" ng-model="SearchString1" />
+                                    </div>*@
+                                <div class="col-md-1">
+                                    <a class="btn-primary btn text-uppercase " href="@Url.Action("Details","claim_detail")?id={{SearchString}}&id1={{SearchString1}}">Search</a>
+                                </div>
+                                <div class="col-md-3">
+                                    <a class="btn-primary btn text-uppercase " href="@Url.Action("genmingvsgvs","claim_detail")">Generate Minute</a>
+                                </div>
+                                <div class="col-md-3">
+                                    <a class="btn-primary btn text-uppercase " href="@Url.Action("genmingvsr","claim_detail")">Generate Minute Return</a>
+                                </div>
+                            </div>
+
+                            @*@Html.Label("Alert", htmlAttributes: new { @class = "control-label col-md-2" })*@
+                        </div>
+
+
+
+                        <div class="form-horizontal" style="border:1px solid #0094ff; overflow-y:hidden">
+                            @*@if (ViewBag.OnePageOfProducts.Count > 0)
+                                {*@
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>
+                                        Event Date
+                                    </th>
+                                    <th>
+                                        Relationship
+                                    </th>
+                                    <th>
+                                        Service No
+                                    </th>
+                                    <th>
+                                        Name of Beneficiary
+                                    </th>
+                                    <th>
+                                        Catagory
+                                    </th>
+                                    <th>
+                                        Diagnosis
+                                    </th>
+                                    <th>
+                                        Claimed Amount
+                                    </th>
+                                    <th>
+                                        Claimed Date
+                                    </th>
+                                    <th>
+                                        Claimed Station
+                                    </th>
+                                    <th>
+                                        Claim Status
+                                    </th>
+                                </tr>
+
+                                @foreach (var item in (IEnumerable<MMS.Models.getclaimdata>)ViewBag.OnePageOfProducts)
+                                {
+                                    <tr>
+                                        <td align="left">
+
+                                            @item.evntdate.Value.ToShortDateString()
+
+
+                                        </td>
+                                        <td align="left">
+
+                                            @item.relasiont
+
+
+                                        </td>
+                                        <td align="left">
+                                            @item.serviceno
+
+                                        </td>
+                                        <td align="left">
+
+                                            @item.claimname
+                                        </td>
+                                        <td align="left">
+                                            @item.catagory
+                                        </td>
+                                        <td align="left">
+                                            @item.diagnosis
+                                        </td>
+                                        <td align="left">
+                                            @item.claimamnt.ToString()
+                                        </td>
+                                        <td align="left">
+                                            @item.crdate.Value.ToShortDateString()
+                                        </td>
+                                        <td align="left">
+                                            @item.loc
+                                        </td>
+                                        <td align="left">
+                                            @if (item.status == "1")
+                                            {<label>Pending</label>
+                                            }
+                                            else if (item.status == "2")
+                                            {
+                                                <label>Forwaded to TSI</label>
+                                            }
+                                            else if (item.status == "21")
+                                            {
+                                                <label>Rejected by TSI</label>
+                                            }
+                                            else if (item.status == "3")
+                                            {
+                                                <label>Forwaded to CWF</label>
+                                            }
+                                            else if (item.status == "4")
+                                            {
+                                                <label>Forwaded to DHS</label>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+
+                            </table>
+                            @*}
+                                else
+                                {
+                                    //Response.Redirect("~/Home/Index/");
+                                    <div><center>No Results</center></div>
+                                }*@
+                            @Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("Details", new { page }))
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section id="work">
+                <div class="container">
+                    <div class="row">
+
+
+
+
+
+
+
+
+                        <div class="col-lg-12 ">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Claim</div>
+                                <div class="panel-body">
+                                    <span id="errormsgspannurse" asp-validation-for="Year" style="background-color:#f86464"></span>
+                                    <div class="form-group">
+                                        <table class="table table-striped table-condensed">
+                                            <tbody>
+                                                <tr>
+                                                    <td>Register No</td>
+                                                    <td>
+                                                        <input type="text" ng-model="regno" ng-required="true" ng-blur="Gettsiclaim()" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Service No,Rank & Name</td>
+                                                    <td>
+                                                        {{clmdx[0].serviceno}}      {{clmdx[0].rank}}  {{clmdx[0].initials}}    {{clmdx[0].Surname}}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Applied Amount</td>
+                                                    <td>
+                                                        {{clmdx[0].claimamnt}}
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>MO Approved Amount</td>
+                                                    <td>
+                                                        {{clmdx[0].moamount}}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Catagory</td>
+                                                    <td>
+                                                        {{clmdx[0].catagory}}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Approved Amount</td>
+                                                    <td>
+                                                        <input type="number" ng-model="clmamnt">
+                                                        <a class="clear" ng-click="clmamnt=null">
+                                                            <span class="glyphicon glyphicon-remove"></span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Return Reason</td>
+                                                    <td>
+                                                        <input type="text" ng-model="rtrsn">
+                                                        <a class="clear" ng-click="rtrsn=null">
+                                                            <span class="glyphicon glyphicon-remove"></span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+
+                                                    <td>
+
+                                                        <input type="button" ng-click="Submitgvs()" value="Save" />
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <table class="table table-striped">
+
+                                            <tr ng-repeat="clitem in clitems" class="item">
+                                                <td width="50%"><b>{{clitem.cnbenef}}</b> </td>
+                                                <td width="50%"><b>{{clitem.cclmamn}}</b> </td>
+                                                <td width="50%"><b>{{clitem.cevntdt|limitTo:-15 |limitTo:13 | date:'dd/MM/yyyy'}}</b> </td>
+
+                                                <td><button ng-click="clremoveItem($index)">Remove</button></td>
+                                            </tr>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    @*<div class="panel panel-primary">
+                            <div class="panel-heading">
+                                Same Day Claims
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-striped" name="sd">
+
+                                    <thead>
+                                        <tr>
+
+                                            <th width="20%" align="left">Benificiary Name</th>
+                                            <th width="20%" align="left">Service No</th>
+                                            <th width="20%" align="left">Event Date</th>
+                                            <th width="20%" align="left">Sent Date</th>
+                                            <th width="20%" align="left">Catagory</th>
+                                            <th width="20%" align="left">Diagnosis</th>
+                                            <th width="20%" align="left">Relationship</th>
+                                            <th width="20%" align="left">Amount</th>
+                                            <th width="20%" align="left">Location</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-repeat="field in clmd">
+                                        <tr>
+
+                                            <td width="40%" align="left"> {{field.claimname}}</td>
+                                            <td width="20%" align="left"> {{field.serviceno}}</td>
+                                            <td width="20%" align="left"> {{field.evntdate |limitTo:-15 |limitTo:13 | date:'dd/MM/yyyy HH:mm'}}</td>
+                                            <td width="20%" align="left"> {{field.crdate |limitTo:-15 |limitTo:13 | date:'dd/MM/yyyy HH:mm'}}</td>
+                                            <td width="20%" align="left"> {{field.catagory}}</td>
+                                            <td width="20%" align="left"> {{field.diagnosis}}</td>
+                                            <td width="20%" align="left"> {{field.relasiont}}</td>
+                                            <td width="20%" align="left"> {{field.claimamnt}}</td>
+                                            <td width="20%" align="left"> {{field.loc}}</td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
+                        </div>*@
+                </div>
+            </section>
+
+
+        </div>
+    </div>
+</div>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+

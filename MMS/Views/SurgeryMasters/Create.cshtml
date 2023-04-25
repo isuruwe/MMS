@@ -1,0 +1,1068 @@
+﻿@model MMS.SurgeryMaster
+
+@{
+    ViewBag.Title = "Surgery";
+}
+@section scripts
+{
+    <script src="~/Scripts/Episode/v6/Module.js"></script>
+    <script src="~/Scripts/Episode/v6/Service.js"></script>
+    <script src="~/Scripts/Episode/v6/Controller.js"></script>
+}
+<link href="~/Scripts/css/jquery.booklet.latest.css" type="text/css" rel="stylesheet" media="screen, projection, tv" />
+<script src="~/Scripts/js/jquery.js"></script>
+<script src="~/Scripts/jquery-ui.min.js"></script>
+<script src="~/Scripts/jquery.min.js"></script>
+<script src="~/Scripts/js/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/js/metisMenu.min.js"></script>
+<script src="~/Scripts/js/sb-admin-2.js"></script>
+<script src="~/Scripts/js/dataTables.bootstrap.min.js"></script>
+<script src="~/Scripts/js/dataTables.responsive.js"></script>
+<script src="~/Scripts/Angular/angular.js"></script>
+
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/jquery.easing.1.3.js"></script>
+<script src="~/Scripts/jquery.booklet.latest.js"></script>
+<script src="~/Scripts/angular-route.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/ui-bootstrap-tpls-1.3.3.min.js"></script>
+
+<link rel="stylesheet" href="~/Scripts/css/bootstrap.min.css">
+<link rel="stylesheet" href="~/Scripts/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/Scripts/css/animate.min.css">
+<link rel="stylesheet" href="~/Scripts/css/et-line-font.css">
+<link rel="stylesheet" href="~/Scripts/css/nivo-lightbox.css">
+@*<link rel="stylesheet" href="~/Scripts/css/nivo_themes/default/default.css">*@
+<link rel="stylesheet" href="~/Scripts/css/style.css">
+@*<script src="~/Scripts/js/bootstrap.min.js"></script>*@
+<script src="~/Scripts/js/smoothscroll.js"></script>
+<script src="~/Scripts/js/isotope.js"></script>
+<script src="~/Scripts/js/imagesloaded.min.js"></script>
+<script src="~/Scripts/js/nivo-lightbox.min.js"></script>
+<script src="~/Scripts/js/jquery.backstretch.min.js"></script>
+<script src="~/Scripts/js/wow.min.js"></script>
+<script src="~/Scripts/js/custom.js"></script>
+<script type="text/javascript" src="~/Scripts/js/jquery-clock-timepicker.min.js"></script>
+<script>
+    jQuery.extend(jQuery.expr[':'], {
+    focusable: function (el, index, selector) {
+        return $(el).is('a, button, :input, [tabindex]');
+    }
+});
+    $(document).ready(function () {
+
+      ///  document.getElementById('dop1').valueAsDate = new Date();
+        $('#sdf4').clockTimePicker({
+            alwaysSelectHoursFirst:true,
+        });
+        $('#sdf5').clockTimePicker({
+            alwaysSelectHoursFirst: true,
+        });
+    });
+   
+
+
+    $(document).on('keypress', 'input,select', function (e) {
+        if (e.which == 13) {
+            debugger;
+            e.preventDefault();
+            // Get all focusable elements on the page
+            var $canfocus = $(':focusable');
+            var index = $canfocus.index(document.activeElement) + 1;
+            if (index >= $canfocus.length) index = 0;
+            $canfocus.eq(index).focus();
+        }
+    });
+
+    $(document).on('keypress', '#srch', function (e) {
+
+        if (e.which == 13) {
+            debugger;
+            // Enter key pressed
+            document.location = $("#change1").attr('href');
+        }
+    });
+    $(document).on('keypress', '#drdur', function (e) {
+
+        if (e.which == 13) {
+            debugger;
+            // Enter key pressed
+           $("#draddl").trigger('click');
+        }
+    });
+    $(document).on('keypress', '#mdt', function (e) {
+
+        if (e.which == 13) {
+            debugger;
+            // Enter key pressed
+            $("#mbtn").click();
+        }
+    });
+
+
+    function validate() {
+        debugger;
+        
+        var selectv1 = $("#toa1").find(":selected").text();
+        var selectv = $("#tt1").find(":selected").text();
+        var selectv2 = $("#nopid").find(":selected").text();
+        var selectv3 = $("#nutrid").find(":selected").text();
+        var selectv4 = $("#doa1").val();
+        var selectv5 = $("#dos1").val();
+        var selectv6 = $("#dod1").val();
+        var selectv7 = $("#aby").find(":selected").text();
+        var selectv8 = $("#moa").find(":selected").text();
+        if (selectv1 == "-- Select Type --") {
+            $("#errormsgspan").text("Please Select Type of Anesthesia");
+            return false;
+        }
+       else if (selectv7 == "-- Select --") {
+            $("#errormsgspan").text("Please Select Assisted By");
+            return false;
+       }
+       else if (selectv8 == "-- Select --") {
+           $("#errormsgspan").text("Please Select MO Anesthesia");
+           return false;
+       }
+        else if (selectv4 == "") {
+            $("#errormsgspan").text("Please Select Date of Admission");
+            return false;
+        }
+        else if (selectv5 == "") {
+            $("#errormsgspan").text("Please Select Date of Surgery");
+            return false;
+        }
+        //else if (selectv6 == "") {
+        //    $("#errormsgspan").text("Please Select Date of Discharge");
+        //    return false;
+        //}
+        else if (selectv2 == "-- Select Procedure --") {
+            $("#errormsgspan").text("Please Select Name of Procedure");
+            return false;
+        }
+        else if (selectv3 == "-- Select Type --") {
+        $("#errormsgspan").text("Please Select Nutrition");
+        return false;
+    }
+      else if (selectv == "") {
+            $("#errormsgspan").text("Please Select Table");
+            return false;
+        } else {
+            $("#errormsgspan").text(" ");
+            angular.element(document.getElementById('epicontrol')).scope().Submitsurgery();
+            return true;
+        }
+
+    }
+
+</script>
+@using PagedList.Mvc;
+@using PagedList;
+
+
+<div ng-app="EpisodeApp" class="container">
+
+    <div ng-controller="EpisodeCntrl" id="epicontrol" ng-init="initsur()">
+
+        <div ng-show="divPor" class="form-horizontal">
+         
+            <section class="navbar navbar-fixed-top custom-navbar" role="navigation">
+                <div class="container">
+
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li>
+                                <a href="@Url.Action("Index","Home")">HOME</a>
+
+                            </li>
+                            <li>
+                                <input type="submit" ng-click="" onclick="validate();" value="Save" class="btn-primary btn-sm" />
+
+
+
+                            </li>
+                            <li><span id="errormsgspan" asp-validation-for="Year" style="color:white"></span> </li>
+                         
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a id="tp" href="#about">TOP</a></li>
+                           
+                            <li><a href="#about">Search</a></li>
+                           
+                        </ul>
+
+
+                    </div>
+
+
+
+                </div>
+            </section>
+
+            <div ng-show="showloader" id="loading">
+                <img id="loading-image" src="~/Content/Images/loading.png" />
+            </div>
+            <section id="about">
+                <div class="form-group">
+                    <div class="col-md-7">
+                        <div class="col-md-6">
+                            <input type="text" id="srch" class="form-control" style="color:blue" ng-model="SearchString" />
+                        </div>
+                        <div class="col-md-2"><a id="change1" type='submit' value='Search' name='Search' class="btn-primary btn text-uppercase " href="@Url.Action("Create","SurgeryMasters")?id={{SearchString}}">search</a></div>
+                    </div>
+                </div>
+                <div class="form-horizontal" style="border:1px solid #0094ff; overflow-y:hidden">
+                    @if (ViewBag.OnePageOfProducts.Count > 0)
+                    {
+                        <table id="asdfhg" class="table table-striped">
+                            <tr>
+                                <th>
+
+                                </th>
+                                <th>
+                                    Service No
+                                </th>
+                                <th>
+                                    Name
+                                </th>
+
+                                <th>
+                                    Date
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+                                <th>
+                                    Print
+                                </th>
+                                <th></th>
+
+                            </tr>
+
+                            @foreach (var item in (IEnumerable<MMS.Models.getdocdetail>)ViewBag.OnePageOfProducts)
+                            {
+                                <tr>
+                                    <td align="left">
+                                        @item.relasiondet
+                                    </td>
+                                    <td align="left">
+                                        <a href="#contact" ng-click="Getsurgpatient('@item.pdids');loadchild1('@item.sno');">@item.sno</a>
+                                    </td>
+                                    <td align="left">
+                                        <a href="#contact" ng-click="Getsurgpatient('@item.pdids');loadchild1('@item.sno');">
+                                            @*@if (item.relasiont == 1)
+                                        { @item.rnkname}*@
+                                            @item.rnkname @item.inililes @item.sname
+                                        </a>
+
+                                    </td>
+
+                                    <td align="left">
+                                        @item.crdate
+                                    </td>
+
+                                    <td align="left">
+                                        @item.pstatus
+                                    </td>
+                                    <td align="left">
+                                        <a href="@Url.Action("View", "SurgeryMasters")?pdid=@item.pdids">
+                                            Print
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="" ng-click="delPatient('@item.pdids');">
+
+                                            Delete
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+
+                        </table>
+                    }
+                    else
+                    {
+                        //Response.Redirect("~/Home/Index/");
+                        <div><center>No Results</center></div>
+                    }
+                    @Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("Create", new { page, currentFilter = ViewBag.CurrentFilter }))
+                </div>
+            </section>
+            <section id="work">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Surgery Diagnosis</div>
+                            <table class="table table-striped  ">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                       
+                                        <td>
+                                            Relationship
+                                        </td>
+                                        <td colspan="2" align="left">
+                                          
+                                              
+                                                <select id="RTypeID" ng-model="Relationship" ng-options="c as c.Relationship for c in Relationships">
+                                                    <option value="">-- Select Relationship Type --</option>
+                                                </select>
+                                            
+                                            <div ng-show="GetPatientDet.length > 1 && GetPatientDet[0].Relationship!='1'">
+                                              
+                                                  
+                                                    <select id="pdnew" ng-model="pidnew" ng-change="" ng-options="d as d.Surname for d in PatientDetdr">
+                                                        <option value="">-- Select Child --</option>
+                                                    </select>
+                                               
+                                            </div>
+                                            <span class="test" style="font-weight:bold">{{  GetPatientDet[0].Relationship=='1' ? GetPatientDet[0].RNK_NAME : '' }}</span>            {{ GetPatientDet[0].Relationship != '5' ? GetPatientDet[0].Initials : ''}} {{ GetPatientDet[0].Surname}}
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td >
+                                            Service Type
+                                        </td>
+                                        <td colspan="2" align="left">
+                                            <select id="st" ng-model="st">
+                                                <option value="1">Officer</option>
+                                                <option selected value="2">Other Rank</option>
+                                                <option selected value="3">Civilian</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <td>
+                                            ServiceNo
+                                        </td>
+                                        <td colspan="2" align="left">
+                                            <div class="form-group">
+                                              
+                                                <div class="col-md-2">
+                                                    <input type="text" ng-model="ServiceNo" ng-required="true" ng-blur="GetPatientsall(st,ServiceNo,Relationship.RTypeID);loadchild2(ServiceNo);" />
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Date of Admission</td>
+
+                                        <td colspan="2"><input id="doa1" type="date" ng-model="doa" /></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Date of Surgery</td>
+
+                                        <td colspan="2"><input id="dos1" type="date" ng-model="dos" /></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Date of Discharge</td>
+
+                                        <td colspan="2"><input id="dod1" type="date" ng-model="dod" /></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Theatre Table
+                                        </td>
+
+                                        <td colspan="2">
+                                            <select class="form-control" id="tt1" ng-model="tt" >
+                                                
+                                                <option value="1">Table 1</option>
+                                                <option value="2">Table 2</option>
+                                            </select>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td width="30%">Name of Procedure</td>
+
+                                        <td colspan="2" align="left" width="60%">
+                                            <select class="form-control" id="nopid" ng-model="nop" ng-change="setprd(nop.nprlDescription);" ng-options="g as g.nprDescription for g in nop3">
+                                                <option value="">-- Select Procedure --</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Type of Anaesthesia</td>
+
+                                        <td colspan="2">
+                                          
+                                            <select class="form-control" id="toa1" ng-model="toa" ng-change=" " ng-options="g as g.TADescription for g in toa3">
+                                                <option value="">-- Select Type --</option>
+                                            </select>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Indication</td>
+
+                                        <td colspan="2"><textarea ng-model="ind" rows="2" cols="145" style="width: 100%; max-width: 100%;"></textarea></td>
+
+                                    </tr>
+                                    <tr >
+                                        <td>Antibiotic Prophylaxis </td>
+                                        <td colspan="3"><table class="table table-striped table-condensed">
+
+    <thead class="panel-heading">
+        <tr>
+            <th width="25%" align="left">Drug Name </th>
+
+            <th width="10%" align="left">Dose </th>
+            <th width="10%" align="left">Route </th>
+            <th width="10%" align="left">Method </th>
+            <th width="10%" align="left">Time </th>
+            <th width="5%" align="left">Duration </th>
+            <th width="10%" align="left"></th>
+        </tr>
+      
+    </thead>
+    <tbody>
+        <tr>
+
+            <td width="25%" align="left"><input class="form-control" type="text" ng-model="suDName1" uib-typeahead="g as g.itemdescription for g in DName | filter: $viewValue| limitTo:20" typeahead-on-select='Getdrugalldep(DName1.itemno)'><a class="clear" ng-click="DName1=null"><span class="glyphicon glyphicon-remove"></span></a></td>
+
+            <td width="10%" align="left"><select class="form-control " ng-change=" " id="Dose1" ng-model="Dose" ng-options="g as g.DrugGroupName for g in Dose3"></select></td>
+            <td width="10%" align="left">
+                <select class="form-control" id="Route" ng-model="suRoute2" ng-change=" " ng-options="g as g.RouteDetail for g in Route3">
+                    <option value="">-- Select Route --</option>
+                </select>
+            </td>
+            <td width="10%" align="left">
+                <select class="form-control" id="Method" ng-model="suMethod2" ng-change=" " ng-options="g as g.MethodDetail for g in Method3">
+                    <option value="">-- Select Method --</option>
+                </select>
+            </td>
+
+            <td width="10%" align="left"><select class="form-control" id="dtime" ng-model="dtime2" ng-change=" " ng-options="g as g.StockType for g in dtime3"></select></td>
+
+            <td width="5%" align="left"><input id="drdur" type="number" ng-model="suDuration" /></td>
+            <td width="10%" align="left">
+
+                <input type="button" id="draddl" class="f1" ng-click="suaddItem(suDName1.itemno,suDName1.itemdescription,Dose.DrugGroupName,suRoute2.RouteID,suRoute2.RouteDetail,suMethod2.MethodID,suMethod2.MethodDetail,suDuration,dtime2.StockTypeID)" value="Add" />
+                <span id="errormsgspan" asp-validation-for="Year" style="color:red"></span>
+            </td>
+        </tr>
+    </tbody>
+
+</table> <table class="table table-striped">
+
+                                    <tr ng-repeat="sditem in suitems" class="item">
+                                        <td width="50%"><b>{{sditem.suItemno1}}</b> </td>
+                                        <td><b>:</b>{{sditem.suDose}} </td>
+                                        <td><b>:</b>{{sditem.suRoute1}} </td>
+                                        <td><b>:</b>{{sditem.suMethod1}} </td>
+                                        <td><b>:</b>{{sditem.suDuration}} </td>
+                                        <td><button ng-click="sdremoveItem($index)">Remove</button></td>
+                                    </tr>
+                                </table>
+                                        </td>
+
+                                        
+
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>Surgeon</td>
+
+                                        <td colspan="2">
+                                        
+                                        
+                                            <select class="form-control" id="attsrg" ng-model="attsrg" ng-change=" " ng-options="g as g.modesc for g in atsur">
+                                               
+                                            </select>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Assisted By</td>
+
+                                        <td colspan="2">
+                                            <select class="form-control" id="aby" ng-model="aby" ng-change=" " ng-options="g as g.asidesc for g in surasi">
+                                                <option value="">-- Select --</option>
+                                            </select>
+                                        
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Anaesthetist</td>
+
+                                        <td colspan="2"><textarea ng-model="ant" rows="2" cols="145" style="width: 100%; max-width: 100%;"></textarea></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>MO Anesthesia</td>
+
+                                        <td colspan="2">
+                                           
+                                            <select class="form-control" id="moa" ng-model="moa" ng-change=" " ng-options="g as g.modesc for g in surmo">
+                                                <option value="">-- Select --</option>
+                                            </select>
+
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Nurse</td>
+
+                                        <td colspan="2"><textarea ng-model="nurs" rows="2" cols="145" style="width: 100%; max-width: 100%;"></textarea></td>
+
+                                    </tr>
+                                    @*<tr>
+                                        <td>MO Anaesthesia</td>
+
+                                        <td colspan="2"><textarea ng-model="moa" rows="2" cols="145" style="width: 100%; max-width: 100%;"></textarea></td>
+
+                                    </tr>*@
+                                    @*<tr>
+                                        <td rowspan="8">Procedure Details</td>
+                                        <td>Antibiotic Prophylaxis</td>
+
+                                        <td><textarea ng-model="antipr" rows="2" cols="145" style="width: 100%; max-width: 100%;"></textarea></td>
+
+                                    </tr>*@
+                                    <tr>
+
+                                        <td>Surgery Start Time</td>
+
+                                        <td>
+                                            <input class="form-control time required"  ng-model="sst"  id="sdf4" type="text" value="08:45" autocomplete="off" autocapitalize="off" spellcheck="false" style="min-width: 94px;">
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+
+                                        <td>Surgery End Time</td>
+
+                                        <td>
+                                            <input class="form-control time required" ng-model="set" id="sdf5" type="text" value="08:45" autocomplete="off" autocapitalize="off" spellcheck="false" style="min-width: 94px;">
+                                       </td>
+
+                                    </tr>
+                                    <tr>
+
+                                        <td>Catheter <input type="checkbox" ng-model="Catheter" rows="2" cols="145" style="width: 100%; max-width: 100%;" /></td>
+
+                                        <td>Central IV line<input type="checkbox" ng-model="Ivline" rows="2" cols="145" style="width: 100%; max-width: 100%;" /></td>
+                                        <td>Epidural<input type="checkbox" ng-model="Epidural" rows="2" cols="145" style="width: 100%; max-width: 100%;" /></td>
+                                       
+                                    </tr>
+                                    <tr>
+
+                                        <td>Findings</td>
+
+                                        <td width="40%"><textarea ng-model="find" rows="2" cols="145" style="width: 100%; max-width: 100%;"></textarea></td>
+
+                                    </tr>
+                                    @*<tr>
+
+                                        <td>Duration of Surgery</td>
+
+                                        <td><textarea ng-model="dos" rows="2" cols="145" style="width: 100%; max-width: 100%;"></textarea></td>
+
+                                    </tr>
+                                    <tr>
+
+                                        <td>Incision</td>
+
+                                        <td><textarea ng-model="incs" rows="2" cols="145" style="width: 100%; max-width: 100%;"></textarea></td>
+
+                                    </tr>*@
+                                    <tr>
+
+                                        <td>Procedure</td>
+
+                                        <td><textarea ng-model="prced" rows="4" cols="145" style="width: 100%; max-width: 100%;"></textarea></td>
+
+                                    </tr>
+                                    <tr>
+
+                                        <td>Drains Inserted</td>
+
+                                        <td><input type="checkbox" ng-model="drins" rows="2" cols="145" style="width: 100%; max-width: 100%;"/></td>
+
+                                    </tr>
+                                   
+                                    <tr>
+
+                                        <td>Skin Closure</td>
+
+                                        <td colspan="2"><table class="table table-striped table-condensed">
+
+    <thead class="panel-heading">
+        <tr>
+            <th width="25%" align="left">Suture materials </th>
+
+            <th width="10%" align="left">Technique  </th>
+            <th width="10%" align="left">No of pkts </th>
+            <th width="10%" align="left"> </th>
+        </tr>
+
+    </thead>
+    <tbody>
+        <tr>
+
+            <td width="25%" align="left"><select class="form-control" id="Route" ng-model="sutm2" ng-change=" " ng-options="g as g.Suturematerials for g in sutm3">
+    <option value="">-- Select Suture Materials--</option>
+</select></td>
+
+        
+            <td width="10%" align="left">
+                <select class="form-control" id="Route" ng-model="tech2" ng-change=" " ng-options="g as g.tdesc for g in surteq">
+                    <option value="">-- Select technique --</option>
+                </select>
+            </td>
+            <td width="10%" align="left"><input type="number" ng-model="nopkt" rows="2" cols="145" style="width: 100%; max-width: 100%;" /></td>
+            <td width="10%" align="left">
+
+                <input type="button" id="mataddl" class="f1" ng-click="matItem(sutm2.SMID,sutm2.Suturematerials,tech2.tid,tech2.tdesc,nopkt)" value="Add" />
+                <span id="errormsgspan" asp-validation-for="Year" style="color:red"></span>
+            </td>
+        </tr>
+    </tbody>
+
+</table>
+                                        
+                                        
+                                            <table class="table table-striped">
+
+                                                <tr ng-repeat="item in matItems" class="item">
+                                                    <td><b>{{item.tSuturematerials}}</b> </td>
+                                                    <td><b>:</b>{{item.ttdesc}} </td>
+                                                    <td><b>{{item.tnopkt}}</b> </td>
+                                                    <td><button ng-click="matremoveItem($index)">Remove</button></td>
+                                                </tr>
+                                            </table></td>
+
+                                    </tr>
+                                    <tr> <td colspan="3"><b>Post-Operative Management</b></td></tr>
+<tr>
+                                       
+                                        <td>Monitoring Instructions</td>
+    <td><table class="table table-striped table-condensed">
+
+    <thead class="panel-heading">
+        <tr>
+            <th width="25%" align="left"> </th>
+
+            <th width="10%" align="left">Frequency </th>
+            <th width="10%" align="left">Duration </th>
+           
+            <th width="10%" align="left"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+
+         
+
+            <td width="10%" align="left"><input type="text" id="pom1" ng-model="pom1"/>
+           </td>
+            <td width="10%" align="left">
+                <select class="form-control" id="pfeq1" ng-model="pfeq1" ng-change=" " ng-options="g as g.pomfdesc for g in surfeq">
+                    <option value="">-- Select Frequency --</option>
+                </select>
+            </td>
+            <td width="10%" align="left">
+                <select class="form-control" id="pdur1" ng-model="pdur1" ng-change=" " ng-options="g as g.pomduration for g in surpdur">
+                    <option value="">-- Select Duration --</option>
+                </select>
+            </td>
+
+           <td width="10%" align="left">
+
+                <input type="button" id="draddl" class="f1" ng-click="pomItem(pom1,pom1,pfeq1.pomfid,pfeq1.pomfdesc,pdur1.pomdid,pdur1.pomduration)" value="Add" />
+                <span id="errormsgspan" asp-validation-for="Year" style="color:red"></span>
+            </td>
+        </tr>
+    </tbody>
+
+</table>
+
+<table class="table table-striped">
+
+    <tr ng-repeat="item in pomitems" class="item">
+        <td><b>{{item.tpomdesc}}</b> </td>
+        <td><b>:</b>{{item.tpomfdesc}} </td>
+        <td><b>{{item.tpomduration}}</b> </td>
+        <td><button ng-click="pomremoveItem($index)">Remove</button></td>
+    </tr>
+</table></td>
+                                        <td>@*<textarea ng-model="moins" rows="2" cols="145" style="width: 100%; max-width: 100%;"></textarea>*@</td>
+
+                                    </tr>
+                                    <tr>
+
+                                        <td>Nutrition</td>
+                                        <td><select class="form-control" id="nutrid" ng-model="nutr" ng-change=" " ng-options="g as g.NutDesc for g in nutr3">
+    <option value="">-- Select Type --</option>
+</select></td>
+                                        <td><textarea ng-model="nutri" rows="2" cols="145" style="width: 100%; max-width: 100%;"></textarea></td>
+
+                                    </tr>
+                                    <tr>
+
+                                        <td>Medications</td>
+
+                                        <td colspan="4">
+                                            <table class="table table-striped table-condensed">
+
+                                                <thead class="panel-heading">
+                                                    <tr>
+                                                        <th width="25%" align="left">Drug Name </th>
+
+                                                        <th width="10%" align="left">Dose </th>
+                                                        <th width="10%" align="left">Route </th>
+                                                        <th width="10%" align="left">Method </th>
+                                                        <th width="10%" align="left">Time </th>
+                                                        <th width="5%" align="left">Duration </th>
+                                                        <th width="10%" align="left"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+
+                                                        <td width="25%" align="left"><input class="form-control" type="text" ng-model="DName1" uib-typeahead="g as g.itemdescription for g in DName | filter: $viewValue| limitTo:20" typeahead-on-select='Getdrugalldep(DName1.itemno)'><a class="clear" ng-click="DName1=null"><span class="glyphicon glyphicon-remove"></span></a></td>
+
+                                                        <td width="10%" align="left"><select class="form-control " ng-change=" " id="Dose1" ng-model="Dose" ng-options="g as g.DrugGroupName for g in Dose3"></select></td>
+                                                        <td width="10%" align="left">
+                                                            <select class="form-control" id="Route" ng-model="Route2" ng-change=" " ng-options="g as g.RouteDetail for g in Route3">
+                                                                <option value="">-- Select Route --</option>
+                                                            </select>
+                                                        </td>
+                                                        <td width="10%" align="left">
+                                                            <select class="form-control" id="Method" ng-model="Method2" ng-change=" " ng-options="g as g.MethodDetail for g in Method3">
+                                                                <option value="">-- Select Method --</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td width="10%" align="left"><select class="form-control" id="dtime" ng-model="dtime2" ng-change=" " ng-options="g as g.StockType for g in dtime3"></select></td>
+
+                                                        <td width="5%" align="left"><input id="drdur" type="number" ng-model="Duration" /></td>
+                                                        <td width="10%" align="left">
+
+                                                            <input type="button" id="draddl" class="f1" ng-click="daddItem(DName1.itemno,DName1.itemdescription,Dose.DrugGroupName,Route2.RouteID,Route2.RouteDetail,Method2.MethodID,Method2.MethodDetail,Duration,dtime2.StockTypeID)" value="Add" />
+                                                            <span id="errormsgspan" asp-validation-for="Year" style="color:red"></span>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+
+                                            </table>
+
+
+                                            <table class="table table-striped">
+
+                                                <tr ng-repeat="ditem in ditems" class="item">
+                                                    <td width="50%"><b>{{ditem.dItemno1}}</b> </td>
+                                                    <td><b>:</b>{{ditem.dDose}} </td>
+                                                    <td><b>:</b>{{ditem.dRoute1}} </td>
+                                                    <td><b>:</b>{{ditem.dMethod1}} </td>
+                                                    <td><b>:</b>{{ditem.dDuration}} </td>
+                                                    <td><button ng-click="dremoveItem($index)">Remove</button></td>
+                                                </tr>
+                                            </table></td>
+
+                                    </tr>
+                                    <tr>
+
+                                        <td>Special Instructions</td>
+
+                                        <td><textarea ng-model="spins" rows="2" cols="145" style="width: 100%; max-width: 100%;"></textarea></td>
+
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                    </div>
+                }
+            </section>
+         
+            <section id="contact">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Surgery Information</div>
+                    <table class="table table-bordered  ">
+
+                        <tbody>
+                            <tr>
+
+
+                                <td colspan="3"></td>
+
+                            </tr>
+                            <tr>
+
+                                <td>
+                                    <img data-ng-src="{{primage1}}" style="width:100px;" />
+                                </td>
+                                <td colspan="2" align="center">
+                                    <span class="test" style="font-weight:bold">{{  surghst[0].Relationship=='SELF' ? surghst[0].RNK_NAME : '' }}</span>            {{ surghst[0].Relationship != '5' ? surghst[0].Initials : ''}} {{ surghst[0].Surname}}
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    Theatre Table
+                                </td>
+
+                                <td colspan="2">
+                                    {{  surgthsthyp[0].TheaterTable=='1' ? 'Table 1' : 'Table 2'  }}
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td width="30%">Name of Procedure</td>
+
+                                <td colspan="2" width="60%">
+                                    {{ surgthsthyp[0].ProcedureName}}
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>Type of Anaesthesia</td>
+
+                                <td colspan="2">
+                                    {{ surgthsthyp[0].TADescription}}
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>Date of Procedure</td>
+
+                                <td colspan="2">
+                                    {{ surgthsthyp[0].DateodProcedure |limitTo:-15 |limitTo:13 | date:'dd/MM/yyyy HH:mm'}}
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>Indication</td>
+
+                                <td colspan="2">
+                                    {{ surgthsthyp[0].Indication}}
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>Attending Surgeon</td>
+
+                                <td colspan="2">
+                                    {{ surgthsthyp[0].Surgeon}}
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>Assisted By</td>
+
+                                <td colspan="2">
+
+                                    {{ surgthsthyp[0].AssistedBy}}
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>Anaesthetist</td>
+
+                                <td colspan="2">
+                                    {{ surgthsthyp[0].Anesthetist}}
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>MO Anaesthesia</td>
+
+                                <td colspan="2">
+                                    {{ surgthsthyp[0].MOAnesthesia}}
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td rowspan="8">Procedure Details</td>
+                                <td>Antibiotic Prophylaxis</td>
+
+                                <td>
+                                    {{ surgthsthyp[0].AntibioticP}}
+                                </td>
+
+                            </tr>
+                            <tr>
+
+                                <td>Positioning</td>
+
+                                <td width="40%">
+
+                                    {{ surgthsthyp[0].Positioning}}
+                                </td>
+
+                            </tr>
+                            <tr>
+
+                                <td>Duration of Surgery</td>
+
+                                <td>
+                                    {{ surgthsthyp[0].DurationofSurgery}}
+
+                                </td>
+
+                            </tr>
+                            <tr>
+
+                                <td>Incision</td>
+
+                                <td>
+                                    {{ surgthsthyp[0].Incision}}
+
+                                </td>
+
+                            </tr>
+                            <tr>
+
+                                <td>Procedure</td>
+
+                                <td>
+                                    {{ surgthsthyp[0].PrcedureDetail}}
+                                </td>
+
+                            </tr>
+                            <tr>
+
+                                <td>Drains Inserted</td>
+
+                                <td>
+                                    {{ surgthsthyp[0].DrainsInserted}}
+                                </td>
+
+                            </tr>
+                            <tr>
+
+                                <td>Blood Loss</td>
+
+                                <td>
+                                    {{ surgthsthyp[0].BloodLoss}}
+                                </td>
+
+                            </tr>
+                            <tr>
+
+                                <td>Closure Method</td>
+
+                                <td>
+                                    {{ surgthsthyp[0].ClosureMethod}}
+                                </td>
+
+                            </tr>
+                            <tr>
+
+                                <td>Suture Materials Used</td>
+
+                                <td colspan="2">
+                                    {{ surgthsthyp[0].SutureMaterials}}
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td rowspan="4">Post-Operative Management</td>
+                                <td>Monitoring Instructions</td>
+
+                                <td>
+                                    {{ surgthsthyp[0].MonitoringInstruct}}
+                                </td>
+
+                            </tr>
+                            <tr>
+
+                                <td>Nutrition</td>
+
+                                <td>
+                                    {{ surgthsthyp[0].Nutrition}}
+                                </td>
+
+                            </tr>
+                            <tr>
+
+                                <td>Medications</td>
+
+                                <td>
+                                  
+                                        
+                                     
+
+                                            <table class="table table-striped " name="sd">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="40%" align="left">Drug Name </th>
+
+                                                        <th width="20%" align="left">Dose </th>
+                                                        <th width="20%" align="left">Route </th>
+                                                        <th width="20%" align="left">Method </th>
+
+                                                        <th width="20%" align="left">Duration </th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody ng-repeat="field in druglist">
+                                                    <tr>
+
+                                                        <td width="40%" align="left">{{ field.itemdescription }}</td>
+
+                                                        <td width="20%" align="left">{{ field.Dose }}</td>
+                                                        <td width="20%" align="left"> {{field.RouteDetail}}</td>
+                                                        <td width="20%" align="left">{{ field.MethodDetail }}</td>
+
+                                                        <td width="20%" align="left">{{ field.Duration }}</td>
+
+                                                        <td width="20%" align="left">
+                                                            <a href="" ng-click="deldrug(field.Ps_Index);">
+
+                                                                Delete
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+
+
+                                            </table>
+                                      
+                                </td>
+
+                            </tr>
+                            <tr>
+
+                                <td>Special Instructions</td>
+
+                                <td>
+                                    {{ surgthsthyp[0].SpecialIntruct}}
+                                </td>
+
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </section>
+</div>
+
+    </div>
+</div>
+
+                   
+

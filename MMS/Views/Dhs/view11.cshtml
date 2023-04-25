@@ -1,0 +1,119 @@
+﻿@*@model Lab_Report*@
+
+@{
+    ViewBag.Title = "Report";
+
+}
+
+
+@using PagedList.Mvc;
+@using PagedList;
+
+@section scripts
+{
+    <script src="~/Scripts/Lab/Module.js"></script>
+    <script src="~/Scripts/Lab/Service.js"></script>
+    <script src="~/Scripts/Lab/Controller.js"></script>
+}
+
+<script src="~/Scripts/Angular/angular.js"></script>
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/angular-route.js"></script>
+<script src="~/Scripts/js/jquery.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+
+<script src="~/Scripts/js/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/js/metisMenu.min.js"></script>
+<script src="~/Scripts/js/sb-admin-2.js"></script>
+<script src="~/Scripts/js/dataTables.bootstrap.min.js"></script>
+<script src="~/Scripts/js/dataTables.responsive.js"></script>
+<script src="~/Scripts/Angular/angular.js"></script>
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/angular-route.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/ui-bootstrap-tpls-1.3.3.min.js"></script>
+<script src="~/Scripts/angular-filter.js"></script>
+<link rel="stylesheet" href="~/Scripts/css/bootstrap.min.css">
+<link rel="stylesheet" href="~/Scripts/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/Scripts/css/animate.min.css">
+<link rel="stylesheet" href="~/Scripts/css/et-line-font.css">
+<link rel="stylesheet" href="~/Scripts/css/nivo-lightbox.css">
+@*<link rel="stylesheet" href="~/Scripts/css/nivo_themes/default/default.css">*@
+<link rel="stylesheet" href="~/Scripts/css/style.css">
+@*<script src="~/Scripts/js/bootstrap.min.js"></script>*@
+<script src="~/Scripts/js/smoothscroll.js"></script>
+<script src="~/Scripts/js/isotope.js"></script>
+<script src="~/Scripts/js/imagesloaded.min.js"></script>
+<script src="~/Scripts/js/nivo-lightbox.min.js"></script>
+<script src="~/Scripts/js/jquery.backstretch.min.js"></script>
+<script src="~/Scripts/js/wow.min.js"></script>
+<script src="~/Scripts/js/custom.js"></script>
+
+
+
+<div ng-app="LabApp" class="container">
+
+    <div ng-controller="LabCntrl">
+
+        <div ng-show="divPor" class="form-horizontal">
+
+            <section class="navbar navbar-fixed-top custom-navbar" role="navigation">
+                <div class="container">
+
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li>
+                                <a href="@Url.Action("Index","Home")">HOME</a>
+
+                            </li>
+
+                            <li>
+                                <div ng-show="showerror">
+                                    <span style="background-color:white">Error!</span>
+                                </div>
+
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#about">TOP</a></li>
+                            <li><a href="#work"></a></li>
+                            @*<li><a href="#about" class="smoothScroll">ABOUT</a></li>*@
+
+                            @*<li><a href="#portfolio" class="smoothScroll">PORTFOLIO</a></li>*@
+
+                        </ul>
+
+                    </div>
+
+
+
+
+                </div>
+            </section>
+
+            <section id="about">
+                <div class="container">
+                    <div class="row">
+
+                        <iframe src="~/Reports/rptsickanadhs.aspx" width="1368" height="568"></iframe>
+
+
+
+                    </div>
+                </div>
+            </section>
+
+
+
+
+
+
+        </div>
+
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

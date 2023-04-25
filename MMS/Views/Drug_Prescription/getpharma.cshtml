@@ -1,0 +1,241 @@
+﻿
+
+@{
+    ViewBag.Title = "MMS";
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts
+{
+    <script src="~/Scripts/Episode/v6/Module.js"></script>
+    <script src="~/Scripts/Episode/v6/Service.js"></script>
+    <script src="~/Scripts/Episode/v6/Controller.js"></script>
+}
+<link href="~/Scripts/css/jquery.booklet.latest.css" type="text/css" rel="stylesheet" media="screen, projection, tv" />
+<script src="~/Scripts/js/jquery.js"></script>
+<script src="~/Scripts/jquery-ui.min.js"></script>
+<script src="~/Scripts/jquery.min.js"></script>
+<script src="~/Scripts/js/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/js/metisMenu.min.js"></script>
+<script src="~/Scripts/js/sb-admin-2.js"></script>
+<script src="~/Scripts/js/dataTables.bootstrap.min.js"></script>
+<script src="~/Scripts/js/dataTables.responsive.js"></script>
+<script src="~/Scripts/Angular/angular.js"></script>
+
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/jquery.easing.1.3.js"></script>
+<script src="~/Scripts/jquery.booklet.latest.js"></script>
+<script src="~/Scripts/angular-route.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/ui-bootstrap-tpls-1.3.3.min.js"></script>
+
+<link rel="stylesheet" href="~/Scripts/css/bootstrap.min.css">
+<link rel="stylesheet" href="~/Scripts/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/Scripts/css/animate.min.css">
+<link rel="stylesheet" href="~/Scripts/css/et-line-font.css">
+<link rel="stylesheet" href="~/Scripts/css/nivo-lightbox.css">
+@*<link rel="stylesheet" href="~/Scripts/css/nivo_themes/default/default.css">*@
+<link rel="stylesheet" href="~/Scripts/css/style.css">
+
+@*<script src="~/Scripts/js/bootstrap.min.js"></script>*@
+<script src="~/Scripts/js/smoothscroll.js"></script>
+<script src="~/Scripts/js/isotope.js"></script>
+<script src="~/Scripts/js/imagesloaded.min.js"></script>
+<script src="~/Scripts/js/nivo-lightbox.min.js"></script>
+<script src="~/Scripts/js/jquery.backstretch.min.js"></script>
+<script src="~/Scripts/js/wow.min.js"></script>
+<script src="~/Scripts/js/custom.js"></script>
+<script>
+    jQuery.extend(jQuery.expr[':'], {
+    focusable: function (el, index, selector) {
+        return $(el).is('a, button, :input, [tabindex]');
+    }
+});
+   
+
+    $(document).on('keypress', 'input,select', function (e) {
+        if (e.which == 13) {
+            debugger;
+            e.preventDefault();
+            // Get all focusable elements on the page
+            var $canfocus = $(':focusable');
+            var index = $canfocus.index(document.activeElement) + 1;
+            if (index >= $canfocus.length) index = 0;
+            $canfocus.eq(index).focus();
+        }
+    });
+
+    $(document).on('keypress', '#srch', function (e) {
+
+        if (e.which == 13) {
+            debugger;
+            // Enter key pressed
+            document.location = $("#change1").attr('href');
+        }
+    });
+    $(document).on('keypress', '#drdur', function (e) {
+
+        if (e.which == 13) {
+            debugger;
+            // Enter key pressed
+           $("#draddl").trigger('click');
+        }
+    });
+    $(document).on('keypress', '#mdt', function (e) {
+
+        if (e.which == 13) {
+            debugger;
+            // Enter key pressed
+            $("#mbtn").click();
+        }
+    });
+
+
+
+
+</script>
+@using PagedList.Mvc;
+@using PagedList;
+
+
+<div ng-app="EpisodeApp" class="container">
+
+    <div ng-controller="EpisodeCntrl" id="epicontrol" ng-init="initphloc()">
+
+        <div ng-show="divPor" class="form-horizontal">
+
+            <section class="navbar navbar-fixed-top custom-navbar" role="navigation">
+                <div class="container">
+
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li>
+                                <a href="@Url.Action("Index","Home")">HOME</a>
+
+                            </li>
+                            <li>
+
+
+                            </li>
+                            <li>
+                                <div ng-show="showerror">
+                                    <span style="background-color:black">Error!</span>
+                                </div>
+
+                            </li>
+                        </ul>
+
+
+
+                    </div>
+
+
+
+                </div>
+            </section><div class="row">
+    <section id="work">
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
+            @using (Html.BeginForm("setstock", "Drug_Prescription", FormMethod.Post))
+            {
+                <select name="loclisi" id="loclisi1" asp-for="Year" class="form-control" ng-model="loclisi" ng-options="g as g.Clinic_Detail for g in Getuserdept1" required>
+                    <option value="">-- Select Location --</option>
+                </select>
+                        <span id="errormsgspan" asp-validation-for="Year"></span>
+                        <button type="submit" onclick="validate()">Next</button>
+
+                        <input type="hidden" name="gl" id="gl" value="{{loclisi.Clinic_ID}}" />
+            }
+        </div>
+        <div class="col-md-3"> </div>
+    </section>
+</div>
+
+            <div class="row">
+                <section>
+
+                    <div class="form-horizontal" style="border:1px solid #0094ff; overflow-y:hidden">
+                        @if (ViewBag.gtck.Count > 0)
+            {
+                            <table id="asdfhg" class="table table-striped">
+                                <tr>
+                                    <th>
+                                        Pharmacy
+                                    </th>
+                                    <th>
+                                        Stock Check Date
+                                    </th>
+                                   
+
+
+                                </tr>
+
+                                @foreach (var item in (IEnumerable<MMS.Models.getsickdata2>)ViewBag.gtck)
+                                {
+                                    <tr>
+                                        <td align="left">
+                                           
+
+                                            <a href="~/Drug_Prescription/getstdet?id=@item.svcid">
+                                                @item.PDID
+                                            </a>
+
+                                            
+                                        </td>
+
+                                        <td align="left">
+                                            <a href="~/Drug_Prescription/getstdet?id=@item.svcid">
+                                                @item.modifieddate
+                                            </a>
+                                           
+                                        </td>
+                                       
+
+                                        
+                                    </tr>
+                                }
+
+                            </table>
+                        }
+                        else
+                        {
+                            //Response.Redirect("~/Home/Index/");
+                            <div><center>No Results</center></div>
+                        }
+
+                    </div>
+
+
+
+                </section>
+            </div>
+
+
+</div>
+    </div>
+
+</div>
+
+<script>
+
+
+    function validate() {
+        debugger;
+       // var selectv = $("#dgcat").find(":selected").text();
+        var selectv = $("#loclisi1").find(":selected").text();
+        var selectv1=  $("#loclisi1").find(":selected").val();
+        if (selectv == "-- Select Location --") {
+            $("#errormsgspan").text("Please Select Location");
+            return false;
+        } else {
+            $("#errormsgspan").text(" ");
+          
+            //window.location.href = "@Url.Action("setstock", "Drug_Prescription")?id = " + selectv1;
+
+            window.location.href = "/Drug_Prescription/setstock?clid="+ selectv1;
+        }
+    }
+
+</script>
+
+

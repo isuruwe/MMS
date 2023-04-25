@@ -1,0 +1,562 @@
+﻿
+
+@{
+    ViewBag.Title = "MMS";
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts
+{
+    <script src="~/Scripts/Episode/v6/Module.js"></script>
+    <script src="~/Scripts/Episode/v6/Service.js"></script>
+    <script src="~/Scripts/Episode/v6/Controller.js"></script>
+}
+<link href="~/Scripts/css/jquery.booklet.latest.css" type="text/css" rel="stylesheet" media="screen, projection, tv" />
+<script src="~/Scripts/js/jquery.js"></script>
+<script src="~/Scripts/jquery-ui.min.js"></script>
+<script src="~/Scripts/jquery.min.js"></script>
+<script src="~/Scripts/js/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/js/metisMenu.min.js"></script>
+<script src="~/Scripts/js/sb-admin-2.js"></script>
+<script src="~/Scripts/js/dataTables.bootstrap.min.js"></script>
+<script src="~/Scripts/js/dataTables.responsive.js"></script>
+<script src="~/Scripts/Angular/angular.js"></script>
+
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/jquery.easing.1.3.js"></script>
+<script src="~/Scripts/jquery.booklet.latest.js"></script>
+<script src="~/Scripts/angular-route.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/ui-bootstrap-tpls-1.3.3.min.js"></script>
+
+<link rel="stylesheet" href="~/Scripts/css/bootstrap.min.css">
+<link rel="stylesheet" href="~/Scripts/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/Scripts/css/animate.min.css">
+<link rel="stylesheet" href="~/Scripts/css/et-line-font.css">
+<link rel="stylesheet" href="~/Scripts/css/nivo-lightbox.css">
+@*<link rel="stylesheet" href="~/Scripts/css/nivo_themes/default/default.css">*@
+<link rel="stylesheet" href="~/Scripts/css/style.css">
+
+@*<script src="~/Scripts/js/bootstrap.min.js"></script>*@
+<script src="~/Scripts/js/smoothscroll.js"></script>
+<script src="~/Scripts/js/isotope.js"></script>
+<script src="~/Scripts/js/imagesloaded.min.js"></script>
+<script src="~/Scripts/js/nivo-lightbox.min.js"></script>
+<script src="~/Scripts/js/jquery.backstretch.min.js"></script>
+<script src="~/Scripts/js/wow.min.js"></script>
+<script src="~/Scripts/js/custom.js"></script>
+<script>
+    jQuery.extend(jQuery.expr[':'], {
+    focusable: function (el, index, selector) {
+        return $(el).is('a, button, :input, [tabindex]');
+    }
+});
+    $(document).ready(function () {
+
+        document.getElementById('mdt').valueAsDate = new Date();
+
+    });
+
+    $(document).on('keypress', 'input,select', function (e) {
+        if (e.which == 13) {
+            debugger;
+            e.preventDefault();
+            // Get all focusable elements on the page
+            var $canfocus = $(':focusable');
+            var index = $canfocus.index(document.activeElement) + 1;
+            if (index >= $canfocus.length) index = 0;
+            $canfocus.eq(index).focus();
+        }
+    });
+
+    $(document).on('keypress', '#srch', function (e) {
+
+        if (e.which == 13) {
+            debugger;
+            // Enter key pressed
+            document.location = $("#change1").attr('href');
+        }
+    });
+    $(document).on('keypress', '#drdur', function (e) {
+
+        if (e.which == 13) {
+            debugger;
+            // Enter key pressed
+           $("#draddl").trigger('click');
+        }
+    });
+    $(document).on('keypress', '#mdt', function (e) {
+
+        if (e.which == 13) {
+            debugger;
+            // Enter key pressed
+            $("#mbtn").click();
+        }
+    });
+
+
+
+
+</script>
+@using PagedList.Mvc;
+@using PagedList;
+
+
+<div ng-app="EpisodeApp" class="container">
+
+    <div ng-controller="EpisodeCntrl" id="epicontrol" ng-init="initpatient()">
+
+        <div ng-show="divPor" class="form-horizontal">
+
+            <section class="navbar navbar-fixed-top custom-navbar" role="navigation">
+                <div class="container">
+
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li>
+                                <a href="@Url.Action("Index","Home")">HOME</a>
+
+                            </li>
+                            <li>
+                                <input type="submit" ng-click="" onclick="validate();" value="Save" class="btn-primary btn-sm" />
+
+
+
+                            </li>
+                            <li>
+                                <div ng-show="showerror">
+                                    <span style="background-color:black">Error!</span>
+                                </div>
+
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a id="tp" href="#work">TOP</a></li>
+                            @* <li><a href="#work" class="smoothScroll">NURSE</a></li>*@
+                            @*<li><a href="#about" class="smoothScroll">ABOUT</a></li>*@
+                            <li><a href="#portfolio">DOCTOR</a></li>
+                          
+                        </ul>
+
+
+                    </div>
+
+
+
+                </div>
+            </section><div class="row">
+                <div class="col-ld-2">
+                </div>
+                <div class="col-ld-2">
+                    @Session["loginuser"].ToString()
+                </div>
+            </div>
+            <section id="work">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <h3>General Entries</h3>
+                        </div><div class="form-group">
+                            <div class="col-md-7">
+                                <div class="col-md-6">
+                                    <input type="text" id="srch" class="form-control" style="color:blue" ng-model="SearchString" />
+                                </div>
+                                <div class="col-md-2"><a id="change1" type='submit' value='Search' name='Search' class="btn-primary btn text-uppercase " href="@Url.Action("genentry","Patient_Detail")?id={{SearchString}}">search</a></div>
+                            </div>
+                        </div>
+                        <div class="form-horizontal" style="border:1px solid #0094ff; overflow-y:hidden">
+                            @if (ViewBag.OnePageOfProducts.Count > 0)
+                            {
+                                <table id="asdfhg" class="table table-striped">
+                                    <tr>
+                                        <th>
+
+                                        </th>
+                                        <th>
+                                            Service No
+                                        </th>
+                                        <th>
+                                            Name
+                                        </th>
+                                        <th>
+                                            Present Complain
+                                        </th>
+                                        <th>
+                                            Date
+                                        </th>
+
+                                        <th>
+                                            Status
+                                        </th>
+                                        <th></th>
+
+                                    </tr>
+
+                                    @foreach (var item in (IEnumerable<MMS.Models.getdocdetail>)ViewBag.OnePageOfProducts)
+                                    {
+                                        <tr>
+                                            <td align="left">
+                                                @item.relasiondet
+                                            </td>
+                                            <td align="left">
+                                                <a href="#portfolio" ng-click="GetOPDPatient('@item.pdids');loadchild1('@item.sno');PatientHystoryfp('@item.pidp');">@item.sno</a>
+                                            </td>
+                                            <td align="left">
+                                                <a href="#portfolio" ng-click="GetOPDPatient('@item.pdids');loadchild1('@item.sno');PatientHystoryfp('@item.pidp');">
+                                                    @if (item.relasiont == 1)
+                                                    { @item.rnkname}
+                                                    @item.inililes @item.sname
+                                                </a>
+
+                                            </td>
+                                            <td align="left">
+                                                @item.pcomoplian
+                                            </td>
+                                            <td align="left">
+                                                @item.crdate
+                                            </td>
+
+                                            <td align="left">
+                                                @if (item.pstatus == "2")
+                                                { <label>Active</label> }
+                                                else
+                                                {
+                                                    <label>Inactive</label>
+                                                }
+                                            </td>
+                                            <td>
+                                                <a href="" ng-click="delPatient('@item.pdids');">
+
+                                                    Delete
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </table>
+                            }
+                            else
+                            {
+                                //Response.Redirect("~/Home/Index/");
+                                <div><center>No Results</center></div>
+                            }
+                            @Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("genentry", new { page, currentFilter = ViewBag.CurrentFilter }))
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+            <div ng-show="showloader" id="loading">
+                <img id="loading-image" src="~/Content/Images/loading.png" />
+            </div>
+
+            <section id="portfolio">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-md-12 col-sm-12">
+                            <div class="section-title">
+                                <h1 class="heading bold">DOCTOR</h1>
+                                <hr>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+
+                                <div class="panel-heading">
+                                    Patient Detail
+                                </div>
+
+                                <div class="panel-body">
+                                    <div class="form-group  has-success" style=" height:300px; overflow-y:auto;">
+                                        <span id="errormsgspannurse" asp-validation-for="Year" style="background-color:#ff0000"></span>
+                                        <div class="col-md-7">
+                                            <div id="svcpr">
+                                                <span class=" test" style="font-weight:bold"> {{ patienthst[0].Relationship=='SELF' ? patienthst[0].RNK_NAME : patienthst[0].Relationship }}</span> {{ patienthst[0].Relationship!='Child' ? patienthst[0].Initials : ''}}   {{patienthst[0].Surname}}
+                                                </br>   Age: {{age}}
+
+                                            </div>
+                                            </br> Medical Category:<div ng-if="patienthst[0].Relationship=='SELF'">
+                                                <div ng-if="patienthst[0].Category=='A4G4(P)'"> <span style="background-color:#ff0000">{{patienthst[0].Category}} </span></div>
+                                                <div ng-if="patienthst[0].Category=='A4G4(T)'||patienthst[0].Category=='A4G3(P)'||patienthst[0].Category=='A4G3(T)'"> <span style="background-color:#ff0000">{{patienthst[0].Category}} </span></div>
+                                                <div ng-if="!(patienthst[0].Category=='A4G4(T)'||patienthst[0].Category=='A4G3(P)'||patienthst[0].Category=='A4G3(T)')"> {{patienthst[0].Category}} </div>
+                                            </div>
+                                            </br> Blood Group:       {{patienthst[0].BloodType}}
+                                            <div ng-show="medbrd[0].CategoryName!=null">
+                                                </br>Medical Board Catagory: {{medbrd[0].CategoryName}}
+                                                </br>Next Medical Board Date: {{medbrd[0].DateOfNextMedical|limitTo:-15 |limitTo:13 | date:'dd/MM/yyyy' }}
+                                            </div>
+
+
+
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="panel-group ">
+                                                <div class="panel panel-default " style="width:120px;">
+
+                                                    <div class="panel-body">
+                                                        <img data-ng-src="{{primage1}}" style="width:100px;" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*<div id="collapse" class="panel-collapse ">*@
+                                        <table class="table table-striped">
+
+                                            <tr ng-repeat="uitem in famlist" class="item">
+                                                <td>
+                                                    <a href="#contact2" ng-click="PatientHystory(uitem.PID);">
+
+
+                                                        {{ uitem.Relationship=='SELF' ? uitem.RNK_NAME : uitem.Relationship }} {{ uitem.Relationship=='SELF' ? uitem.Initials : ''}} {{uitem.Surname}}
+                                                    </a>
+                                                </td>
+
+
+                                            </tr>
+                                        </table>
+                                        <table class="table table-striped">
+
+                                            <tbody>
+
+                                                <tr ng-repeat="r1 in patienthsthyp">
+                                                    @*<td>
+                                                            <button ng-if="r1.expanded" ng-click="r1.expanded = false">-</button>
+                                                            <button ng-if="!r1.expanded" ng-click="r1.expanded = true">+</button>
+                                                        </td>*@
+                                                    <td>Allergies- </td>
+                                                    <td>{{r1.HypersenceMainCategory}}</td>
+
+                                                    <td>{{r1.HypersenseDetail}}</td>
+                                                </tr>
+                                                @*<tr ng-if="r1.expanded" ng-repeat-end="">
+                                                        <td colspan="3">{{r1.HypersenseDetail}}</td>
+                                                    </tr>*@
+
+                                            </tbody>
+                                        </table>
+
+                                        @* </div> *@
+                                    </div>
+                                  
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 ">
+                          
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                   General Entries
+                                </div>
+
+                                <div class="panel-body">
+                                    <div class="form-group has-success">
+
+
+
+                                        <textarea ng-model="genent" cols="50" rows="5"></textarea>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="panel panel-primary">
+
+                                <div class="panel-heading">
+                                    Drug History
+                                </div>
+                                <div class="panel-body">
+
+                                    <div class="form-group has-success">
+
+                                        @*<input type="text" placeholder="Type Here for Suggestion" ng-model="dmedkey1" uib-typeahead="g as g.itemdescription for g in DName | filter: $viewValue| limitTo:20" typeahead-on-select="dmaddItem(dmedkey1.itemdescription)">*@
+
+                                        <textarea disabled="disabled" ng-model="drughyst" cols="50" rows="5"></textarea>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @*Diagnosis*@
+
+
+
+                        <div class="col-lg-4">
+
+
+
+
+                            <div class="panel panel-primary ">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+
+                                        <a href="#contact2" ng-click="PatientHystoryfp(patienthst[0].PID);">
+                                            Front Page
+                                        </a>
+                                        @*<a ng-click="toggle()" data-toggle="collapse" href="#collapse"><b>        +</b></a>*@
+                                    </h4>
+                                    <h4 class="panel-title">
+
+                                        <a href="#contact2" ng-click="PatientHystory(patienthst[0].PID);">
+                                            History
+                                        </a>
+                                        @*<a ng-click="toggle()" data-toggle="collapse" href="#collapse"><b>        +</b></a>*@
+                                    </h4>
+                                    <h4 class="panel-title">
+
+                                        <a href="#contact2" ng-click="PatientHystorypft(patienthst[0].PID);">
+                                            PFT Medical History
+                                        </a>
+                                        @*<a ng-click="toggle()" data-toggle="collapse" href="#collapse"><b>        +</b></a>*@
+                                    </h4>
+                                    <h4 class="panel-title">
+
+                                        <a href="#contact2" ng-click="PatientHystoryclaim(patienthst[0].ServiceNo);">
+                                            Medical Claim History
+                                        </a>
+                                        @*<a ng-click="toggle()" data-toggle="collapse" href="#collapse"><b>        +</b></a>*@
+                                    </h4>
+                                    <h4 class="panel-title">
+
+                                        <a href="@Url.Action("ViewReportbyid","Lab_Report")?id={{patienthst[0].PID}}">
+                                            Lab History
+                                        </a>
+                                        @*<a ng-click="toggle()" data-toggle="collapse" href="#collapse"><b>        +</b></a>*@
+                                    </h4>
+
+
+                                </div>
+
+                                @*<div id="collapse" class="panel-collapse ">
+
+                                        <div class="panel-body" >
+
+
+
+                                            <table class="table table-striped">
+
+                                                <tbody>
+
+                                                    <tr ng-repeat-start="r2 in patienthstall">
+                                                        <td>
+                                                            <button ng-if="r2.expanded" ng-click="r2.expanded = false">-</button>
+                                                            <button ng-if="!r2.expanded" ng-click="r2.expanded = true">+</button>
+                                                        </td>
+
+                                                        <td><a href="#contact" ng-click="PatientHystory(r2.PDID);">Reported-{{r2.CreatedDate |limitTo:-15 |limitTo:13 | date:'dd/MM/yyyy' }}--{{r2.Clinic_Detail}}</a></td>
+
+                                                    </tr>
+                                                    <tr ng-if="r2.expanded" ng-repeat-end="">
+                                                        <td colspan="3">{{r2.dgdetail}}</td>
+
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>*@
+                            </div>
+
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    Diagnosed Medical Conditions
+                                </div>
+
+                                <div class="panel-body">
+                                    <div class="form-group has-success">
+
+                                      @*  <input type="text" placeholder="Type Here for Suggestion" ng-model="pmedkey1" uib-typeahead="g as g.dgdetail for g in Getdgn1 | filter:$viewValue | limitTo:20" typeahead-on-select="pmaddItem(pmedkey1.dgdetail)">*@
+
+                                        <textarea disabled="disabled" ng-model="pastmedhys" cols="50" rows="5"></textarea>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                           
+
+                        </div>
+
+
+                    </div>
+                    @*/*----------------------*/*@
+
+
+
+
+                </div>
+            </section>
+
+         
+            <section id="contact2">
+
+                <div id="mybook" style="text-align: left; ">
+
+                </div>
+
+            </section>
+          
+        </div>
+    </div>
+
+</div>
+<script>
+    $(function () {
+        //single book
+        debugger;
+
+        //$('#mybook').booklet({
+        //    width: '100%',
+        //    height: 800,
+        //   // closed: true,
+        //    autoCenter: true,
+        //    arrows: true,
+        //    direction: "RTL"
+
+        //});
+
+    });
+    function vwlb(id,id1) {
+        debugger;
+        angular.element(document.getElementById('epicontrol')).scope().viewlabtest(id,id1);
+    }
+    function validate1() {
+        debugger;
+        $('#mybook').booklet({
+            width: '100%',
+            height: '100%',
+            //closed: true,
+            autoCenter: true,
+            arrows: true,
+            direction: "RTL"
+
+        });
+    }
+    function validate() {
+        debugger;
+       // var selectv = $("#dgcat").find(":selected").text();
+        
+            //$("#errormsgspan").text(" ");
+            angular.element(document.getElementById('epicontrol')).scope().Submitgenen();
+            return true;
+        
+
+    }
+    $("form").submit(function () {
+
+    });
+</script>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

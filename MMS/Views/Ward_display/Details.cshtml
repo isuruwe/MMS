@@ -1,0 +1,74 @@
+﻿@model MMS.Ward_display
+
+@{
+    ViewBag.Title = "MMS";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Ward_display</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Pname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Prank)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prank)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pwardno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pwardno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pbedno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pbedno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PwardD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PwardD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pdiagnosis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pdiagnosis)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Padmitdate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Padmitdate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.WPID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

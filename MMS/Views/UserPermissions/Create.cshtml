@@ -1,0 +1,193 @@
+﻿@model List<MMS.Models.UserProfileModel>
+@{
+    ViewBag.Title = "MMS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts
+{
+    <script src="~/Scripts/Episode/v6/Module.js"></script>
+    <script src="~/Scripts/Episode/v6/Service.js"></script>
+    <script src="~/Scripts/Episode/v6/Controller.js"></script>
+}
+<link href="~/Scripts/css/jquery.booklet.latest.css" type="text/css" rel="stylesheet" media="screen, projection, tv" />
+<script src="~/Scripts/js/jquery.js"></script>
+<script src="~/Scripts/jquery-ui.min.js"></script>
+<script src="~/Scripts/jquery.min.js"></script>
+<script src="~/Scripts/js/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/js/metisMenu.min.js"></script>
+<script src="~/Scripts/js/sb-admin-2.js"></script>
+<script src="~/Scripts/js/dataTables.bootstrap.min.js"></script>
+<script src="~/Scripts/js/dataTables.responsive.js"></script>
+<script src="~/Scripts/Angular/angular.js"></script>
+
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/jquery.easing.1.3.js"></script>
+<script src="~/Scripts/jquery.booklet.latest.js"></script>
+<script src="~/Scripts/angular-route.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/ui-bootstrap-tpls-1.3.3.min.js"></script>
+
+<link rel="stylesheet" href="~/Scripts/css/bootstrap.min.css">
+<link rel="stylesheet" href="~/Scripts/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/Scripts/css/animate.min.css">
+<link rel="stylesheet" href="~/Scripts/css/et-line-font.css">
+<link rel="stylesheet" href="~/Scripts/css/nivo-lightbox.css">
+@*<link rel="stylesheet" href="~/Scripts/css/nivo_themes/default/default.css">*@
+<link rel="stylesheet" href="~/Scripts/css/style.css">
+@*<script src="~/Scripts/js/bootstrap.min.js"></script>*@
+<script src="~/Scripts/js/smoothscroll.js"></script>
+<script src="~/Scripts/js/isotope.js"></script>
+<script src="~/Scripts/js/imagesloaded.min.js"></script>
+<script src="~/Scripts/js/nivo-lightbox.min.js"></script>
+<script src="~/Scripts/js/jquery.backstretch.min.js"></script>
+<script src="~/Scripts/js/wow.min.js"></script>
+<script src="~/Scripts/js/custom.js"></script>
+<div ng-app="EpisodeApp" class="container">
+    <div ng-controller="EpisodeCntrl" id="usercontrol" ng-init="inituser()">
+
+        <div ng-show="divPor" class="form-horizontal">
+            <style>
+                tr {
+                    padding: 1px;
+                }
+
+                td, th {
+                    padding: 15px;
+                }
+            </style>
+
+            @{
+                ViewBag.Title = "MMS";
+                Layout = "~/Views/Shared/_Layout.cshtml";
+            }
+
+            <section class="navbar navbar-fixed-top custom-navbar" role="navigation">
+                <div class="container">
+
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li>
+                                <a href="@Url.Action("Index","Home")">HOME</a>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right"></ul>
+
+
+                    </div>
+
+
+
+                </div>
+            </section>
+
+            <div style="width:auto;padding:5px; background-color:white;">
+                @using (Html.BeginForm("Create", "UserPermissions", FormMethod.Post))
+            {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    if (@ViewBag.Message != null)
+                    {
+                        @ViewBag.Message
+                    }
+                    @*<div>
+                            <a href="#" id="addNew">Add New Object</a>
+                        </div>*@
+                    <div class="form-group row-fluid form-inline">
+                        @Html.Label("ServiceNo", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input type="text" ng-model="ServiceNo"  ng-blur="getuserperlist();" class="f1"  />
+                        </div>
+                    </div>
+
+                    <div class="form-group row-fluid form-inline">
+                        @Html.Label("Location", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <select class="form-control" id="loc1" ng-model="loc" ng-options="g as g.LocationName for g in locc"></select>
+                        </div>
+                    </div>
+                    <div class="form-group row-fluid form-inline">
+                        @Html.Label("Speciality Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <select class="form-control" id="cltp1" ng-model="cltyp" ng-change=" Getdiv(loc);" ng-options="g as g.ClinicDetails for g in cltp"></select>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="form-group row-fluid form-inline">
+                        @Html.Label("Division", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <select class="form-control" id="div1" ng-model="div" ng-options="g as g.DivisionName for g in divv"></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row-fluid form-inline">
+                        @Html.Label("Menu", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <select class="form-control" id="menu1" ng-model="menu"  ng-options="g as g.MenuName for g in mmenu"></select>
+                       
+                            <input type="button" id="mataddl" class="f1" ng-click="Savemenu();" value="Add" />
+                         </div>
+                    </div>
+                   
+                }
+            </div>
+            <div class="form-group">
+                <table class="table table-striped table-condensed">
+                    <tbody>
+                        <tr>
+
+                            <td>Service No</td>
+                            <td>Location</td>
+                            <td>Division</td>
+                            <td></td>
+                        </tr>
+                        <tr ng-repeat="field in stmdx">
+
+                            <td>
+                                {{field.service}}     
+                            </td>
+                            <td>
+                                {{field.cat}}
+                            </td>
+                            <td>
+                                {{field.fname}}
+                            </td>
+
+                           
+                            <td>
+                                <input type="button"  ng-click="remdiv(field.rt)" value="delete" ">
+                               
+                            </td>
+                         
+                        </tr>
+
+
+
+
+
+
+          
+                    </tbody>
+                </table>
+                <table class="table table-striped">
+
+                    <tr ng-repeat="clitem in clitems" class="item">
+                        <td width="50%"><b>{{clitem.cnbenef}}</b> </td>
+                        <td width="50%"><b>{{clitem.cclmamn}}</b> </td>
+                        <td width="50%"><b>{{clitem.cevntdt|limitTo:-15 |limitTo:13 | date:'dd/MM/yyyy'}}</b> </td>
+
+                        <td><button ng-click="clremoveItem($index)">Remove</button></td>
+                    </tr>
+                </table>
+
+            </div>
+
+
+            <div>
+                @Html.ActionLink("Back to List", "UserPermissionIndex")
+            </div>
+        </div>
+    </div>
+</div>

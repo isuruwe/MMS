@@ -1,0 +1,74 @@
+﻿@model MMS.DrugStockMaster
+
+@{
+    ViewBag.Title = "MMS";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DrugStockMaster</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BatchID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BatchID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpireDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpireDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MFD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MFD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LOC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LOC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StoreID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StoreID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DrugQuantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DrugQuantity)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ItemIndex }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

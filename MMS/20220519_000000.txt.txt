@@ -1,0 +1,15 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+HBA1C
+
+ Service No:01286
+ AVM E G J P De Silva
+May 19 2022  2:09PM
+
+Test Name	Result	Reference Range	Unit
+
+HBA1C		6.9		< 5.6	%
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+

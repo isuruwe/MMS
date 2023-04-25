@@ -1,0 +1,136 @@
+﻿@model IEnumerable<MMS.Models.UserProfileModel>
+
+@{
+    ViewBag.Title = "UserPermissionIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using PagedList.Mvc;
+@using PagedList;
+<section class="navbar navbar-fixed-top custom-navbar" role="navigation">
+    <div class="container">
+
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-left">
+                <li>
+                    <a href="@Url.Action("Index","Home")">HOME</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                @*<li><a href="#work">TOP</a></li>
+                @* <li><a href="#work" class="smoothScroll">NURSE</a></li>*@
+                @*<li><a href="#about" class="smoothScroll">ABOUT</a></li>*@
+                @*<li><a href="#portfolio">DOCTOR</a></li>
+                <li><a href="#team">EXAMINATION</a></li>
+                <li><a href="#pricing">INVESTIGATIONS</a></li>
+                <li><a href="#about">DIAGNOSIS</a></li>
+                <li><a href="#contact">HISTORY</a></li>*@
+
+            </ul>
+
+
+        </div>
+
+
+
+    </div>
+</section>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<br />@if (ViewBag.OnePageOfProducts.Count > 0)
+{
+<table class="table table-striped">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.UserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RoleID)
+        </th>
+
+        <th>
+            @Html.Hidden("Menu ID")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MenuName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SHO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NEW)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EDT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DEL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PRN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SER)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CER)
+        </th>
+        <th></th>
+    </tr>
+
+   @foreach (var item in ViewBag.OnePageOfProducts)
+                {
+        <tr>
+
+            <td>
+                @item.UserID
+            </td>
+            <td>
+                @item.RoleID
+            </td>
+
+            <td>
+               "MenuID"
+            </td>
+            <td>
+               @item.MenuName
+            </td>
+            <td>
+                @item.SHO
+            </td>
+            <td>
+               @item.NEW
+            </td>
+            <td>
+                @item.EDT
+            </td>
+            <td>
+                 @item.DEL
+            </td>
+            <td>
+                @item.PRN
+            </td>
+            <td>
+               @item.SER
+            </td>
+            <td>
+              @item.CER
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.UserProfID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.UserProfID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.UserProfID })
+            </td>
+        </tr>
+    }
+
+</table>}
+else
+{
+    //Response.Redirect("~/Home/Index/");
+    <div><center>No Results</center></div>
+}
+@Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("UserPermissionIndex", new { page }))

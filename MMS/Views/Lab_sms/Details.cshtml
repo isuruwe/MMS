@@ -1,0 +1,90 @@
+﻿@model Lab_Report
+
+@{
+    ViewBag.Title = "MMS";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Lab_Report</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Lab_SubCategory.CategoryID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lab_SubCategory.CategoryID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Patient_Detail.PID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patient_Detail.PID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Result)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Result)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RequestedLocID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RequestedLocID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Issued)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Issued)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IssuedTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssuedTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RequestedTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RequestedTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IssuedLocID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssuedLocID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LabImg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LabImg)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Lab_Index }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

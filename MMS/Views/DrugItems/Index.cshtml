@@ -1,0 +1,93 @@
+﻿@model IEnumerable<MMS.DrugItem>
+
+@{
+    ViewBag.Title = "MMS";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ItemID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ItemShortDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ItemDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UOF)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeOfForm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DrugGroup)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StorageCodition)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StockQuantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LocationID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ItemID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ItemShortDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ItemDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UOF)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TypeOfForm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DrugGroup)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StorageCodition)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Remarks)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StockQuantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LocationID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DrugID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DrugID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DrugID })
+        </td>
+    </tr>
+}
+
+</table>

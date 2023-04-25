@@ -1,0 +1,51 @@
+﻿@model OPD_Master
+
+@{
+    ViewBag.Title = "MMS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>OPD_Master</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Location.STN_CODE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location.STN_CODE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrentNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrentNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxPatients)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxPatients)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OPD_Detail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OPD_Detail)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.OPD_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

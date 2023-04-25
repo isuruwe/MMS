@@ -1,0 +1,46 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+DENGUE Ag
+ Service No:01646
+ T/AVM P Ranasinghe
+Jan 25 2022 10:01AM
+
+Test Name	Result	Reference Range	Unit
+
+DENGEUE NS1 ANTIGEN		Negative			
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+FBC
+ Service No:01646
+ T/AVM P Ranasinghe
+Jan 25 2022  9:37AM
+
+Test Name	Result	Reference Range	Unit
+
+WBC		9.4H		4.0-9.0	UL
+NE		77.1*		50-70	%
+LY		8.2L		20-40	%
+MO		11.6*		3.0-12.0	%
+EO		2.4		0.5-5.0	%
+BA		0.7*		0.0-1.0	%
+RBC		7.03*		3.79-5.7	uL
+HGB		12.2		12.0-18.0	g/dL
+HCT		41.7		33.5-52.0	%
+MCV		59.3L		80.0-100	fL
+MCH		17.4L		28.0-32.0	pg
+MCHC		29.3L		31.0-35.0	g/dL
+RDW-CV		16.1H		11.6-14.0	%
+RDW-SD		38.2L		39.0-46.0	fL
+PLT		151*		150-350	uL
+PCT		0.13L		0.16-0.33	%
+MPV		8.3		7.0-11.0	fL
+PDW		17.2H		15.0-17.0	%
+NE#		7.2*		2.0-7.0	uL
+LY#		0.8		0.8-4.0	uL
+MO#		1.1*		0.12-1.20	uL
+EO#		0.2		0.02-0.50	uL
+BA#		0.1*		0.00-0.10	uL

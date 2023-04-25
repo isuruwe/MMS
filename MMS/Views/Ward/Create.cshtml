@@ -1,0 +1,1536 @@
+﻿
+
+@{
+    ViewBag.Title = "MMS";
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts
+{
+    <script src="~/Scripts/Episode/v6/Module.js"></script>
+    <script src="~/Scripts/Episode/v6/Service.js"></script>
+    <script src="~/Scripts/Episode/v6/Controller.js"></script>
+}
+<link href="~/Scripts/css/jquery.booklet.latest.css" type="text/css" rel="stylesheet" media="screen, projection, tv" />
+<script src="~/Scripts/js/jquery.js"></script>
+<script src="~/Scripts/jquery-ui.min.js"></script>
+<script src="~/Scripts/jquery.min.js"></script>
+<script src="~/Scripts/js/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/js/metisMenu.min.js"></script>
+<script src="~/Scripts/js/sb-admin-2.js"></script>
+<script src="~/Scripts/js/dataTables.bootstrap.min.js"></script>
+<script src="~/Scripts/js/dataTables.responsive.js"></script>
+<script src="~/Scripts/Angular/angular.js"></script>
+
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/jquery.easing.1.3.js"></script>
+<script src="~/Scripts/jquery.booklet.latest.js"></script>
+<script src="~/Scripts/angular-route.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/ui-bootstrap-tpls-1.3.3.min.js"></script>
+
+<link rel="stylesheet" href="~/Scripts/css/bootstrap.min.css">
+<link rel="stylesheet" href="~/Scripts/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/Scripts/css/animate.min.css">
+<link rel="stylesheet" href="~/Scripts/css/et-line-font.css">
+<link rel="stylesheet" href="~/Scripts/css/nivo-lightbox.css">
+@*<link rel="stylesheet" href="~/Scripts/css/nivo_themes/default/default.css">*@
+<link rel="stylesheet" href="~/Scripts/css/style.css">
+<link rel="stylesheet" href="~/Scripts/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="~/Scripts/css/responsive.bootstrap4.min.css">
+<link rel="stylesheet" href="~/Scripts/css/buttons.bootstrap4.min.css">
+
+@*<script src="~/Scripts/js/bootstrap.min.js"></script>*@
+<script src="~/Scripts/js/smoothscroll.js"></script>
+<script src="~/Scripts/js/isotope.js"></script>
+<script src="~/Scripts/js/imagesloaded.min.js"></script>
+<script src="~/Scripts/js/nivo-lightbox.min.js"></script>
+<script src="~/Scripts/js/jquery.backstretch.min.js"></script>
+<script src="~/Scripts/js/wow.min.js"></script>
+<script src="~/Scripts/js/custom.js"></script>
+<script src="~/Scripts/js/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/js/dataTables.bootstrap4.min.js"></script>
+<script src="~/Scripts/js/dataTables.responsive.min.js"></script>
+<script src="~/Scripts/js/responsive.bootstrap4.min.js"></script>
+<script src="~/Scripts/js/dataTables.buttons.min.js"></script>
+<script src="~/Scripts/js/buttons.bootstrap4.min.js"></script>
+<script src="~/Scripts/js/jszip.min.js"></script>
+<script src="~/Scripts/js/pdfmake.min.js"></script>
+<script src="~/Scripts/js/vfs_fonts.js"></script>
+<script src="~/Scripts/js/buttons.html5.min.js"></script>
+<script src="~/Scripts/js/buttons.print.min.js"></script>
+<script src="~/Scripts/js/buttons.colVis.min.js"></script>
+<script>
+    jQuery.extend(jQuery.expr[':'], {
+        focusable: function (el, index, selector) {
+            return $(el).is('a, button, :input, [tabindex]');
+        }
+    });
+    $(document).ready(function () {
+        $("#asdfhg").DataTable({
+            "ordering": false,
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#asdfhg_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+   
+        document.getElementById('mdt').valueAsDate = new Date();
+    
+    });
+    
+    $(document).on('keypress', 'input,select', function (e) {
+        if (e.which == 13) {
+            debugger;
+            e.preventDefault();
+            // Get all focusable elements on the page
+            var $canfocus = $(':focusable');
+            var index = $canfocus.index(document.activeElement) + 1;
+            if (index >= $canfocus.length) index = 0;
+            $canfocus.eq(index).focus();
+        }
+    });
+
+    $(document).on('keypress', '#srch', function (e) {
+
+        if (e.which == 13) {
+            debugger;
+            // Enter key pressed
+            document.location = $("#change1").attr('href');
+        }
+    });
+    $(document).on('keypress', '#drdur', function (e) {
+
+        if (e.which == 13) {
+            debugger;
+            // Enter key pressed
+            $("#draddl").trigger('click');
+        }
+    });
+    $(document).on('keypress', '#mdt', function (e) {
+
+        if (e.which == 13) {
+            debugger;
+            // Enter key pressed
+            $("#mbtn").click();
+        }
+    });
+
+
+
+
+</script>
+@using PagedList.Mvc;
+@using PagedList;
+
+
+<div ng-app="EpisodeApp" class="container">
+
+    <div ng-controller="EpisodeCntrl" id="epicontrol" ng-init="initpatientWard()">
+
+        <div ng-show="divPor" class="form-horizontal">
+
+            <section class="navbar navbar-fixed-top custom-navbar" role="navigation">
+                <div class="container">
+
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li>
+                                <a href="@Url.Action("Index","Home")">HOME</a>
+
+                            </li>
+                            <li>
+                                <input type="submit" ng-click="" onclick="validate();" value="Save" class="btn-primary btn-sm" />
+
+
+
+                            </li>
+                            <li>
+                                <div ng-show="showerror">
+                                    <span style="background-color:black">Error!</span>
+                                </div>
+
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a id="tp" href="#work">TOP</a></li>
+                            @* <li><a href="#work" class="smoothScroll">NURSE</a></li>*@
+                            @*<li><a href="#about" class="smoothScroll">ABOUT</a></li>*@
+                            <li><a href="#portfolio">DOCTOR</a></li>
+                            <li><a href="#team">EXAMINATION</a></li>
+                            <li><a href="#pricing">INVESTIGATIONS</a></li>
+                            <li><a href="#about">DIAGNOSIS</a></li>
+                            <li><a href="#contact">DRUGS</a></li>
+                            <li><a href="#contact1">MEDICAL DISPOSAL</a></li>
+                            <li><a href="/MMS/SurgeryMasters/dcard">DISCHARGE</a></li>
+                            
+                        </ul>
+
+
+                    </div>
+
+
+
+                </div>
+            </section><div class="row">
+                <div class="col-ld-2">
+                </div>
+                <div class="col-ld-2">
+                    @Session["loginuser"].ToString()
+                </div>
+            </div>
+            <section id="work">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <h3>In Ward Patients</h3>
+                        </div><div class="form-group">
+                            <div class="col-md-7">
+                                <div class="col-md-6">
+                                    <input type="text" id="srch" class="form-control" style="color:blue" ng-model="SearchString" />
+                                </div>
+                                <div class="col-md-2"><a id="change1" type='submit' value='Search' name='Search' class="btn-primary btn text-uppercase " href="@Url.Action("Create","Ward")?id={{SearchString}}">search</a></div>
+                            </div>
+                        </div>
+                        <div class="form-horizontal" style="border:1px solid #0094ff; overflow-y:hidden">
+                            @if (ViewBag.OnePageOfProducts.Count > 0)
+                            {
+                            <table id="asdfhg" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>
+
+                                        </th>
+                                        <th>
+                                            Service No
+                                        </th>
+                                        <th>
+                                            Name
+                                        </th>
+                                        <th>
+                                            Present Complain
+                                        </th>
+                                        <th>
+                                            Date
+                                        </th>
+
+                                        <th>
+                                            Status
+                                        </th>
+                                        <th></th>
+
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach (var item in (IEnumerable<MMS.Models.getdocdetail>)ViewBag.OnePageOfProducts)
+                                    {
+                                        <tr>
+                                            <td align="left">
+                                                @item.relasiondet
+                                            </td>
+                                            <td align="left">
+                                                <a href="#portfolio" ng-click="GetOPDPatientWard('@item.pdids');loadchild1('@item.sno');PatientHystoryWard('@item.pidp','@item.pdids');">@item.sno</a>
+                                            </td>
+                                            <td align="left">
+                                                <a href="#portfolio" ng-click="GetOPDPatientWard('@item.pdids');loadchild1('@item.sno');PatientHystoryWard('@item.pidp','@item.pdids');">
+                                                    @if (item.relasiont == 1)
+                                                    {@item.rnkname}
+                                                    @item.inililes @item.sname
+                                                </a>
+
+                                            </td>
+                                            <td align="left">
+                                                @item.pcomoplian
+                                            </td>
+                                            <td align="left">
+                                                @item.crdate
+                                            </td>
+
+                                            <td align="left">
+                                                @if (item.pstatus == "12")
+                                                {<label>Admit</label> }
+                                                else if (item.pstatus == "11")
+                                                {
+                                                    <label>Detain</label>
+                                                }
+                                            </td>
+                                            <td>
+                                                <a href="" ng-click="delPatient('@item.pdids');">
+
+                                                    Delete
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+
+                            </table>
+                            }
+                            else
+                            {
+                                //Response.Redirect("~/Home/Index/");
+                                <div><center>No Results</center></div>
+                            }
+                           
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+            <div ng-show="showloader" id="loading">
+                <img id="loading-image" src="~/Content/Images/loading.png" />
+            </div>
+
+            <section id="portfolio">
+                <div class="container">
+
+                    <div class="row">
+
+                        <div class="col-md-12 col-sm-12">
+                            <div class="section-title">
+
+                                <h1 class="heading bold"></h1>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="col-md-12 ">
+                            <div class="panel panel-primary  ">
+                                <div class="panel-heading"> OPD Details</div>
+                                <div class="panel-body">
+
+
+
+                                    @*<mat-form-field style="width:100%;display:block;">
+
+                                        </mat-form-field>*@
+
+                                    @*@Html.Label("", htmlAttributes: new { @class = "control-label col-md-2"  })*@
+
+                                    <div id="wardoop" style=" text-align: start;">
+
+                                    </div>
+                                    @*<textarea ng-model="h1"  cols="100" rows="10" disabled></textarea>*@
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*--------------------------*@
+                    <div class="row">
+
+                        <div class="col-md-12 col-sm-12">
+                            <div class="section-title">
+                                <h1 class="heading bold">Ward</h1>
+                                <hr>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+
+                                <div class="panel-heading">
+                                    Patient Detail
+                                </div>
+
+                                <div class="panel-body">
+                                    <div class="form-group  has-success" style=" height:300px; overflow-y:auto;">
+                                        <span id="errormsgspandoc" asp-validation-for="Year" style="background-color:#ff0000"></span>
+                                        <div class="col-md-7">
+                                            <div id="svcpr">
+                                                <span class=" test" style="font-weight:bold"> {{ patienthst[0].Relationship=='SELF' ? patienthst[0].RNK_NAME : patienthst[0].Relationship }}</span> {{ patienthst[0].Relationship!='Child' ? patienthst[0].Initials : ''}}   {{patienthst[0].Surname}}
+                                                </br>   Age: {{ age<'100' ? age : N/A }}
+
+                                            </div>
+                                            </br> MES:<div ng-if="patienthst[0].Relationship=='SELF'">
+                                                <div ng-if="patienthst[0].Category=='A4G4(P)'"> <span style="background-color:#ff0000">{{patienthst[0].Category}} </span></div>
+                                                <div ng-if="patienthst[0].Category=='A4G4(T)'||patienthst[0].Category=='A4G3(P)'||patienthst[0].Category=='A4G3(T)'"> <span style="background-color:#ff0000">{{patienthst[0].Category}} </span></div>
+                                                <div ng-if="!(patienthst[0].Category=='A4G4(T)'||patienthst[0].Category=='A4G3(P)'||patienthst[0].Category=='A4G3(T)')"> {{patienthst[0].Category}} </div>
+                                            </div>
+                                            </br> Blood Group:       {{patienthst[0].BloodType}}
+                                            <div ng-show="medbrd[0].CategoryName!=null">
+                                                </br>Medical Board Catagory: {{medbrd[0].CategoryName}}
+                                                </br>Next Medical Board Date: {{medbrd[0].DateOfNextMedical|limitTo:-15 |limitTo:13 | date:'dd/MM/yyyy' }}
+                                            </div>
+                                            <div ng-show="acrw[0].MES!=null">
+                                                </br>Aircrew Medical MES: {{acrw[0].MES}}
+                                                </br>WEF: {{acrw[0].WEF|limitTo:-15 |limitTo:13 | date:'dd/MM/yyyy' }}
+                                                </br>Next Date: {{acrw[0].NextDate|limitTo:-15 |limitTo:13 | date:'dd/MM/yyyy' }}
+                                            </div>
+
+                                            <div ng-show="patienthst[0].mauth==4">
+                                                </br><span style="color:#ff0000">Medical Board Pending</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="panel-group ">
+                                                <div class="panel panel-default " style="width:120px;">
+
+                                                    <div class="panel-body">
+                                                        <img data-ng-src="{{primage1}}" style="width:100px;" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*<div id="collapse" class="panel-collapse ">*@
+                                        <table class="table table-striped">
+
+                                            <tr ng-repeat="uitem in famlist" class="item">
+                                                <td>
+                                                    <a href="#contact2" ng-click="PatientHystory(uitem.PID);">
+
+
+                                                        {{ uitem.Relationship=='SELF' ? uitem.RNK_NAME : uitem.Relationship }} {{ uitem.Relationship=='SELF' ? uitem.Initials : ''}} {{uitem.Surname}}
+                                                    </a>
+                                                </td>
+
+
+                                            </tr>
+                                        </table>
+                                        @*<table class="table table-striped">
+
+                                            <tbody>
+
+                                                <tr ng-repeat="r1 in patienthsthyp">*@
+                                        @*<td>
+                                                <button ng-if="r1.expanded" ng-click="r1.expanded = false">-</button>
+                                                <button ng-if="!r1.expanded" ng-click="r1.expanded = true">+</button>
+                                            </td>*@
+                                        @*<td>Allergies- </td>*@
+                                        @*<td>{{r1.HypersenceMainCategory}}</td>
+
+                                            <td>{{r1.HypersenseDetail}}</td>
+                                                                                            </tr>*@
+                                        @*<tr ng-if="r1.expanded" ng-repeat-end="">
+                                                <td colspan="3">{{r1.HypersenseDetail}}</td>
+                                            </tr>*@
+
+                                        @*</tbody>
+                                            </table>*@
+
+                                        @* </div> *@
+                                    </div>
+                                    <div class="form-group has-success">
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="panel panel-primary">
+                                <div class="panel-heading"> Other Details</div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <table>
+                                                    <tr>
+                                                        <td>@Html.Label("BHT No", htmlAttributes: new { @class = "control-label col-md-3" })</td>
+                                                        <td><input value="" type="text" ng-model="BHTNo" disabled /></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>@Html.Label("Ward", htmlAttributes: new { @class = "control-label col-md-3" })</td>
+                                                        @*<td><input value="" type="text" ng-model="wardNo" /></td>*@
+                                                        <td>
+                                                            <select id="wardNo" ng-model="wardNo" ng-options="g as g.Ward_Type for g in wardTypes" disabled>
+                                                                <option value="">-- Select --</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>@Html.Label("Bed No", htmlAttributes: new { @class = "control-label col-md-3" })</td>
+                                                        <td><input value="" type="text" ng-model="bedNo" disabled /></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>@Html.Label("Remarks", htmlAttributes: new { @class = "control-label col-md-3" })</td>
+                                                        <td><input value="" type="text" ng-model="remarks" disabled /></td>
+                                                    </tr>
+                                                </table>
+
+
+
+                                                <div class="col-md-10">
+
+                                                </div>
+
+                                                <div class="col-md-10">
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+
+                                <div class="panel-heading">
+                                    Vitals
+                                </div>
+
+                                <div class="panel-body">
+                                    <div class="form-group  has-success">
+
+                                        <table class="table table-striped">
+
+                                            <tbody>
+
+                                                <tr ng-repeat-start="r1 in patientvit">
+                                                    <td>
+                                                        <button ng-if="r1.expanded" ng-click="r1.expanded = false">-</button>
+                                                        <button ng-if="!r1.expanded" ng-click="r1.expanded = true">+</button>
+                                                    </td>
+
+                                                    <td>{{r1.VitalType}}</td>
+                                                    <td>{{r1.VitalValues}}</td>
+                                                    <td>{{r1.ReadingUnit}}</td>
+
+                                                </tr>
+                                                <tr ng-if="r1.expanded" ng-repeat-end="">
+                                                    <td colspan="3">{{r1.Reading_Time |limitTo:-15 |limitTo:13 | date:'short'}}</td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    Patients Complains
+                                </div>
+
+                                <div class="panel-body">
+                                    <div class="form-group has-success">
+                                        <textarea ng-model="History_PresentComplain" cols="50" rows="5"></textarea>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="panel panel-primary">
+
+                                <div class="panel-heading">
+                                    Drug History
+                                </div>
+                                <div class="panel-body">
+
+                                    <div class="form-group has-success">
+                                        @*<input type="text" placeholder="Type Here for Suggestion" ng-model="dmedkey1" uib-typeahead="g as g.itemdescription for g in DName | filter: $viewValue| limitTo:20" typeahead-on-select="dmaddItem(dmedkey1.itemdescription)">*@
+                                        <textarea ng-model="drughyst" cols="50" rows="5" disabled></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @*Diagnosis*@
+
+
+
+                        <div class="col-lg-4">
+                            <div class="panel panel-primary ">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+
+                                        <a href="#contact2" ng-click="PatientHystoryfp(patienthstall[0].PID);">
+                                            Front Page
+                                        </a>
+                                        @*<a ng-click="toggle()" data-toggle="collapse" href="#collapse"><b>        +</b></a>*@
+                                    </h4>
+                                    <h4 class="panel-title">
+
+                                        <a href="#contact2" ng-click="PatientHystory(patienthstall[0].PID);">
+                                            History
+                                        </a>
+                                        @*<a ng-click="toggle()" data-toggle="collapse" href="#collapse"><b>        +</b></a>*@
+                                    </h4>
+                                    <h4 class="panel-title">
+
+                                        <a href="#contact2" ng-click="PatientHystorypft(patienthstall[0].PID);">
+                                            PFT Medical History
+                                        </a>
+                                        @*<a ng-click="toggle()" data-toggle="collapse" href="#collapse"><b>        +</b></a>*@
+                                    </h4>
+                                    <h4 class="panel-title">
+
+                                        <a href="#contact2" ng-click="PatientHystoryclaim(patienthst[0].ServiceNo);">
+                                            Medical Claim History
+                                        </a>
+                                        @*<a ng-click="toggle()" data-toggle="collapse" href="#collapse"><b>        +</b></a>*@
+                                    </h4>
+                                    <h4 class="panel-title">
+
+                                        <a href="@Url.Action("ViewReportbyid","Lab_Report")?id={{patienthstall[0].PID}}">
+                                            Lab History
+                                        </a>
+                                        @*<a ng-click="toggle()" data-toggle="collapse" href="#collapse"><b>        +</b></a>*@
+                                    </h4>
+
+
+                                </div>
+
+                                @*<div id="collapse" class="panel-collapse ">
+
+                                        <div class="panel-body" >
+                                            <table class="table table-striped">
+                                                <tbody>
+                                                    <tr ng-repeat-start="r2 in patienthstall">
+                                                        <td>
+                                                            <button ng-if="r2.expanded" ng-click="r2.expanded = false">-</button>
+                                                            <button ng-if="!r2.expanded" ng-click="r2.expanded = true">+</button>
+                                                        </td>
+
+                                                        <td><a href="#contact" ng-click="PatientHystory(r2.PDID);">Reported-{{r2.CreatedDate |limitTo:-15 |limitTo:13 | date:'dd/MM/yyyy' }}--{{r2.Clinic_Detail}}</a></td>
+
+                                                    </tr>
+                                                    <tr ng-if="r2.expanded" ng-repeat-end="">
+                                                        <td colspan="3">{{r2.dgdetail}}</td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>*@
+                            </div>
+
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    Diagnosed Medical Conditions
+                                </div>
+
+                                <div class="panel-body">
+                                    <div class="form-group has-success">
+                                        @*<input type="text" placeholder="Type Here for Suggestion" ng-model="pmedkey1" uib-typeahead="g as g.dgdetail for g in Getdgn1 | filter:$viewValue | limitTo:20" typeahead-on-select="pmaddItem(pmedkey1.dgdetail)">*@
+                                        <textarea ng-model="pastmedhys" cols="50" rows="5" disabled></textarea>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    Allergies History
+                                </div>
+
+                                <div class="panel-body">
+                                    <table class="table table-striped">
+
+                                        <tbody>
+
+                                            <tr ng-repeat="r1 in patienthsthyp">
+                                                <td>Allergies- </td>
+                                                <td>{{r1.HypersenceMainCategory}}</td>
+
+                                                <td>{{r1.HypersenseDetail}}</td>
+                                            </tr>
+                                            <tr ng-if="r1.expanded" ng-repeat-end="">
+                                                <td colspan="3">{{r1.HypersenseDetail}}</td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                    <div class="form-group has-success">
+                                        @Html.Label("Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <select id="HID" ng-model="HyperType1" ng-change=" GetHyperSubType(HyperType1);" ng-options="c as c.HypersenceMainCategory for c in HyperType">
+                                            <option value="">-- Select Allergy Type --</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group has-success">
+                                        @Html.Label("Detail", htmlAttributes: new { @class = "control-label col-md-2" })
+
+                                        <input type="text" ng-model="HDetail" />
+                                        <input type="button" ng-click="haddItem(HyperType1.HypersenceMainCatID,HyperType1.HypersenceMainCategory,HDetail)" value="Add" />
+                                    </div>
+                                    <table class="table table-striped">
+
+                                        <tr ng-repeat="hitem in hitems" class="item">
+                                            <td><b>{{hitem.htype}}->{{hitem.hstype1}}</b></td>
+                                            <td><button ng-click="hremoveItem($index)">Remove</button></td>
+                                        </tr>
+                                    </table>
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                    @*/*----------------------*/*@
+                    @*<div class="row">
+
+                            <div class="col-md-12 col-sm-12">
+                                <div class="section-title">
+
+                                    <h1 class="heading bold">Others</h1>
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="col-md-4 ">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading"> Other Details</div>
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <table>
+                                                        <tr>
+                                                            <td>@Html.Label("Remarks", htmlAttributes: new { @class = "control-label col-md-3" })</td>
+                                                            <td><input value="" type="text" ng-model="remarks" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>@Html.Label("Ward No", htmlAttributes: new { @class = "control-label col-md-3" })</td>
+                                                            <td><input value="" type="text" ng-model="wardNo" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>@Html.Label("Bed No", htmlAttributes: new { @class = "control-label col-md-3" })</td>
+                                                            <td><input value="" type="text" ng-model="bedNo" /></td>
+                                                        </tr>
+                                                    </table>
+
+
+
+                                                    <div class="col-md-10">
+
+                                                    </div>
+
+                                                    <div class="col-md-10">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
+
+
+                </div>
+            </section>
+            <section id="team">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-md-12 col-sm-12">
+                            <div class="section-title">
+
+                                <h1 class="heading bold">Examination</h1>
+                                <hr>
+                            </div>
+                        </div>
+
+
+                        @*General Examination*@
+                        <div class="col-lg-4 ">
+
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    General Examination <input type="checkbox" ng-model="ge" />
+                                </div>
+                                <div class="panel-body" ng-show="ge">
+                                    Vitals
+                                    <div class="form-group">
+                                        @Html.Label("Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            <select id="VTID" ng-model="VTID" ng-options="c as c.VitalType for c in VitalTypes">
+                                                <option value="">-- Select Vital Type --</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Label("Value", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            <input value="" type="text" ng-model="vvalue" />
+                                            <input type="button" ng-click="addItem(VTID.VTID,vvalue)" value="Add" />
+                                        </div>
+                                    </div>
+                                    <table class="table table-striped">
+
+                                        <tr ng-repeat="item in items" class="item">
+                                            <td><b>{{item.name}}</b> </td>
+                                            <td><b>:</b>{{item.amount}} </td>
+                                            <td><button ng-click="removeItem($index)">Remove</button></td>
+                                        </tr>
+                                    </table>
+
+
+
+
+
+                                    <textarea ng-model="genex" cols="50" rows="5"></textarea>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        @*Cardiovascular System Examination*@
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    Cardiovascular System Examination<input type="checkbox" ng-model="ce" />
+                                </div>
+
+                                <div class="panel-body" ng-show="ce">
+                                    <textarea ng-model="cardex" cols="50" rows="5"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        @*Central Nervous System Examination*@
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    Central Nervous System Examination <input type="checkbox" ng-model="cne" />
+                                </div>
+                                <div class="panel-body" ng-show="cne">
+                                    <textarea ng-model="cenex" cols="50" rows="5"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix">  </div>
+                        @*Respiratory System Examination*@
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    Respiratory System Examination <input type="checkbox" ng-model="rse" />
+                                </div>
+                                <div class="panel-body" ng-show="rse">
+                                    <textarea ng-model="resex" cols="50" rows="5"></textarea>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        @*Other Relevant Clinical Examination*@
+                        <div class="col-lg-4 " data-wow-delay="0.1s">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    Other Relevant Clinical Examination <input type="checkbox" ng-model="oe" />
+                                </div><div class="panel-body" ng-show="oe">
+                                    <textarea ng-model="othex" cols="50" rows="5"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        @*Abdominal Examination*@
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    Abdominal Examination <input type="checkbox" ng-model="ae" />
+                                </div>
+                                <div class="panel-body" ng-show="ae">
+                                    <textarea ng-model="abdex" cols="50" rows="5"></textarea>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </section>
+            <section id="pricing">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="section-title">
+                                <h1 class="heading bold">Investigations</h1>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Investigations</div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+
+                                        <input type="text" ng-model="lName1" uib-typeahead="g as g.CategoryName for g in lName | filter: $viewValue| limitTo:20">
+                                        <a class="clear" ng-click="lName1=null">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                        </a>
+
+                                        <input type="button" ng-click="laddItem(lName1.CategoryID,lName1.CategoryName,lName1.TubeCategory)" value="Add" />
+                                        <table class="table table-striped">
+
+                                            <tr ng-repeat="litem in litems" class="item">
+                                                <td width="50%"><b>{{litem.labcat}}</b> </td>
+
+
+                                                <td><button ng-click="lremoveItem($index)">Remove</button></td>
+                                            </tr>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        @*<div class="clearfix">  </div>*@
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Test Name</div>
+                                <table class="table table-striped  ">
+                                    <thead>
+                                        <tr>
+                                            <th width="40%" align="left"></th>
+                                            <th></th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-repeat="field in lablist">
+                                        <tr>
+                                            <td width="20%" align="left">
+                                                <a ng-click="viewlabtest(field.TestSID,field.TubeCategory);">
+                                                    {{field.CategoryName}}
+                                                </a>
+                                            </td>
+                                            <td width="20%" align="left">{{field.RequestedTime |limitTo:-15 |limitTo:13 | date:'dd/MM/yyyy HH:mm'  }}</td>
+                                            <td>
+                                                <div ng-if="field.Issued=='0'"> Pending</div>
+                                                <div ng-if="field.Issued=='1'">Issued</div>
+                                            </td>
+                                            <td width="20%" align="left">
+                                                <a href="" ng-click="delinv(field.TestSID);">
+
+                                                    Delete
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 ">
+
+                            <div class="panel panel-primary">
+
+                                <div class="panel-heading"><input type="submit" ng-click="printDiv('prins');" value="Print" class="btn btn-default hidden-print" /></div>
+                                <div class="panel-body" id="prins">
+                                    <table class="table table-striped  ">
+
+                                        <thead>
+                                            <tr>
+                                                <th width="40%" align="left">Test Name</th>
+                                                <th width="20%" align="left">Result</th>
+                                                <th width="20%" align="left">Result Status</th>
+                                                <th width="20%" align="left">Reference Range Unit</th>
+                                                <th width="20%" align="left">Reference Range</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody ng-repeat="field in viewlab">
+                                            {{viewlab[0].CategoryName}}
+                                            <tr>
+                                                <td width="40%" align="left"> {{field.SubCategoryName}}</td>
+                                                <td width="20%" align="left"> {{field.testResult}}</td>
+                                                <td width="20%" align="left"> {{field.teststatus}}</td>
+                                                <td width="20%" align="left">{{ field.ReferenceRangeUnit }}</td>
+                                                <td width="20%" align="left"> {{field.ReferenceRange}}</td>
+                                            </tr>
+                                        </tbody>
+
+
+
+                                        @*
+                                            <span ng-show="myForm.{{field.name}}.$dirty && myForm.{{field.name}}.$error.required">Required!</span>*@
+                                        @*
+                                            <span ng-show="myForm.{{field.name}}.$dirty && myForm.{{field.name}}.$error.email">Not email!</span>*@
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="col-lg-4 col-md-4 col-sm-4 wow fadeInUp" data-wow-delay="0.1s">
+                                <div class="form-group">
+                                    <div class="col-md-10">
+                                        <input type="submit" ng-click="Savepatient();" value="Save" class="btn btn-default" />
+
+                                    </div>
+                                </div>
+                            </div>*@
+
+
+                    </div>
+
+                </div>
+            </section>
+            <section id="about">
+                <div class="container">
+                    <div class="row">
+                        <div>
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Diagnosis</div>
+                                <div class="panel-body">
+                                    <input type="text" id="dgcat" ng-model="dgn1" typeahead-on-select="baddItem(dgn1.dgid,dgn1.dgdetail);" uib-typeahead="g as g.dgdetail for g in Getdgn1 | filter:$viewValue | limitTo:20">
+                                    <a class="clear">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </a>
+                                    <table class="table table-striped">
+
+                                        <tr>
+                                            <td ng-repeat="item in bitems" class="item">{{item.dgdet}} <button ng-click="bremoveItem($index)">Remove</button></td>
+                                        </tr>
+                                    </table>
+                                    <div class="form-group">
+                                        <textarea ng-model="OPD_Diagnosis" rows="5" cols="145" style="width: 100%; max-width: 100%;"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact">
+                <div class="container">
+                    <div class="row">
+
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                Drug Prescription
+                            </div>
+                            <div class="panel-body">
+
+
+                                <table class="table table-striped table-condensed">
+
+                                    <thead class="panel-heading">
+                                        <tr>
+                                            <th width="25%" align="left">Drug Name </th>
+
+                                            <th width="10%" align="left">Dose </th>
+                                            <th width="10%" align="left">Route </th>
+                                            <th width="10%" align="left">Method </th>
+                                            <th width="10%" align="left">Time </th>
+                                            <th width="5%" align="left">Duration </th>
+                                            <th width="10%" align="left"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+
+                                            <td width="25%" align="left"><input class="form-control" type="text" ng-model="DName1" uib-typeahead="g as g.itemdescription for g in DName | filter: $viewValue| limitTo:20" typeahead-on-select='GetdrugalldepWard(DName1.itemno)'><a class="clear" ng-click="DName1=null"><span class="glyphicon glyphicon-remove"></span></a></td>
+
+                                            <td width="10%" align="left"><select class="form-control " ng-change=" " id="Dose1" ng-model="Dose" ng-options="g as g.DrugGroupName for g in Dose3"></select></td>
+                                            <td width="10%" align="left">
+                                                <select class="form-control" id="Route" ng-model="Route2" ng-change=" " ng-options="g as g.RouteDetail for g in Route3">
+                                                    <option value="">-- Select Route --</option>
+                                                </select>
+                                            </td>
+                                            <td width="10%" align="left">
+                                                <select class="form-control" id="Method" ng-model="Method2" ng-change=" " ng-options="g as g.MethodDetail for g in Method3">
+                                                    <option value="">-- Select Method --</option>
+                                                </select>
+                                            </td>
+
+                                            <td width="10%" align="left"><select class="form-control" id="dtime" ng-model="dtime2" ng-change=" " ng-options="g as g.StockType for g in dtime3"></select></td>
+
+                                            <td width="5%" align="left"><input id="drdur" type="number" ng-model="Duration" /></td>
+                                            <td width="10%" align="left">
+
+                                                <input type="button" id="draddl" class="f1" ng-click="daddItemWard(DName1.itemno,DName1.itemdescription,Dose.DrugGroupName,Route2.RouteID,Route2.RouteDetail,Method2.MethodID,Method2.MethodDetail,Duration,dtime2.StockTypeID)" value="Add" />
+                                                <span id="errormsgspan" asp-validation-for="Year" style="background-color:#1bff00"></span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+
+
+                                <table class="table table-striped">
+
+                                    <tr ng-repeat="ditem in ditems" class="item">
+                                        <td width="50%"><b>{{ditem.dItemno1}}</b> </td>
+                                        <td><b>:</b>{{ditem.dDose}} </td>
+                                        <td><b>:</b>{{ditem.dRoute1}} </td>
+                                        <td><b>:</b>{{ditem.dMethod1}} </td>
+                                        <td><b>:</b>{{ditem.dDuration}} </td>
+                                        <td><button ng-click="dremoveItem($index)">Remove</button></td>
+                                    </tr>
+                                </table>
+                                Special Instruction for Phamacist  <textarea ng-model="drugins" cols="5000" rows="2"></textarea>
+                            </div>
+                        </div>
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                Drug Availability
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-striped" name="sd">
+
+                                    <thead>
+                                        <tr>
+
+                                            <th width="20%" align="left">Item Description</th>
+                                            <th width="20%" align="left">Drug Quantity</th>
+                                            <th width="20%" align="left">Location</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-repeat="field in epasonr">
+                                        <tr>
+
+                                            <td width="40%" align="left"> {{field.itemdescription}}</td>
+                                            <td width="20%" align="left"> {{field.DrugQuantity}}</td>
+                                            <td width="20%" align="left"> {{field.LOC}}</td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
+                        </div>
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                Drugs Management
+                            </div>
+                            <div class="panel-body">
+
+                                <table class="table table-striped " name="sd">
+                                    <thead>
+                                        <tr>
+                                            <th width="20%" align="left">Date </th>
+                                            <th width="40%" align="left">Drug Name </th>
+                                            <th width="20%" align="left">Dose </th>
+                                            <th width="20%" align="left">Route </th>
+                                            <th width="20%" align="left">Method </th>
+                                            <th width="20%" align="left">Duration </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-repeat="field in druglist">
+                                        <tr>
+                                            <td width="40%" align="left">{{ field.date }}</td>
+                                            <td width="40%" align="left">{{ field.itemdescription }}</td>
+                                            <td width="20%" align="left">{{ field.Dose }}</td>
+                                            <td width="20%" align="left"> {{field.RouteDetail}}</td>
+                                            <td width="20%" align="left">{{ field.MethodDetail }}</td>
+                                            <td width="20%" align="left">{{ field.Duration }}</td>
+                                            <td width="20%" align="left">
+                                                <a href="" ng-click="deldrugWard(field.Ps_Index);">
+                                                    Remove
+                                                </a>
+                                            </td>
+                                        </tr>
+
+
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-danger">
+                            <div class="panel-heading">
+                              Discharge  Drugs 
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-striped table-condensed">
+
+                                    <thead class="panel-heading">
+                                        <tr>
+                                            <th width="25%" align="left">Drug Name </th>
+
+                                            <th width="10%" align="left">Dose </th>
+                                            <th width="10%" align="left">Route </th>
+                                            <th width="10%" align="left">Method </th>
+                                            <th width="10%" align="left">Time </th>
+                                            <th width="5%" align="left">Duration </th>
+                                            <th width="10%" align="left"></th>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+
+                                            <td width="25%" align="left"><input class="form-control" type="text" ng-model="suDName1" uib-typeahead="g as g.itemdescription for g in DName | filter: $viewValue| limitTo:20" typeahead-on-select='Getdrugalldep(DName1.itemno)'><a class="clear" ng-click="DName1=null"><span class="glyphicon glyphicon-remove"></span></a></td>
+
+                                            <td width="10%" align="left"><select class="form-control " ng-change=" " id="Dose1" ng-model="Dose" ng-options="g as g.DrugGroupName for g in Dose3"></select></td>
+                                            <td width="10%" align="left">
+                                                <select class="form-control" id="Route" ng-model="suRoute2" ng-change=" " ng-options="g as g.RouteDetail for g in Route3">
+                                                    <option value="">-- Select Route --</option>
+                                                </select>
+                                            </td>
+                                            <td width="10%" align="left">
+                                                <select class="form-control" id="Method" ng-model="suMethod2" ng-change=" " ng-options="g as g.MethodDetail for g in Method3">
+                                                    <option value="">-- Select Method --</option>
+                                                </select>
+                                            </td>
+
+                                            <td width="10%" align="left"><select class="form-control" id="dtime" ng-model="dtime2" ng-change=" " ng-options="g as g.StockType for g in dtime3"></select></td>
+
+                                            <td width="5%" align="left"><input id="drdur" type="number" ng-model="suDuration" /></td>
+                                            <td width="10%" align="left">
+
+                                                <input type="button" id="draddl" class="f1" ng-click="suaddItem(suDName1.itemno,suDName1.itemdescription,Dose.DrugGroupName,suRoute2.RouteID,suRoute2.RouteDetail,suMethod2.MethodID,suMethod2.MethodDetail,suDuration,dtime2.StockTypeID)" value="Add" />
+                                                <span id="errormsgspan" asp-validation-for="Year" style="color:red"></span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table> <table class="table table-striped">
+
+                                    <tr ng-repeat="sditem in suitems" class="item">
+                                        <td width="50%"><b>{{sditem.suItemno1}}</b> </td>
+                                        <td><b>:</b>{{sditem.suDose}} </td>
+                                        <td><b>:</b>{{sditem.suRoute1}} </td>
+                                        <td><b>:</b>{{sditem.suMethod1}} </td>
+                                        <td><b>:</b>{{sditem.suDuration}} </td>
+                                        <td><button ng-click="sdremoveItem($index)">Remove</button></td>
+                                    </tr>
+                                </table>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact1">
+                <div class="container">
+                    <div class="row">
+                        <div class="panel panel-primary  ">
+                            <div class="panel-heading">
+                                Patient Complain
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-striped" name="sd">
+
+                                    <thead>
+                                        <tr>
+
+                                            <th width="20%" align="left">Date</th>
+                                            <th width="20%" align="left">Complain</th>
+                                            <th width="20%" align="left">Doctor</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-repeat="c1 in ComList">
+                                        <tr>
+
+                                            <td width="40%" align="left"> {{c1.date}}</td>
+                                            <td width="20%" align="left"> {{c1.description}}</td>
+                                            <td width="20%" align="left"> {{c1.investigated}}</td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+                            <div class="panel-body">
+                                <textarea ng-model="PatientCom" cols="80" rows="5"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="panel panel-primary  ">
+                            <div class="panel-heading">
+                                Management Plan
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-striped" name="sd">
+
+                                    <thead>
+                                        <tr>
+
+                                            <th width="20%" align="left">Date</th>
+                                            <th width="20%" align="left">Note</th>
+                                            <th width="20%" align="left">Doctor</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-repeat="f1 in planlist">
+                                        <tr>
+
+                                            <td width="40%" align="left"> {{f1.date}}</td>
+                                            <td width="20%" align="left"> {{f1.description}}</td>
+                                            <td width="20%" align="left"> {{f1.investigated}}</td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+                            <div class="panel-body">
+                                <textarea ng-model="planofmgt" cols="80" rows="5"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                Medical Disposal
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-striped" name="sd">
+
+                                    <thead>
+                                        <tr>
+
+                                            <th width="20%" align="left">Category Type</th>
+                                            <th width="20%" align="left">Category Days</th>
+                                            <th width="20%" align="left">Effective Date</th>
+                                            <th width="20%" align="left"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+
+                                            <td width="40%" align="left">
+                                                <select class="form-control" id="CategoryName" ng-model="CName1" ng-change=" " ng-options="g as g.Category for g in CName">
+                                                    <option value="">-- Select --</option>
+                                                </select>
+                                            </td>
+                                            <td width="20%" align="left"><input type="number" ng-model="SickDays" rows="5" cols="20" /></td>
+                                            <td width="20%" align="left"> <input id="mdt" type="date" ng-model="Sickeff" /></td>
+                                            <td> <span id="errormsgspan1" asp-validation-for="Year" style="background-color:#1bff00"></span> <input id="mbtn" type="button" ng-click="saddItem(CName1.CatID,CName1.Category,SickDays,Sickeff)" value="Add" /> </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+
+                                <div class="form-group col-md-5">
+                                    <table class="table table-striped">
+
+                                        <tr ng-repeat="sitem in sitems" class="item">
+                                            <td><b>{{sitem.scategory}}</b> </td>
+                                            <td><b>:</b>{{sitem.sdays}} Days </td>
+                                            <td><b>:</b>{{sitem.seff|limitTo:-15 |limitTo:13 | date:'dd/MM/yyyy'}}  </td>
+                                            <td><button ng-click="sremoveItem($index)">Remove</button></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="form-group  col-lg-10">
+                                    <table class="table table-striped" name="sd" ng-repeat="field in siclist">
+
+
+
+
+
+                                        <tr>
+
+                                            <td width="40%" align="left">{{ field.Category_Type }}</td>
+                                            <td width="20%" align="left">{{ field.CatPeriod }} Days</td>
+                                            <td width="20%" align="left">From:{{ field.Date |limitTo:-15 |limitTo:13 | date:'dd/MM/yyyy'}}</td>
+                                        </tr>
+
+                                        @*
+                                            <span ng-show="myForm.{{field.name}}.$dirty && myForm.{{field.name}}.$error.required">Required!</span>*@
+                                        @*
+                                            <span ng-show="myForm.{{field.name}}.$dirty && myForm.{{field.name}}.$error.email">Not email!</span>*@
+
+                                    </table>
+                                </div>
+
+                                <div class="form-group  col-lg-15">
+                                    @*<div class="form-group col-md-5">
+                                            Management Plan
+                                            <textarea ng-model="planofmgt" cols="50" rows="5"></textarea>
+                                        </div>*@
+
+                                    <div class="form-group col-md-5">
+                                        Other Hospital Referrals
+                                        <textarea ng-model="reftohosp" cols="80" rows="5"></textarea>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        Clinic
+                                        <select id="GClinic" ng-model="GClinic" ng-options="f as f.ClinicDetails for f in GetClinic">
+                                            <option value="">-- Select Clinic --</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group  col-md-4">
+                                    Patient Status
+
+                                    <select id="pntstatus" ng-model="pntStatus" ng-options="g as g.StatusDec for g in patientstatus">
+                                        <option value="">select</option>
+                                    </select>
+
+
+
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+            <section id="contact2">
+
+                @*<div id="mybook" style="text-align: left; ">
+
+                    </div>*@
+
+            </section>
+            <section id="contact3">
+                <div class="container">
+                    <div class="row">
+
+
+
+
+                        <div class="col-lg-12   wow fadeInUp" data-wow-delay="0.1s">
+
+                            @*<h3>Patient Details</h3>*@
+
+
+                            <div class="form-group " align="center">
+                                @*<table class="table table-striped  ">*@
+
+                                @*<thead>
+                                        <tr>
+                                            <th width="40%" align="left">Test Name</th>
+                                            <th width="20%" align="left">Result</th>
+                                            <th width="20%" align="left">Result Status</th>
+                                            <th width="20%" align="left">Reference Range Unit</th>
+                                            <th width="20%" align="left">Reference Range</th>
+
+                                        </tr>
+                                    </thead>*@
+                                @*<tbody ng-repeat="field in viewlab">
+                                        {{viewlab[0].CategoryName}}
+                                        <br />Date:{{viewlab[0].RequestedTime | date:'dd/MM/yyyy HH:mm'  }}
+                                        <tr>
+                                            <td width="40%" align="left"> {{field.SubCategoryName}}</td>
+                                            <td width="20%" align="left"> {{field.testResult}}</td>
+                                            <td width="20%" align="left"> {{field.teststatus}}</td>
+                                            <td width="20%" align="left">{{ field.ReferenceRangeUnit }}</td>
+                                            <td width="20%" align="left"> {{field.ReferenceRange}}</td>
+                                        </tr>
+                                    </tbody>*@
+
+
+
+                                @*
+                                    <span ng-show="myForm.{{field.name}}.$dirty && myForm.{{field.name}}.$error.required">Required!</span>*@
+                                @*
+                                    <span ng-show="myForm.{{field.name}}.$dirty && myForm.{{field.name}}.$error.email">Not email!</span>*@
+                                @*</table>*@
+                                @*<button ng-disabled="myForm.$invalid">Submit</button>*@
+
+                            </div>
+
+                            @*<div class="form-group">
+                                    @Html.Label("ServiceNo", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        <input type="text" ng-model="ServiceNo" ng-required="true" ng-blur="GetPatient(ServiceNo,Relationship.RTypeID)" />
+                                    </div>
+                                </div>
+                                <div ng-show="GetPatientDet.length > 1">
+                                    <div class="form-group">
+                                        @Html.Label("Child", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <select id="pdnew" ng-model="pidnew" ng-change="loadchild(pidnew)" ng-options="d as d.Initials for d in PatientDetdr">
+                                            <option value="">-- Select Child --</option>
+                                        </select>
+                                    </div>
+                                </div>*@
+
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</div>
+<script>
+    $(function () {
+        //single book
+        debugger;
+        //$("#asdfhg").DataTable({
+        //    "ordering": false,
+        //    "responsive": true, "lengthChange": false, "autoWidth": false,
+        //    "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        //}).buttons().container().appendTo('#asdfhg_wrapper .col-md-6:eq(0)');
+        //$('#example2').DataTable({
+        //    "paging": true,
+        //    "lengthChange": false,
+        //    "searching": false,
+        //    "ordering": true,
+        //    "info": true,
+        //    "autoWidth": false,
+        //    "responsive": true,
+        //});
+  
+
+        //$('#mybook').booklet({
+        //    width: '100%',
+        //    height: 800,
+        //   // closed: true,
+        //    autoCenter: true,
+        //    arrows: true,
+        //    direction: "RTL"
+
+        //});
+
+    });
+    function vwlb(id, id1) {
+        debugger;
+        angular.element(document.getElementById('epicontrol')).scope().viewlabtest(id, id1);
+    }
+    function validate1() {
+        debugger;
+        $('#mybook').booklet({
+            width: '100%',
+            height: '100%',
+            //closed: true,
+            autoCenter: true,
+            arrows: true,
+            direction: "RTL"
+
+        });
+    }
+    function validate() {
+        debugger;
+        var selectv = $("#dgcat").find(":selected").text();
+        //if (angular.element(document.getElementById('epicontrol')).scope().bitems.length < 1) {
+        //    alert("Please Select Daignosis catagory");
+        //    //$("#errormsgspan").text("Please Select Daignosis catagory");
+        //    return false;
+        //} else {
+        //    //$("#errormsgspan").text(" ");
+        //    angular.element(document.getElementById('epicontrol')).scope().SavepatientWard();
+        //    return true;
+        //}
+        angular.element(document.getElementById('epicontrol')).scope().SavepatientWard();
+
+    }
+    $("form").submit(function () {
+
+    });
+</script>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

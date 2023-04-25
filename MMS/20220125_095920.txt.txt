@@ -1,0 +1,1009 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+DENGUE Ag
+ Service No:02644
+ Wg Cdr S Maddumasuriya
+Jan 25 2022 10:01AM
+
+Test Name	Result	Reference Range	Unit
+
+DENGEUE NS1 ANTIGEN		Negative			
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+DENGUE Ag
+ Service No:01646
+ T/AVM P Ranasinghe
+Jan 25 2022 10:01AM
+
+Test Name	Result	Reference Range	Unit
+
+DENGEUE NS1 ANTIGEN		Negative			
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+Covid 19 Rapid Antigen Test
+ Service No:03828
+ T/Sqn Ldr H M S L Jayawardhane
+Jan 25 2022  9:59AM
+
+Test Name	Result	Reference Range	Unit
+
+Covid 19 Rapid Antigen		Negative			
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+Covid 19 Rapid Antigen Test
+ Service No:03828
+ T/Sqn Ldr H M S L Jayawardhane
+Jan 25 2022  9:58AM
+
+Test Name	Result	Reference Range	Unit
+
+Covid 19 Rapid Antigen		Negative			
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+UFR
+ Service No:24724
+ WO LN WIMAL
+Jan 25 2022  9:56AM
+
+Test Name	Result	Reference Range	Unit
+
+Colour		Pale yellow			
+Appearance		Clear			
+Specific Gravity		1020			
+Reaction		Acidic			
+Albumin		Nil			
+Sugar		Nil			
+Nitrite		Nil			
+Ketone Bodies		Nil			
+Bile		Nil			
+Pus Cells		1-3			HPF
+Red Cells		1-2			HPF
+Epithelial Cells		++			HPF
+Crystals		Calcium Oxalate 1-2			HPF
+Yeast Cells		N/S			HPF
+Organisms		N/S			HPF
+Parasites		N/S			HPF
+Cast		N/S			HPF
+Mucus		N/S			HPF
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+Covid 19 Rapid Antigen Test
+ Service No:27086
+ F/Sgt WAK WICKRAMARATHNE
+Jan 25 2022  9:48AM
+
+Test Name	Result	Reference Range	Unit
+
+Covid 19 Rapid Antigen		NEGATIVE			
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+FBC
+ Service No:01646
+ T/AVM P Ranasinghe
+Jan 25 2022  9:37AM
+
+Test Name	Result	Reference Range	Unit
+
+WBC		9.4H		4.0-9.0	UL
+NE		77.1*		50-70	%
+LY		8.2L		20-40	%
+MO		11.6*		3.0-12.0	%
+EO		2.4		0.5-5.0	%
+BA		0.7*		0.0-1.0	%
+RBC		7.03*		3.79-5.7	uL
+HGB		12.2		12.0-18.0	g/dL
+HCT		41.7		33.5-52.0	%
+MCV		59.3L		80.0-100	fL
+MCH		17.4L		28.0-32.0	pg
+MCHC		29.3L		31.0-35.0	g/dL
+RDW-CV		16.1H		11.6-14.0	%
+RDW-SD		38.2L		39.0-46.0	fL
+PLT		151*		150-350	uL
+PCT		0.13L		0.16-0.33	%
+MPV		8.3		7.0-11.0	fL
+PDW		17.2H		15.0-17.0	%
+NE#		7.2*		2.0-7.0	uL
+LY#		0.8		0.8-4.0	uL
+MO#		1.1*		0.12-1.20	uL
+EO#		0.2		0.02-0.50	uL
+BA#		0.1*		0.00-0.10	uL
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+Covid 19 Rapid Antigen Test
+ Service No:AW/3396
+ LAC PMA DILRUKSHI
+Jan 25 2022  9:35AM
+
+Test Name	Result	Reference Range	Unit
+
+Covid 19 Rapid Antigen		positive			
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+FBC
+ Service No:02644
+ Wg Cdr S Maddumasuriya
+Jan 25 2022  9:32AM
+
+Test Name	Result	Reference Range	Unit
+
+WBC		7.4		4.0-9.0	UL
+NE		59.4		50-70	%
+LY		30.3		20-40	%
+MO		7.6		3.0-12.0	%
+EO		1.9		0.5-5.0	%
+BA		0.8		0.0-1.0	%
+RBC		4.95		3.79-5.7	uL
+HGB		14.3		12.0-18.0	g/dL
+HCT		40.7		33.5-52.0	%
+MCV		82.2		80.0-100	fL
+MCH		28.9		28.0-32.0	pg
+MCHC		35.1H		31.0-35.0	g/dL
+RDW-CV		13.5		11.6-14.0	%
+RDW-SD		44.4		39.0-46.0	fL
+PLT		234		150-350	uL
+PCT		0.17		0.16-0.33	%
+MPV		7.1		7.0-11.0	fL
+PDW		18.0H		15.0-17.0	%
+NE#		4.4		2.0-7.0	uL
+LY#		2.2		0.8-4.0	uL
+MO#		0.6		0.12-1.20	uL
+EO#		0.1		0.02-0.50	uL
+BA#		0.1		0.00-0.10	uL
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+Covid 19 Rapid Antigen Test
+ Service No:03127
+ T/Sqn Ldr H D K Kumarasiri
+Jan 25 2022  9:30AM
+
+Test Name	Result	Reference Range	Unit
+
+Covid 19 Rapid Antigen		Negative			
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+Covid 19 Rapid Antigen Test
+ Service No:01496
+ Air Mshl S K Pathirana
+Jan 25 2022  9:30AM
+
+Test Name	Result	Reference Range	Unit
+
+Covid 19 Rapid Antigen		Negative			
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+LP
+ Service No:015129
+ LAC DMBS DISSANAYAKE
+Jan 25 2022  9:28AM
+
+Test Name	Result	Reference Range	Unit
+
+Cholesterol		346		<200	mg/dl
+HDL Direct		39		>45	mg/dl
+LDL		275		<150	mg/dl
+TriGly		158		<160	mg/dl
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+SE
+ Service No:50021
+ LAC BDI AMARASINGHE
+Jan 25 2022  9:28AM
+
+Test Name	Result	Reference Range	Unit
+
+Sodium		142.1		135-152	mmol/l
+Potassium		4.20		3.5-5.2	mmol/l
+Chloride		107		97-107	mmol/l
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+LP
+ Service No:02585
+ T/Wg Cdr C P Kumarasinghe
+Jan 25 2022  9:22AM
+
+Test Name	Result	Reference Range	Unit
+
+Cholesterol		237		<200	mg/dl
+HDL Direct		65		>45	mg/dl
+LDL		146.6		<150	mg/dl
+TriGly		127		<160	mg/dl
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+FBS
+ Service No:02585
+ T/Wg Cdr C P Kumarasinghe
+Jan 25 2022  9:21AM
+
+Test Name	Result	Reference Range	Unit
+
+Glucose		82		65-110	mg/dl
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+FBC
+ Service No:02741
+   
+Jan 25 2022  9:13AM
+
+Test Name	Result	Reference Range	Unit
+
+WBC		5.9		4.0-9.0	UL
+NE		36.4		50-70	%
+LY		49.4		20-40	%
+MO		8.2		3.0-12.0	%
+EO		4.3		0.5-5.0	%
+BA		1.7		0.0-1.0	%
+RBC		5.04		3.79-5.7	uL
+HGB		13.7		12.0-18.0	g/dL
+HCT		41.4		33.5-52.0	%
+MCV		82.1		80.0-100	fL
+MCH		27.2L		28.0-32.0	pg
+MCHC		33.1		31.0-35.0	g/dL
+RDW-CV		13.6		11.6-14.0	%
+RDW-SD		44.7		39.0-46.0	fL
+PLT		183		150-350	uL
+PCT		0.13L		0.16-0.33	%
+MPV		6.9L		7.0-11.0	fL
+PDW		18.2H		15.0-17.0	%
+NE#		2.2		2.0-7.0	uL
+LY#		2.9		0.8-4.0	uL
+MO#		0.5		0.12-1.20	uL
+EO#		0.3		0.02-0.50	uL
+BA#		0.1		0.00-0.10	uL
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+FBC
+ Service No:27740
+   DG HG SHALUNI UMAYA
+Jan 25 2022  9:11AM
+
+Test Name	Result	Reference Range	Unit
+
+WBC		3.8L		4.0-9.0	UL
+NE		29.7		50-70	%
+LY		61.5H		20-40	%
+MO		7.1		3.0-12.0	%
+EO		0.9		0.5-5.0	%
+BA		0.8		0.0-1.0	%
+RBC		4.76		3.79-5.7	uL
+HGB		13.7		12.0-18.0	g/dL
+HCT		39.5		33.5-52.0	%
+MCV		83.0		80.0-100	fL
+MCH		28.8		28.0-32.0	pg
+MCHC		34.7		31.0-35.0	g/dL
+RDW-CV		14.2H		11.6-14.0	%
+RDW-SD		47.1H		39.0-46.0	fL
+PLT		98L		150-350	uL
+PCT		0.08L		0.16-0.33	%
+MPV		7.8		7.0-11.0	fL
+PDW		17.9H		15.0-17.0	%
+NE#		1.1		2.0-7.0	uL
+LY#		2.4		0.8-4.0	uL
+MO#		0.3		0.12-1.20	uL
+EO#		0.0		0.02-0.50	uL
+BA#		0.0		0.00-0.10	uL
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+FBC
+ Service No:016573
+ LAC RDBS DESHAPPRIYA
+Jan 25 2022  9:11AM
+
+Test Name	Result	Reference Range	Unit
+
+WBC		3.9L		4.0-9.0	UL
+NE		54.1		50-70	%
+LY		27.1		20-40	%
+MO		15.8H		3.0-12.0	%
+EO		0.3		0.5-5.0	%
+BA		2.7H		0.0-1.0	%
+RBC		4.86		3.79-5.7	uL
+HGB		13.8		12.0-18.0	g/dL
+HCT		41.3		33.5-52.0	%
+MCV		85.0		80.0-100	fL
+MCH		28.4		28.0-32.0	pg
+MCHC		33.4		31.0-35.0	g/dL
+RDW-CV		13.7		11.6-14.0	%
+RDW-SD		46.6H		39.0-46.0	fL
+PLT		156		150-350	uL
+PCT		0.11L		0.16-0.33	%
+MPV		7.1		7.0-11.0	fL
+PDW		17.7H		15.0-17.0	%
+NE#		2.1		2.0-7.0	uL
+LY#		1.1		0.8-4.0	uL
+MO#		0.6		0.12-1.20	uL
+EO#		0.0		0.02-0.50	uL
+BA#		0.1		0.00-0.10	uL
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+FBC
+ Service No:01737
+   
+Jan 25 2022  9:11AM
+
+Test Name	Result	Reference Range	Unit
+
+WBC		7.9		4.0-9.0	UL
+NE		85.1H		50-70	%
+LY		7.8L		20-40	%
+MO		6.0		3.0-12.0	%
+EO		0.1		0.5-5.0	%
+BA		1.0		0.0-1.0	%
+RBC		4.92		3.79-5.7	uL
+HGB		14.9		12.0-18.0	g/dL
+HCT		43.7		33.5-52.0	%
+MCV		88.8		80.0-100	fL
+MCH		30.3		28.0-32.0	pg
+MCHC		34.1		31.0-35.0	g/dL
+RDW-CV		14.3H		11.6-14.0	%
+RDW-SD		50.8H		39.0-46.0	fL
+PLT		255		150-350	uL
+PCT		0.18		0.16-0.33	%
+MPV		6.9L		7.0-11.0	fL
+PDW		17.8H		15.0-17.0	%
+NE#		6.7		2.0-7.0	uL
+LY#		0.6L		0.8-4.0	uL
+MO#		0.5		0.12-1.20	uL
+EO#		0.0		0.02-0.50	uL
+BA#		0.1		0.00-0.10	uL
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+FBC
+ Service No:03179
+ Sqn Ldr K W L K Karunarathne
+Jan 25 2022  9:11AM
+
+Test Name	Result	Reference Range	Unit
+
+WBC		4.4		4.0-9.0	UL
+NE		53.8		50-70	%
+LY		32.4		20-40	%
+MO		10.0		3.0-12.0	%
+EO		1.8		0.5-5.0	%
+BA		2.0		0.0-1.0	%
+RBC		4.12		3.79-5.7	uL
+HGB		12.0		12.0-18.0	g/dL
+HCT		35.9		33.5-52.0	%
+MCV		87.1		80.0-100	fL
+MCH		29.1		28.0-32.0	pg
+MCHC		33.4		31.0-35.0	g/dL
+RDW-CV		13.3		11.6-14.0	%
+RDW-SD		46.3H		39.0-46.0	fL
+PLT		188		150-350	uL
+PCT		0.14L		0.16-0.33	%
+MPV		7.3		7.0-11.0	fL
+PDW		16.3		15.0-17.0	%
+NE#		2.4		2.0-7.0	uL
+LY#		1.4		0.8-4.0	uL
+MO#		0.4		0.12-1.20	uL
+EO#		0.1		0.02-0.50	uL
+BA#		0.1		0.00-0.10	uL
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+FBC
+ Service No:AW/3463
+ Cpl SGN SAMAYAMANTHRI
+Jan 25 2022  9:11AM
+
+Test Name	Result	Reference Range	Unit
+
+WBC		5.7		4.0-9.0	UL
+NE		56.8		50-70	%
+LY		28.0		20-40	%
+MO		5.2		3.0-12.0	%
+EO		9.0		0.5-5.0	%
+BA		1.0		0.0-1.0	%
+RBC		4.80		3.79-5.7	uL
+HGB		13.4		12.0-18.0	g/dL
+HCT		39.8		33.5-52.0	%
+MCV		82.9		80.0-100	fL
+MCH		27.9L		28.0-32.0	pg
+MCHC		33.7		31.0-35.0	g/dL
+RDW-CV		14.7H		11.6-14.0	%
+RDW-SD		48.7H		39.0-46.0	fL
+PLT		253		150-350	uL
+PCT		0.17		0.16-0.33	%
+MPV		6.9L		7.0-11.0	fL
+PDW		18.9H		15.0-17.0	%
+NE#		3.2		2.0-7.0	uL
+LY#		1.6		0.8-4.0	uL
+MO#		0.3		0.12-1.20	uL
+EO#		0.5		0.02-0.50	uL
+BA#		0.1		0.00-0.10	uL
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+FBC
+ Service No:28754
+ Sgt TMA BANDARA
+Jan 25 2022  9:04AM
+
+Test Name	Result	Reference Range	Unit
+
+WBC		7.4		4.0-9.0	UL
+NE		55.0		50-70	%
+LY		28.9		20-40	%
+MO		6.2		3.0-12.0	%
+EO		9.0		0.5-5.0	%
+BA		0.9		0.0-1.0	%
+RBC		5.53		3.79-5.7	uL
+HGB		16.5		12.0-18.0	g/dL
+HCT		45.2		33.5-52.0	%
+MCV		81.7		80.0-100	fL
+MCH		29.8		28.0-32.0	pg
+MCHC		36.5H		31.0-35.0	g/dL
+RDW-CV		13.3		11.6-14.0	%
+RDW-SD		43.5		39.0-46.0	fL
+PLT		159		150-350	uL
+PCT		0.10L		0.16-0.33	%
+MPV		6.4L		7.0-11.0	fL
+PDW		18.0H		15.0-17.0	%
+NE#		4.1		2.0-7.0	uL
+LY#		2.1		0.8-4.0	uL
+MO#		0.5		0.12-1.20	uL
+EO#		0.7		0.02-0.50	uL
+BA#		0.1		0.00-0.10	uL
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+BG
+ Service No:AW/3726
+ LAC JR PAMUDIKA
+Jan 25 2022  8:55AM
+
+Test Name	Result	Reference Range	Unit
+
+BLOOD GROUP		AB			
+Rh		Positive			
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+UFR
+ Service No:34982
+ Cpl KMD DAYANANDA 
+Jan 25 2022  8:39AM
+
+Test Name	Result	Reference Range	Unit
+
+Colour		Pale yelow			
+Appearance		Clear			
+Specific Gravity		1020			
+Reaction		Acidic			
+Albumin		Nil			
+Sugar		Nil			
+Nitrite		Nil			
+Ketone Bodies		Nill			
+Bile		Nill			
+Pus Cells		1-3			HPF
+Red Cells		N/S			HPF
+Epithelial Cells		++			HPF
+Crystals		N/S			HPF
+Yeast Cells		N/S			HPF
+Organisms		N/S			HPF
+Parasites		N/S			HPF
+Cast		N/S			HPF
+Mucus		N/S			HPF
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+FBC
+ Service No:34982
+ Cpl KMD DAYANANDA 
+Jan 25 2022  8:36AM
+
+Test Name	Result	Reference Range	Unit
+
+WBC		7.0		4.0-9.0	UL
+NE		45.5		50-70	%
+LY		51.		20-40	%
+MO		0.8		3.0-12.0	%
+EO		1.6		0.5-5.0	%
+BA		0.6		0.0-1.0	%
+RBC		5.36		3.79-5.7	uL
+HGB		14.4		12.0-18.0	g/dL
+HCT		39		33.5-52.0	%
+MCV		72.8		80.0-100	fL
+MCH		26.9		28.0-32.0	pg
+MCHC		36.9		31.0-35.0	g/dL
+RDW-CV		13.6		11.6-14.0	%
+RDW-SD		39.6		39.0-46.0	fL
+PLT		333		150-350	uL
+PCT		0.2		0.16-0.33	%
+MPV		5.9		7.0-11.0	fL
+PDW		17.8		15.0-17.0	%
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+CRP
+ Service No:34982
+ Cpl KMD DAYANANDA 
+Jan 25 2022  8:36AM
+
+Test Name	Result	Reference Range	Unit
+
+CRP		<6		<6	mg/l
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+FBC
+ Service No:015501
+ LAC MP SANJEEWA
+Jan 25 2022  8:03AM
+
+Test Name	Result	Reference Range	Unit
+
+WBC		8.7		4.0-9.0	UL
+NE		54		50-70	%
+LY		31		20-40	%
+MO		4.4		3.0-12.0	%
+EO		8		0.5-5.0	%
+BA		1.5		0.0-1.0	%
+RBC		5.15		3.79-5.7	uL
+HGB		13.6		12.0-18.0	g/dL
+HCT		44.9		33.5-52.0	%
+MCV		87		80.0-100	fL
+MCH		26		28.0-32.0	pg
+MCHC		30.3		31.0-35.0	g/dL
+PLT		249		150-350	uL
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+FBC
+ Service No:42597
+ Cpl TM HETTIARACHCHI
+Jan 25 2022  8:02AM
+
+Test Name	Result	Reference Range	Unit
+
+WBC		5.5		4.0-9.0	UL
+NE		45		50-70	%
+LY		43		20-40	%
+MO		6.6		3.0-12.0	%
+EO		3.5		0.5-5.0	%
+BA		.8		0.0-1.0	%
+RBC		4.98		3.79-5.7	uL
+HGB		15.4		12.0-18.0	g/dL
+HCT		48.7		33.5-52.0	%
+MCV		97		80.0-100	fL
+MCH		30		28.0-32.0	pg
+MCHC		31		31.0-35.0	g/dL
+PLT		248		150-350	uL
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+FBC
+ Service No:02010
+ Gp Capt S A P T Piyarathne
+Jan 25 2022  7:59AM
+
+Test Name	Result	Reference Range	Unit
+
+WBC		4.4		4.0-9.0	UL
+NE		34		50-70	%
+LY		49		20-40	%
+MO		9.5		3.0-12.0	%
+EO		5.3		0.5-5.0	%
+BA		.7		0.0-1.0	%
+RBC		5.09		3.79-5.7	uL
+HGB		15.8		12.0-18.0	g/dL
+HCT		49		33.5-52.0	%
+MCV		97		80.0-100	fL
+MCH		31		28.0-32.0	pg
+MCHC		31.8		31.0-35.0	g/dL
+PLT		264		150-350	uL
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+Covid 19 Rapid Antigen Test
+ Service No:41797
+ LAC DDU YASANTHA
+Jan 25 2022  7:50AM
+
+Test Name	Result	Reference Range	Unit
+
+Covid 19 Rapid Antigen		Negative			
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+Covid 19 Rapid Antigen Test
+ Service No:39097
+ Cpl HH SANJEEWA
+Jan 25 2022  7:50AM
+
+Test Name	Result	Reference Range	Unit
+
+Covid 19 Rapid Antigen		Negative			
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+Covid 19 Rapid Antigen Test
+ Service No:03721
+ Flt Lt E H Karunarathne
+Jan 25 2022  7:50AM
+
+Test Name	Result	Reference Range	Unit
+
+Covid 19 Rapid Antigen		Negative			
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+DENGUE Ab
+ Service No:49100
+ LAC RADM MASHENTHA
+Jan 25 2022  7:23AM
+
+Test Name	Result	Reference Range	Unit
+
+Dengue IgG Ab		Positive			
+Dengue IgM Ab		Positive			
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+DENGUE Ag
+ Service No:37051
+ Sgt EAAK KARUNATHILAKE 
+Jan 25 2022  7:22AM
+
+Test Name	Result	Reference Range	Unit
+
+DENGEUE NS1 ANTIGEN		Negative			
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+FBC
+ Service No:37051
+ Sgt EAAK KARUNATHILAKE 
+Jan 25 2022  7:06AM
+
+Test Name	Result	Reference Range	Unit
+
+WBC		5.2		4.0-9.0	UL
+NE		75.6		50-70	%
+LY		14.1L		20-40	%
+MO		5.0		3.0-12.0	%
+EO		4.6		0.5-5.0	%
+BA		0.7		0.0-1.0	%
+RBC		4.32		3.79-5.7	uL
+HGB		12.4		12.0-18.0	g/dL
+HCT		34.2		33.5-52.0	%
+MCV		79.2L		80.0-100	fL
+MCH		28.7		28.0-32.0	pg
+MCHC		36.3H		31.0-35.0	g/dL
+RDW-CV		13.2		11.6-14.0	%
+RDW-SD		41.8		39.0-46.0	fL
+PLT		127L		150-350	uL
+PCT		0.09L		0.16-0.33	%
+MPV		6.8L		7.0-11.0	fL
+PDW		18.4H		15.0-17.0	%
+NE#		3.9		2.0-7.0	uL
+LY#		0.7		0.8-4.0	uL
+MO#		0.3		0.12-1.20	uL
+EO#		0.2		0.02-0.50	uL
+BA#		0.0		0.00-0.10	uL
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+FBC
+ Service No:48583
+ LAC IMLS JAYASINGHE 
+Jan 25 2022  6:35AM
+
+Test Name	Result	Reference Range	Unit
+
+WBC		10.3H		4.0-9.0	UL
+NE		70.4		50-70	%
+LY		14.3L		20-40	%
+MO		9.3		3.0-12.0	%
+EO		5.5		0.5-5.0	%
+BA		0.5		0.0-1.0	%
+RBC		5.34		3.79-5.7	uL
+HGB		13.4		12.0-18.0	g/dL
+HCT		38.9		33.5-52.0	%
+MCV		72.8L		80.0-100	fL
+MCH		25.1L		28.0-32.0	pg
+MCHC		34.4		31.0-35.0	g/dL
+RDW-CV		13.2		11.6-14.0	%
+RDW-SD		38.4L		39.0-46.0	fL
+PLT		333		150-350	uL
+PCT		0.24		0.16-0.33	%
+MPV		7.1		7.0-11.0	fL
+PDW		19.5H		15.0-17.0	%
+NE#		7.3H		2.0-7.0	uL
+LY#		1.5		0.8-4.0	uL
+MO#		1.0H		0.12-1.20	uL
+EO#		0.6		0.02-0.50	uL
+BA#		0.1		0.00-0.10	uL
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+FBC
+ Service No:49100
+ LAC RADM MASHENTHA
+Jan 25 2022  6:32AM
+
+Test Name	Result	Reference Range	Unit
+
+WBC		5.2		4.0-9.0	UL
+NE		38.1		50-70	%
+LY		38.0		20-40	%
+MO		19.0H		3.0-12.0	%
+EO		4.2		0.5-5.0	%
+BA		0.7		0.0-1.0	%
+RBC		5.09		3.79-5.7	uL
+HGB		15.9		12.0-18.0	g/dL
+HCT		43.8		33.5-52.0	%
+MCV		86.1		80.0-100	fL
+MCH		31.2		28.0-32.0	pg
+MCHC		36.3H		31.0-35.0	g/dL
+RDW-CV		13.4		11.6-14.0	%
+RDW-SD		46.1H		39.0-46.0	fL
+PLT		126L		150-350	uL
+PCT		0.09L		0.16-0.33	%
+MPV		7.5		7.0-11.0	fL
+PDW		18.3H		15.0-17.0	%
+NE#		2.0		2.0-7.0	uL
+LY#		2.0		0.8-4.0	uL
+MO#		1.0H		0.12-1.20	uL
+EO#		0.2		0.02-0.50	uL
+BA#		0.0		0.00-0.10	uL
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+FBC
+ Service No:32912
+ Sgt NSS HETTIARACHCHI
+Jan 25 2022  6:27AM
+
+Test Name	Result	Reference Range	Unit
+
+WBC		8.8*		4.0-9.0	UL
+NE		26.9L		50-70	%
+LY		53.3*		20-40	%
+MO		16.9*		3.0-12.0	%
+EO		1.9		0.5-5.0	%
+BA		1.0		0.0-1.0	%
+RBC		4.92		3.79-5.7	uL
+HGB		14.6		12.0-18.0	g/dL
+HCT		40.6		33.5-52.0	%
+MCV		82.5		80.0-100	fL
+MCH		29.7		28.0-32.0	pg
+MCHC		36.0H		31.0-35.0	g/dL
+RDW-CV		13.2		11.6-14.0	%
+RDW-SD		43.6		39.0-46.0	fL
+PLT		119L		150-350	uL
+PCT		0.09L		0.16-0.33	%
+MPV		7.3		7.0-11.0	fL
+PDW		18.9H		15.0-17.0	%
+NE#		2.4		2.0-7.0	uL
+LY#		4.7*		0.8-4.0	uL
+MO#		1.5*		0.12-1.20	uL
+EO#		0.2		0.02-0.50	uL
+BA#		0.1		0.00-0.10	uL
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+FBC
+ Service No:49079
+ LAC SD MADUSHAN
+Jan 25 2022  6:26AM
+
+Test Name	Result	Reference Range	Unit
+
+WBC		5.3		4.0-9.0	UL
+NE		71.4		50-70	%
+LY		8.8L		20-40	%
+MO		18.8H		3.0-12.0	%
+EO		0.4		0.5-5.0	%
+BA		0.6		0.0-1.0	%
+RBC		5.32		3.79-5.7	uL
+HGB		15.4		12.0-18.0	g/dL
+HCT		42.4		33.5-52.0	%
+MCV		79.7L		80.0-100	fL
+MCH		28.9		28.0-32.0	pg
+MCHC		36.3H		31.0-35.0	g/dL
+RDW-CV		13.5		11.6-14.0	%
+RDW-SD		43.0		39.0-46.0	fL
+PLT		159		150-350	uL
+PCT		0.12L		0.16-0.33	%
+MPV		7.7		7.0-11.0	fL
+PDW		18.8H		15.0-17.0	%
+NE#		3.8		2.0-7.0	uL
+LY#		0.5L		0.8-4.0	uL
+MO#		1.0H		0.12-1.20	uL
+EO#		0.0		0.02-0.50	uL
+BA#		0.0		0.00-0.10	uL
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+FBC
+ Service No:26881
+ Sgt WAPK RANATHUNGA
+Jan 25 2022  6:23AM
+
+Test Name	Result	Reference Range	Unit
+
+WBC		6.0		4.0-9.0	UL
+NE		39.7		50-70	%
+LY		28.8		20-40	%
+MO		17.9H		3.0-12.0	%
+EO		12.6H		0.5-5.0	%
+BA		1.0		0.0-1.0	%
+RBC		5.32		3.79-5.7	uL
+HGB		15.5		12.0-18.0	g/dL
+HCT		44.9		33.5-52.0	%
+MCV		84.4		80.0-100	fL
+MCH		29.1		28.0-32.0	pg
+MCHC		34.5		31.0-35.0	g/dL
+RDW-CV		13.2		11.6-14.0	%
+RDW-SD		44.6		39.0-46.0	fL
+PLT		99L		150-350	uL
+PCT		0.08L		0.16-0.33	%
+MPV		7.9		7.0-11.0	fL
+PDW		18.2H		15.0-17.0	%
+NE#		2.4		2.0-7.0	uL
+LY#		1.7		0.8-4.0	uL
+MO#		1.1H		0.12-1.20	uL
+EO#		0.8		0.02-0.50	uL
+BA#		0.1		0.00-0.10	uL
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+FBC
+ Service No:44443
+ LAC H THILINA KUMARA
+Jan 25 2022  6:21AM
+
+Test Name	Result	Reference Range	Unit
+
+WBC		9.6H		4.0-9.0	UL
+NE		24.5L		50-70	%
+LY		50.8		20-40	%
+MO		19.8H		3.0-12.0	%
+EO		3.8		0.5-5.0	%
+BA		1.1		0.0-1.0	%
+RBC		4.80		3.79-5.7	uL
+HGB		14.0		12.0-18.0	g/dL
+HCT		39.6		33.5-52.0	%
+MCV		82.5		80.0-100	fL
+MCH		29.2		28.0-32.0	pg
+MCHC		35.4H		31.0-35.0	g/dL
+RDW-CV		12.7		11.6-14.0	%
+RDW-SD		41.9		39.0-46.0	fL
+PLT		23*		150-350	uL
+PCT		0.02L		0.16-0.33	%
+MPV		10.1		7.0-11.0	fL
+PDW		18.7H		15.0-17.0	%
+NE#		2.4		2.0-7.0	uL
+LY#		4.9		0.8-4.0	uL
+MO#		1.9H		0.12-1.20	uL
+EO#		0.4		0.02-0.50	uL
+BA#		0.1		0.00-0.10	uL
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+FBC
+ Service No:45740
+ LAC LLS YAHIRU
+Jan 25 2022  6:19AM
+
+Test Name	Result	Reference Range	Unit
+
+WBC		5.0		4.0-9.0	UL
+NE		56.2		50-70	%
+LY		31.0		20-40	%
+MO		10.8H		3.0-12.0	%
+EO		1.7		0.5-5.0	%
+BA		0.3		0.0-1.0	%
+RBC		5.09		3.79-5.7	uL
+HGB		15.1		12.0-18.0	g/dL
+HCT		42.1		33.5-52.0	%
+MCV		82.7		80.0-100	fL
+MCH		29.7		28.0-32.0	pg
+MCHC		35.9H		31.0-35.0	g/dL
+RDW-CV		13.2		11.6-14.0	%
+RDW-SD		43.7		39.0-46.0	fL
+PLT		145L		150-350	uL
+PCT		0.11L		0.16-0.33	%
+MPV		7.3		7.0-11.0	fL
+PDW		18.9H		15.0-17.0	%
+NE#		2.8		2.0-7.0	uL
+LY#		1.6		0.8-4.0	uL
+MO#		0.5		0.12-1.20	uL
+EO#		0.1		0.02-0.50	uL
+BA#		0.0		0.00-0.10	uL
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+FBC
+ Service No:49716
+ LAC LAPM WIMALAWEERA
+Jan 25 2022  6:15AM
+
+Test Name	Result	Reference Range	Unit
+
+WBC		7.3*		4.0-9.0	UL
+NE		54.6*		50-70	%
+LY		29.8*		20-40	%
+MO		12.2*		3.0-12.0	%
+EO		2.8		0.5-5.0	%
+BA		0.6*		0.0-1.0	%
+RBC		5.61		3.79-5.7	uL
+HGB		15.1		12.0-18.0	g/dL
+HCT		41.9		33.5-52.0	%
+MCV		74.7L		80.0-100	fL
+MCH		26.9L		28.0-32.0	pg
+MCHC		36.0H		31.0-35.0	g/dL
+RDW-CV		13.6		11.6-14.0	%
+RDW-SD		40.6		39.0-46.0	fL
+PLT		31*		150-350	uL
+PCT		0.03L		0.16-0.33	%
+MPV		9.6		7.0-11.0	fL
+PDW		19.7H		15.0-17.0	%
+NE#		4.0*		2.0-7.0	uL
+LY#		2.2*		0.8-4.0	uL
+MO#		0.9*		0.12-1.20	uL
+EO#		0.2		0.02-0.50	uL
+BA#		0.0*		0.00-0.10	uL

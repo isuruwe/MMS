@@ -1,0 +1,78 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+MICRO ALBUMINURINE
+
+ Service No:01286
+ AVM E G J P De Silva
+May 18 2022  4:23PM
+
+Test Name	Result	Reference Range	Unit
+
+Micro Albumin urine		7		<30	mg/dL
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+GGT
+ Service No:01286
+ AVM E G J P De Silva
+May 18 2022  4:15PM
+
+Test Name	Result	Reference Range	Unit
+
+GGT		27		11-50	
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+AST
+ Service No:01286
+ AVM E G J P De Silva
+May 18 2022  4:15PM
+
+Test Name	Result	Reference Range	Unit
+
+AST		40.3		<40	
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+ALT
+ Service No:01286
+ AVM E G J P De Silva
+May 18 2022  4:15PM
+
+Test Name	Result	Reference Range	Unit
+
+ALT		57		<40	
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+LP
+ Service No:01286
+ AVM E G J P De Silva
+May 18 2022  4:14PM
+
+Test Name	Result	Reference Range	Unit
+
+Cholesterol		103		<200	mg/dl
+HDL Direct		43		>45	mg/dl
+LDL		36		<150	mg/dl
+TriGly		121		<160	mg/dl
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	 	 	 SRI LANKA AIR FORCE HOSPITAL LABORATORY SERVICES
+
+FBS
+ Service No:01286
+ AVM E G J P De Silva
+May 18 2022  4:14PM
+
+Test Name	Result	Reference Range	Unit
+
+Glucose		103		65-110	mg/dl
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+

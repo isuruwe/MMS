@@ -1,0 +1,317 @@
+﻿@model List<MenuItem> 
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - MMS</title>
+    @*<meta name="viewport" content="width=device-width" />*@
+    @*<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>*@
+
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+        /* demo page styles */
+        body {
+            background: #eee;
+            margin: 0;
+            padding: 0;
+        }
+
+        .example {
+            background: #fff url(../images/clouds-in-blue-sky.jpg);
+            width: 770px;
+            height: 570px;
+            border: 1px #000 solid;
+            margin: 20px auto;
+            padding: 15px;
+            border-radius: 3px;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+        }
+
+        footer {
+            background-color: #000;
+            height: 40px;
+            padding: 10px;
+            color: #fff;
+            text-align: center;
+        }
+        /* main menu styles */
+        #nav {
+            display: inline-block;
+            width: 100%;
+            margin: 0px auto;
+            padding: 0;
+            
+            background: #335599 url(../images/bg.png) repeat-x 0 -110px;
+            border-radius: 10px; /*some css3*/
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            box-shadow: 0 2px 2px rgba(0,0,0, .5);
+            -moz-box-shadow: 0 2px 2px rgba(0,0,0, .5);
+            -webkit-box-shadow: 0 2px 2px rgba(0,0,0, .5);
+        }
+
+            #nav li {
+                margin: 10px;
+                float: left;
+                position: relative;
+                list-style: none;
+            }
+
+            #nav a {
+                font-weight: bold;
+                color: #e7e5e5;
+                text-decoration: none;
+                display: block;
+                padding: 8px 20px;
+                border-radius: 10px; /*some css3*/
+                -moz-border-radius: 10px;
+                -webkit-border-radius: 10px;
+                text-shadow: 0 2px 2px rgba(0,0,0, .7);
+            }
+
+            /* selected menu element */
+            #nav .current a, #nav li:hover > a {
+                background: #7788aa url(../images/bg.png) repeat-x 0 -20px;
+                color: #000;
+                border-top: 1px solid #f8f8f8;
+                box-shadow: 0 2px 2px rgba(0,0,0, .7); /*some css3*/
+                -moz-box-shadow: 0 2px 2px rgba(0,0,0, .7);
+                -webkit-box-shadow: 0 2px 2px rgba(0,0,0, .7);
+                text-shadow: 0 2px 2px rgba(255,255,255, 0.7);
+            }
+
+            /* sublevels */
+            #nav ul li:hover a, #nav li:hover li a {
+                background: none;
+                border: none;
+                color: #000;
+            }
+
+            #nav ul li a:hover {
+                background: #335599 url(../images/bg.png) repeat-x 0 -100px;
+                color: #fff;
+                border-radius: 10px; /*some css3*/
+                -moz-border-radius: 10px;
+                -webkit-border-radius: 10px;
+                text-shadow: 0 2px 2px rgba(0,0,0, 0.7);
+            }
+
+            #nav ul li:first-child > a {
+                -moz-border-radius-topleft: 10px; /*some css3*/
+                -moz-border-radius-topright: 10px;
+                -webkit-border-top-left-radius: 10px;
+                -webkit-border-top-right-radius: 10px;
+            }
+
+            #nav ul li:last-child > a {
+                -moz-border-radius-bottomleft: 10px; /*some css3*/
+                -moz-border-radius-bottomright: 10px;
+                -webkit-border-bottom-left-radius: 10px;
+                -webkit-border-bottom-right-radius: 10px;
+            }
+
+            /* drop down */
+            #nav li:hover > ul {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            #nav ul {
+                opacity: 0;
+                visibility: hidden;
+                padding: 0;
+                width: 175px;
+                position: absolute;
+                background: #aabbcc url(../images/bg.png) repeat-x 0 0;
+                border: 1px solid #7788aa;
+                border-radius: 10px; /*some css3*/
+                -moz-border-radius: 10px;
+                -webkit-border-radius: 10px;
+                box-shadow: 0 2px 2px rgba(0,0,0, .5);
+                -moz-box-shadow: 0 2px 2px rgba(0,0,0, .5);
+                -webkit-box-shadow: 0 2px 2px rgba(0,0,0, .5);
+                -moz-transition: opacity .25s linear, visibility .1s linear .1s;
+                -webkit-transition: opacity .25s linear, visibility .1s linear .1s;
+                -o-transition: opacity .25s linear, visibility .1s linear .1s;
+                transition: opacity .25s linear, visibility .1s linear .1s;
+            }
+
+                #nav ul li {
+                    float: none;
+                    margin: 0;
+                }
+
+                #nav ul a {
+                    font-weight: normal;
+                    text-shadow: 0 2px 2px rgba(255,255,255, 0.7);
+                }
+
+                #nav ul ul {
+                    left: 160px;
+                    top: 0px;
+                }
+    </style>
+
+</head>
+<body style="background-color:#dbe4eb">
+
+    <!-- Second navbar for categories -->
+    <!-- Second navbar for search -->
+    <!-- Second navbar for profile settings -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                @*@Html.ActionLink("POR", "Index", "POR_Header", new { area = "" }, new { @class = "navbar-brand" })*@
+
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbar-collapse-4">
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="navbar-collapse-4">
+                    @*<a class="nav navbar-nav navbar-left" href="#"><span>MMS</span></a>*@
+                    <ul class="nav navbar-nav navbar-right">
+
+                        @BuildMenu(Model)
+                        @helper  BuildMenu(List<MenuItem> menu, int? parentid = 0, int level = 0)
+{
+if (menu != null)
+{
+    var pboj = from m in menu where m.ParentMenuID == 0 select m;
+    foreach (var k in pboj)
+    {
+
+        var vsObj = from y in menu where y.ParentMenuID == k.MenuID select y;
+        if (vsObj.Count() > 0)
+        {
+                @:<li class="dropdown">
+                    @Html.ActionLink(k.MenuName, k.MethodName, k.ControllerName, new { @data_toggle = "dropdown", @class = "dropdown-toggle" })
+                    @:<ul class="dropdown-menu">
+                                foreach (var l in vsObj)
+            {
+                    @:<li>
+                        @Html.ActionLink(l.MenuName, l.MethodName, l.ControllerName)
+                    var vsssObj = from y in menu where y.ParentMenuID == l.MenuID select y;
+                    if (vsssObj.Count() > 0)
+                    {
+                        @:<ul>
+                        foreach (var u in vsssObj)
+                        {
+                            @:<li>
+                                @Html.ActionLink(u.MenuName, "Index", "Home")
+                            var vssssObj = from r in menu where r.ParentMenuID == u.MenuID select r;
+                            if (vssssObj.Count() > 0)
+                            {
+                                @:<ul>
+                                foreach (var t in vssssObj)
+                                {
+                                    @:<li>
+                                        @Html.ActionLink(u.MenuName, "Index", "Home")
+                                    var vtsObj = from y in menu where y.ParentMenuID == u.MenuID select y;
+                                    if (vtsObj.Count() > 0)
+                                    {
+                                        @:<ul>
+                                        foreach (var j in vtsObj)
+                                        {
+                                            @:<li>@Html.ActionLink(j.MenuName, "Index", "Home")</li>
+                                        }
+                                        @:</ul>
+                                    }
+                                    else
+                                    {
+                                        @:</li>
+                                    }
+                                }
+                                @:</ul>
+                            }
+                            else
+                            {
+                                @:</li>
+                            }
+                        }
+                        @:</ul>
+                    }
+                    else
+                    {
+                        @:</li>
+                    }
+                }
+                @:</ul>
+            }
+            else
+            {
+                @:<li>
+                    @Html.ActionLink(k.MenuName, k.MethodName, k.ControllerName)
+                    @:</li>
+            }
+    }
+}
+}
+                        <li>@Html.ActionLink("Logout", "LogOff", "Users")</li>
+                    </ul>
+
+
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container -->
+
+    </nav><!-- /.navbar -->
+    @*<div class="container-fluid header-back">
+            <di class="col-md-5 pull-left header-text">
+                <h1>CPOR/POR</h1>
+                <p class="lead">Personnal Occurances Report.</p>
+        </div>*@
+    @*</div>*@
+    <div class="container">
+        <div class="[ row ]">
+            <div class="[ col-xs-12  col-md-12 ]" style="padding-left:30px;padding-right:30px;min-height:500px;padding-top:30px;">
+
+
+                @RenderBody()
+
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>&copy; @DateTime.Now.Year - Dte of IT</p>
+            </div>
+        </div>
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+    <script>
+    $(document).ready(function () {
+        $(".dropdown").hover(
+            function () {
+                $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true, true).slideDown("fast");
+                $(this).toggleClass('open');
+            },
+            function () {
+                $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true, true).slideUp("fast");
+                $(this).toggleClass('open');
+            }
+        );
+    });
+    </script>
+    <script src="~/Content/html5shiv.js"></script>
+    <script src="~/Content/respond.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>

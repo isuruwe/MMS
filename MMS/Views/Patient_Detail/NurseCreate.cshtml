@@ -1,0 +1,989 @@
+﻿
+@{
+    ViewBag.Title = "NurseCreate";
+}
+@using PagedList.Mvc;
+@using PagedList;
+
+@section scripts
+{
+    <script src="~/Scripts/Episode/v6/Module.js"></script>
+    <script src="~/Scripts/Episode/v6/Service.js"></script>
+    <script src="~/Scripts/Episode/v6/Controller.js"></script>
+}
+
+<script src="~/Scripts/Angular/angular.js"></script>
+<script src="~/Scripts/Angular/angular-sanitize.js"></script>
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/angular-route.js"></script>
+<script src="~/Scripts/js/jquery.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/ui-bootstrap-tpls-1.3.3.min.js"></script>
+<link rel="stylesheet" href="~/Scripts/css/bootstrap.min.css">
+<link rel="stylesheet" href="~/Scripts/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/Scripts/css/animate.min.css">
+<link rel="stylesheet" href="~/Scripts/css/et-line-font.css">
+<link rel="stylesheet" href="~/Scripts/css/nivo-lightbox.css">
+@*<link rel="stylesheet" href="~/Scripts/css/nivo_themes/default/default.css">*@
+<link rel="stylesheet" href="~/Scripts/css/style.css">
+<link rel="stylesheet" href="~/Scripts/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="~/Scripts/css/responsive.bootstrap4.min.css">
+<link rel="stylesheet" href="~/Scripts/css/buttons.bootstrap4.min.css">
+
+@*<script src="~/Scripts/js/bootstrap.min.js"></script>*@
+<script src="~/Scripts/js/smoothscroll.js"></script>
+<script src="~/Scripts/js/isotope.js"></script>
+<script src="~/Scripts/js/imagesloaded.min.js"></script>
+<script src="~/Scripts/js/nivo-lightbox.min.js"></script>
+<script src="~/Scripts/js/jquery.backstretch.min.js"></script>
+<script src="~/Scripts/js/wow.min.js"></script>
+<script src="~/Scripts/js/custom.js"></script>
+<script src="~/Scripts/js/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/js/dataTables.bootstrap4.min.js"></script>
+<script src="~/Scripts/js/dataTables.responsive.min.js"></script>
+<script src="~/Scripts/js/responsive.bootstrap4.min.js"></script>
+<script src="~/Scripts/js/dataTables.buttons.min.js"></script>
+<script src="~/Scripts/js/buttons.bootstrap4.min.js"></script>
+<script src="~/Scripts/js/jszip.min.js"></script>
+<script src="~/Scripts/js/pdfmake.min.js"></script>
+<script src="~/Scripts/js/vfs_fonts.js"></script>
+<script src="~/Scripts/js/buttons.html5.min.js"></script>
+<script src="~/Scripts/js/buttons.print.min.js"></script>
+<script src="~/Scripts/js/buttons.colVis.min.js"></script>
+
+
+<div ng-app="EpisodeApp" class="container">
+
+    <div ng-controller="EpisodeCntrl" id="epicontrol" ng-init="initsick()">
+
+        <div ng-show="divPor" class="form-horizontal">
+
+            <section class="navbar navbar-fixed-top custom-navbar" role="navigation">
+                <div class="container">
+
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li>
+                                <a href="@Url.Action("Index","Home")">HOME</a>
+                            </li>
+                            <li><input type="submit" id="svd" ng-click="Submitpatient();" onclick="disa();" value="Save" class="btn-sm btn-primary" /></li>
+                            <li>
+                                <div ng-show="showerror">
+                                    
+                                </div>
+
+                            </li>
+                        
+                        
+                         </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#team">TOP</a></li>
+                            <li><a href="#work">NURSE</a></li>
+                            <li><a href="#about">Sick Report</a></li>
+                           
+                            <li><a href="#pricing">SICK CATAGORY</a></li>
+                            <li>
+                                <a href="@Url.Action("Createnon","Patients")?id=1">ADD PATIENT</a>
+                            </li>
+                           
+
+                            @*<li><a href="#portfolio" class="smoothScroll">PORTFOLIO</a></li>*@
+
+                        </ul>
+
+                    </div>
+
+
+
+
+                </div>
+            </section>
+            <div ng-show="showloader" id="loading">
+                <img id="loading-image" src="~/Content/Images/loading.png" />
+            </div>
+            <section id="team">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-md-12 col-sm-12">
+                            <div class="section-title">
+
+                                <h1 class="heading bold">OPD Patients</h1>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="form-horizontal" style="height:150px;   border:1px solid #0094ff; overflow-y:auto;">
+                            @if (ViewBag.sicpr.Count > 0)
+            {
+                                <table id="asdfhg2" class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Section
+                                            </th>
+                                            <th>
+                                                Sick Reported
+                                            </th>
+                                            <th>
+                                                Complain Entered
+                                            </th>
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in (IEnumerable<MMS.Models.sickparade>)ViewBag.sicpr)
+                                        {
+                                            <tr>
+                                                <td align="left">
+
+
+                                                    <a href="~/Patient_Detail/NurseCreate?id3=@item.divid">
+                                                        @item.section
+                                                    </a>
+
+
+                                                </td>
+                                                <td align="left">
+
+
+                                                    <a href="~/Patient_Detail/NurseCreate?id3=@item.divid">
+                                                        @item.sickcount
+                                                    </a>
+
+
+                                                </td>
+
+                                                <td align="left">
+
+
+                                                    <a href="~/Patient_Detail/NurseCreate?id3=@item.divid">
+                                                        @item.comcount
+                                                    </a>
+
+
+                                                </td>
+
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                            else
+                            {
+                                //Response.Redirect("~/Home/Index/");
+                                <div><center>No Results</center></div>
+                            }
+
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-7">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" style="color:blue" ng-model="SearchString" />
+                                </div> <div class="col-md-2">
+                                    <a class="btn-primary btn text-uppercase " href="@Url.Action("NurseCreate","Patient_Detail")?id={{SearchString}}">Search</a>
+                                </div>
+                               
+                            </div>
+                            <div class="col-md-2">
+                                <a class="btn-primary btn text-uppercase " href="@Url.Action("View1","Patient_Detail")?opdid=@Session["userloc"]">Print Sick Report</a>
+                            </div>
+                            @*@Html.Label("Alert", htmlAttributes: new { @class = "control-label col-md-2" })*@
+                        </div>
+
+
+
+                        @*<div class="form-horizontal" style="border:1px solid #0094ff; overflow-y:hidden">
+                            @if (ViewBag.OnePageOfProducts.Count > 0)
+                            {
+                                <table class="table table-striped">
+                                    <tr>
+                                        <th>
+                                          
+                                        </th>
+                                        <th>
+                                            Service No
+                                        </th>
+                                        <th>
+                                            Name
+                                        </th>
+                                        <th>
+                                            Present Complain
+                                        </th>
+                                        <th>
+                                           Date
+                                        </th>
+                                        <th>  <th/>
+
+
+                                    </tr>
+
+                                    @foreach (var item in ViewBag.OnePageOfProducts)
+                                    {
+                                        <tr>
+                                            <td align="left">
+                                                @item.Patient.RelationshipType1.Relationship
+                                            </td>
+                                            <td align="left">
+
+                                                <a href="#portfolio" ng-click="GetOPDPatient('@item.PDID');">@item.Patient.ServiceNo</a>
+                                            </td>
+                                            <td align="left">
+
+                                                <a href="#portfolio" ng-click="GetOPDPatient('@item.PDID');">@item.Patient.rank1.RNK_NAME @item.Patient.Initials @item.Patient.Surname</a>
+                                            </td>
+                                            <td align="left">
+                                                @item.Present_Complain
+                                            </td>
+                                            <td align="left">
+                                                @item.CreatedDate
+                                            </td>
+                                            <td>
+                                                <a href="" ng-click="delPatient('@item.PDID');">
+                                                   
+                                                   Delete
+                                                </a>
+                                                
+                                            </td>
+
+                                        </tr>
+                                    }
+
+                                </table>
+                            }
+                            else
+                            {
+                                //Response.Redirect("~/Home/Index/");
+                                <div><center>No Results</center></div>
+                            }
+                            @Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("NurseCreate", new { page }))
+                        </div>*@
+                        <div class="form-horizontal" style="border:1px solid #0094ff; overflow-y:hidden">
+                            @if (ViewBag.OnePageOfProducts.Count > 0)
+                            {
+                                <table id="asdfhg" class="table table-striped">
+                                    
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Service No
+                                            </th>
+                                            <th>
+                                                Name
+                                            </th>
+                                            <th>
+                                                Complain
+                                            </th>
+                                            <th>
+                                                Live In/Out
+                                            </th>
+                                            <th>
+                                                Is For Duty
+                                            </th>
+                                            <th>
+                                                Is Reported
+                                            </th>
+                                            <th>
+                                                Category
+                                            </th>
+
+                                            <th>
+                                                Category Days
+                                            </th>
+                                            <th>
+                                                Sick Reported Date
+                                            </th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in (IEnumerable<MMS.Models.getsickdata2>)ViewBag.OnePageOfProducts)
+                                        {
+                                            <tr>
+                                                <td align="left">
+
+                                                    <a href="#work" ng-click="GetPatientnew('@item.svt','@item.svcid','@item.rt');loadchild2('@item.svcid');">@item.svcid</a>
+
+                                                </td>
+                                                <td align="left">
+
+                                                    <a href="#work" ng-click="GetPatientnew('@item.svt','@item.svcid','@item.rt');loadchild2('@item.svcid');">@item.rank&nbsp;@item.fname&nbsp;@item.lname</a>@if (item.IsMedical == "1")
+                                                    { <label style="color:coral"> Medical</label>
+                                                    }
+                                                </td>
+                                                <td align="left">
+                                                    @if (item.stat == "1")
+                                                    { <label>No</label>
+                                                    }
+                                                    else
+                                                    {
+                                                        <label>Yes</label>
+                                                    }
+
+                                                </td>
+                                                <td align="left">
+                                                    @item.isliveout
+                                                </td>
+                                                <td align="left">
+                                                    @item.isduty
+                                                </td>
+                                                <td align="left">
+                                                  @if (@item.stat == "1")
+                                                  { <label>Absent</label> }
+                                                  else
+                                                  {
+                                                    <label>Reported</label>
+                                                  }
+                                                </td>
+                                                <td align="left">
+                                                    @item.cat
+                                                </td>
+                                                <td align="left">
+                                                    @item.catdays
+                                                </td>
+
+                                                <td align="left">
+                                                    @item.regdate
+                                                </td>
+
+
+
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                            else
+                            {
+                                //Response.Redirect("~/Home/Index/");
+                                <div><center>No Results</center></div>
+                            }
+                          
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="work">
+                <div class="container">
+                    <div class="row">
+
+
+
+                        <div class="col-md-12 col-sm-12">
+                            <div class="section-title">
+                                
+                                <h1 class="heading bold">Nurse</h1>
+                                <hr>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-4 ">
+
+                            <h3>Patient Details</h3>
+                            <hr>
+                            <span id="errormsgspannurse" asp-validation-for="Year" style="color:red"></span> 
+                            
+                            <div class="form-group">
+                                @Html.Label("Service Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <select id="st" ng-model="st">
+                                        <option value="1">Officer</option>
+                                        <option selected value="2">Other Rank</option>
+                                        <option selected value="3">Civilian</option>
+                                        <option selected value="4">Retired Officer</option>
+                                        <option selected value="5">Retired Airmen</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Relationship", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <select id="RTypeID" ng-model="Relationship" ng-options="c as c.Relationship for c in Relationships">
+                                    <option value="">-- Select Relationship Type --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Reason", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <select id="GetpatiantTypes1" ng-model="GetpatiantTypes1" ng-options="c as c.CategoryDescription for c in GetpatiantTypes">
+                                    <option value="">-- Select Reason --</option>
+                                </select>
+                            </div>
+                            <div ng-show="GetpatiantTypes1.CategoryID=='2'">
+                                <div class="form-group">
+                                    @Html.Label("     ", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <select id="GetpatiantsubTypes1" ng-model="GetpatiantsubTypes1" ng-options="c as c.SubCategoryDescription for c in GetpatiantsubTypes">
+                                        <option value=""  selected="selected">-- Select Sub Type --</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("ServiceNo", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <input type="text" ng-model="ServiceNo" ng-required="true" ng-blur="GetPatient(st,ServiceNo,Relationship.RTypeID);loadimgbystp(st,ServiceNo);" />
+                                </div>
+                            </div>
+                            <div ng-show="GetPatientDet.length > 1 && GetPatientDet[0].Relationship!='1'">
+                                <div class="form-group">
+                                    @Html.Label("Child", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <select id="pdnew" ng-model="pidnew" ng-change="loadchild(pidnew)" ng-options="d as d.Surname for d in PatientDetdr">
+                                        <option value="">-- Select Child --</option>
+                                    </select>
+                                </div>
+                            </div>
+                            @*<div class="form-group">
+                                    @Html.Label("RANK", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        {{ServicePersonnels[0].RNK_NAME}}
+                                    </div>
+                                </div>*@
+
+                            <div class="form-group">
+                                @Html.Label("Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+
+                                    <span class="test" style="font-weight:bold"> {{  GetPatientDet[0].Relationship=='1' ? GetPatientDet[0].RNK_NAME : '' }}</span>            {{ GetPatientDet[0].Relationship!='5' ? GetPatientDet[0].Initials : ''}}    {{GetPatientDet[0].Surname}}
+                                    <div ng-show="GetPatientDet.length > 1 && GetPatientDet[0].retiredStatus!='Serving'"></div>
+                                    <label style="color:coral">{{GetPatientDet[0].retiredStatus}} </label>
+                                </div>
+                                </div>
+
+                            <div class="form-group">
+                                @Html.Label("Sex", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @*{{GetPatientDet[0].SxDetail}}*@
+                                    <span class="test" style="font-weight:bold"> {{  GetPatientDet[0].Relationship=='2'||GetPatientDet[0].Relationship=='4' ? 'Female' : GetPatientDet[0].SxDetail }}</span> 
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("Medical Category", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                  {{  GetPatientDet[0].Relationship=='1' ?   GetPatientDet[0].Category : '' }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Age", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    {{ age }}
+                                </div>
+                            </div>
+                            <div class="panel-group ">
+                                <div class="panel panel-default " >
+
+                                    <div class="panel-body">
+                                        <img data-ng-src="{{primage}}" style="width:200px;" />
+
+
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-4 ">
+
+                            <h3>Present Complain</h3>
+                            <hr>
+                           
+
+                            <div class="form-group">
+                                <div class="col-md-5">
+                                    <input type="text" placeholder="Type Here for Suggestion" ng-model="medkey1" uib-typeahead="v as v.MKDetail for v in medkey | filter:{MKDetail : $viewValue}:startsWith| limitTo:20" typeahead-on-select="maddItem(medkey1.MKDetail)">
+                                    @*@Html.Label("Complain", htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                </div>
+                                    <div class="col-md-10">
+                                        <textarea type="text" rows="4" cols="50" ng-model="Present_Complain"></textarea>
+                                    </div>
+                                </div>
+
+
+                            <h3>Vitals</h3>
+                            <hr>
+                            <div class="form-group">
+                                @Html.Label("Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <select id="VTID" ng-model="VTID" ng-options="c as c.VitalType for c in VitalTypes">
+                                        <option value="">-- Select Vital Type --</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("Value", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <input value="" type="text" ng-model="vvalue" />
+                                    <input type="button" ng-click="addItem(VTID.VTID,vvalue)" value="Add" />
+                                </div>
+                            </div>
+                            <table class="table table-striped">
+
+                                <tr ng-repeat="item in items" class="item">
+                                    <td><b>{{item.name}}</b> </td>
+                                    <td><b>:</b>{{item.amount}} </td>
+                                    <td><button ng-click="removeItem($index)">Remove</button></td>
+                                </tr>
+                            </table>
+
+
+
+                        </div>
+
+
+
+                        <div class="col-lg-4 col-md-4 col-sm-4 ">
+
+                            <h3>Allergies</h3>
+                            <hr>
+                            <div class="form-group">
+                                @Html.Label("Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <select id="HID" ng-model="HyperType1" ng-change=" GetHyperSubType(HyperType1);" ng-options="c as c.HypersenceMainCategory for c in HyperType">
+                                        <option value="">-- Select Allergy Type --</option>
+                                    </select>
+                                </div>
+                            </div>
+                            @*<div class="form-group">
+                                @Html.Label("Sub Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <select id="HID" ng-model="HyperSubType1" ng-change=" " ng-options="e as e.HyperSubType for e in HyperSubType">
+                                        <option value="">-- Select Allergy Sub Type --</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("Reaction", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <select id="RID" ng-model="HypRMainCategory1" ng-change=" GetReactSubType(HypRMainCategory1);" ng-options="c as c.HypRMainDetail for c in HypRMainCategory">
+                                        <option value="">-- Select Reaction --</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Reaction Detail", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <select id="RSubID" ng-model="HypRSubCategory1" ng-change=" " ng-options="f as f.RSubcategory for f in HypRSubCategory">
+                                        <option value="">-- Select Reaction Type --</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Severity", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <select id="SeverityID" ng-model="SeverityType1" ng-change=" " ng-options="g as g.SevertyType for g in SeverityType">
+                                        <option value="">-- Select Severity --</option>
+                                    </select>
+                                </div>
+                            </div>*@
+                            <div class="form-group">
+                                @Html.Label("Detail", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <input type="text" ng-model="HDetail" />
+                                    <input type="button" ng-click="haddItem(HyperType1.HypersenceMainCatID,HyperType1.HypersenceMainCategory,HDetail)" value="Add" />
+                                </div>
+                            </div>
+                            <table class="table table-striped">
+
+                                <tr ng-repeat="hitem in hitems" class="item">
+                                    <td><b>{{hitem.htype}}->{{hitem.hstype1}}</b> </td>
+                                    @*<td><b>:</b>{{hitem.htype1}} </td>*@
+                                    <td><button ng-click="hremoveItem($index)">Remove</button></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 wow fadeInUp" data-wow-delay="0.1s">
+
+
+                            <div id="collapse" class="panel-collapse @*collapse*@">
+
+                                <table class="table table-striped">
+
+                                    <tbody>
+
+                                        <tr ng-repeat-start="r1 in patienthsthyp1">
+                                            <td>
+                                                <button ng-if="r1.expanded" ng-click="r1.expanded = false">-</button>
+                                                <button ng-if="!r1.expanded" ng-click="r1.expanded = true">+</button>
+                                            </td>
+                                            <td>Allergies- </td>
+                                            <td>{{r1.HypersenceMainCategory}}</td>
+                                            @*<td>{{person.RNK_NAME}}</td>*@
+                                        </tr>
+                                        <tr ng-if="r1.expanded" ng-repeat-end="">
+                                            <td colspan="3">{{r1.HypersenseDetail}}</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </section>
+            <section id="about">
+                <div class="container">
+                    <div class="row">
+
+
+
+                        <div class="col-md-12 col-sm-12">
+                            <div class="section-title">
+
+                                <h1 class="heading bold">Sick Report</h1>
+                                <hr>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 ">
+
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    Patient Details
+                                </div>
+                                <div class="panel-body">
+
+
+                                    <span id="errormsgspansick" asp-validation-for="Year" style="color:red"></span>
+
+                                    <div class="form-group">
+                                        @Html.Label("Service Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            <select   id="st" ng-model="st">
+                                                <option value="1">Officer</option>
+                                                <option selected value="2" >Other Rank</option>
+                                                
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Label("ServiceNo", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            <input type="text" ng-model="ServiceNo" ng-required="true" ng-blur="GetPatientsick(st,ServiceNo,1);loadimgbystp(st,ServiceNo);" />
+                                        </div>
+                                    </div>
+
+                                    @*<div class="form-group">
+                                    @Html.Label("RANK", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        {{ServicePersonnels[0].RNK_NAME}}
+                                    </div>
+                                </div>*@
+
+                                    <div class="form-group">
+                                        @Html.Label("Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+
+                                            <span class="test" id="snv" style="font-weight:bold"> {{  GetPatientDet1[0].Relationship=='1' ? GetPatientDet1[0].RNK_NAME : '' }}</span>            {{ GetPatientDet1[0].Relationship!='5' ? GetPatientDet1[0].Initials : ''}}    {{GetPatientDet1[0].Surname}}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Label("Sex", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            {{GetPatientDet1[0].SxDetail}}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Label("Medical Category", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            {{  GetPatientDet1[0].Relationship=='1' ?   GetPatientDet1[0].Category : '' }}
+                                        </div>
+                                    </div>
+                                    <div class="panel-group ">
+                                        <div class="panel panel-default ">
+
+                                            <div class="panel-body">
+                                                <img data-ng-src="{{primage}}" style="width:200px;" />
+
+
+
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-4 ">
+
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    Sick Report
+                                </div>
+                                <div class="panel-body">
+
+
+                                    <span id="errormsgspansick2" asp-validation-for="Year" style="color:red"></span>
+
+
+
+                                    <div class="form-group">
+                                        @Html.Label("Live In/Out", htmlAttributes: new { @class = "control-label col-md-6" })
+                                        <div class="col-md-5">
+
+                                            <select class="form-control" id="livein" ng-model="livein">
+                                                <option selected value="">--Select--</option>
+                                                <option value="In">In</option>
+                                                <option value="Out">Out</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("Age", htmlAttributes: new { @class = "control-label col-md-5" })
+                                        <div class="col-md-5">
+                                            <input type="text" id="age" ng-model="age" ng-required="true" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("Total Service", htmlAttributes: new { @class = "control-label col-md-5" })
+                                        <div class="col-md-5">
+                                            <input type="text" id="tservice" ng-model="tservice" ng-required="true" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("If for duty", htmlAttributes: new { @class = "col-md-6" })
+                                        <div class="col-md-5">
+
+                                            <select class="form-control" id="forduty" ng-model="forduty">
+                                                <option selected value="">--Select--</option>
+                                                <option value="Yes">Yes</option>
+                                                <option value="No">No</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("Whether a defaulter", htmlAttributes: new { @class = "col-md-6" })
+                                        <div class="col-md-5">
+
+                                            <select class="form-control" id="defaulter" ng-model="defaulter">
+                                                <option selected value="">--Select--</option>
+                                                <option value="No">No</option>
+                                                <option value="Yes">Yes</option>
+                                            </select>
+
+                                        </div>
+
+
+                                    </div>
+                                    <div class="form-group row-fluid form-inline">
+                                        @Html.Label("Location", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            <select class="form-control" id="loc1" ng-model="loc" ng-options="g as g.LocationName for g in locc" ng-change=" Getdivnurs(loc)"></select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row-fluid form-inline">
+                                        @Html.Label("Division", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            <select class="form-control" id="div1" ng-model="div" ng-options="g as g.DivisionName for g in divv"></select>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="form-group row-fluid form-inline">
+                                        <input type="submit" onclick="validate();" value="Save Sick Report" class="btn-sm btn-primary" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </section>
+            @*<section id="pricing">
+                <div class="container">
+                    <div class="row">
+
+
+
+                        <div class="col-md-12 col-sm-12">
+                            <div class="section-title">
+                                <strong>03</strong>
+                                <h1 class="heading bold">SICK CATAGORY</h1>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-7">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" style="color:blue" ng-model="SearchString1" />
+                                </div> <div class="col-md-2">
+                                    <a class="btn-primary btn text-uppercase " href="@Url.Action("NurseCreate","Patient_Detail")?id1={{SearchString1}}">Search</a>
+                                </div>
+
+                            </div>
+                            @Html.Label("Alert", htmlAttributes: new { @class = "control-label col-md-2" })
+                        </div>
+                        <div class="form-horizontal" style="border:1px solid #0094ff; overflow-y:hidden">
+                            @if (ViewBag.sickcate.Count > 0)
+                            {
+                                <table class="table table-striped">
+                                    <tr>
+                                        <th>
+                                            Name
+                                        </th>
+                                        <th>
+                                            Sick Category Days
+                                        </th>
+                                        <th>
+                                            Sick Category
+                                        </th>
+                                        <th>
+                                            Issued Date
+                                        </th>
+                                        <th>
+                                           Print
+                                        </th>
+
+                                    </tr>
+
+                                    @foreach (var item in (IEnumerable<MMS.Models.getsickdata2>)ViewBag.OnePageOfProducts)
+                                    {
+                                        if (item.catdays!=null) {
+                                            <tr>
+                                                <td align="left">
+
+                                                    <a href="#portfolio">@item.rank @item.fname @item.lname</a>
+                                                </td>
+                                                <td align="left">
+                                                    @item.catdays
+                                                </td>
+                                                <td align="left">
+                                                    @item.cat
+                                                </td>
+                                                <td align="left">
+                                                    @item.regdate
+                                                </td>
+                                                <td><input type="submit" ng-mouseover="viewsick('@item.isliveout');"  ng-click="printDiv('prins')" value="Print" class="btn btn-default hidden-print" /></td>
+
+                                            </tr>
+                                        }
+                                    }
+
+</table><div name="prins"  id="prins" style="visibility:hidden" class="psa " align="center">
+                            
+            <div class="col-md-12 col-sm-12 ">
+
+                <div class="section-title">
+
+                    <h1 class="heading bold">Sick Catagory</h1>
+                    <p>
+                         Sevice No:     {{viewsickr[0].ServiceNo}}
+                        <br />Name:     {{viewsickr[0].Initials}}  {{viewsickr[0].Surname}}
+                    </p>
+                    <hr>
+                    <p>
+                              Sicck Catagory:       {{viewsickr[0].Category_Type}}
+                        <br />Catagory Days:        {{viewsickr[0].CatPeriod}}  Days
+                    </p>
+                    <hr>
+                </div>
+            </div>
+                            </div>
+                            }
+                            else
+                            {
+                                //Response.Redirect("~/Home/Index/");
+    <div><center>No Results</center></div>
+    }
+    @Html.PagedListPager((IPagedList)ViewBag.sickcate, page1 => Url.Action("NurseCreate", new { page1 }))
+</div>
+                    </div>
+                </div>
+            </section>*@
+        </div>
+    </div>
+</div>
+    
+<script>
+    $(function () {
+        $("#asdfhg").DataTable({
+            "ordering": false,
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#asdfhg_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+    function disa() {
+        //document.getElementById("svd").disabled = true;
+        //$("#svd").removeAttr('class');
+    }
+    function validate() {
+        debugger;
+
+        var selectv1 = $("#livein").find(":selected").text();
+
+        var selectv2 = $("#forduty").find(":selected").text();
+        var selectv3 = $("#defaulter").find(":selected").text();
+        var selectv4 = $("#age").val();
+        var selectv5 = $("#tservice").val();
+        var selectv6 = $("#snv").text();
+        var selectv7 = $("#div1").find(":selected").text();
+        if (selectv1 == "--Select--") {
+            $("#errormsgspansick2").text("Please Select Live In or Out");
+            return false;
+        }
+
+        else if (selectv2 == "--Select--") {
+            $("#errormsgspansick2").text("Please Select If for Duty");
+            return false;
+        }
+        else if (selectv3 == "--Select--") {
+            $("#errormsgspansick2").text("Please Select Whether a defaulter");
+            return false;
+        }
+        else if (selectv4 == "") {
+            $("#errormsgspansick2").text("Please Type Age");
+            return false;
+        }
+        else if (selectv5 == "") {
+            $("#errormsgspansick2").text("Please type Total Service");
+            return false;
+        }
+        else if (selectv6 == "") {
+            $("#errormsgspansick2").text("Please type Service No");
+            return false;
+        }
+        else if (selectv7 == "") {
+            $("#errormsgspansick2").text("Please select Section");
+            return false;
+        }
+       else {
+            $("#errormsgspansick2").text(" ");
+
+            angular.element(document.getElementById('epicontrol')).scope().Submitsicknurs();
+
+            return true;
+        }
+
+    }
+
+
+</script>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+

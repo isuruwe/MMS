@@ -1,0 +1,1804 @@
+﻿@*@model IEnumerable<Patient_Detail>*@
+
+@{
+    ViewBag.Title = "MMS";
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts
+{
+    <script src="~/Scripts/Episode/v6/Module.js"></script>
+    <script src="~/Scripts/Episode/v6/Service.js"></script>
+    <script src="~/Scripts/Episode/v6/Controller.js"></script>
+}
+
+<script src="~/Scripts/js/jquery.js"></script>
+<script src="~/Scripts/js/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/js/metisMenu.min.js"></script>
+<script src="~/Scripts/js/sb-admin-2.js"></script>
+<script src="~/Scripts/js/dataTables.bootstrap.min.js"></script>
+<script src="~/Scripts/js/dataTables.responsive.js"></script>
+<script src="~/Scripts/Angular/angular.js"></script>
+<script src="~/Scripts/Angular/angular-sanitize.js"></script>
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/angular-route.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/ui-bootstrap-tpls-1.3.3.min.js"></script>
+
+<link rel="stylesheet" href="~/Scripts/css/bootstrap.min.css">
+<link rel="stylesheet" href="~/Scripts/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/Scripts/css/animate.min.css">
+<link rel="stylesheet" href="~/Scripts/css/et-line-font.css">
+<link rel="stylesheet" href="~/Scripts/css/nivo-lightbox.css">
+@*<link rel="stylesheet" href="~/Scripts/css/nivo_themes/default/default.css">*@
+<link rel="stylesheet" href="~/Scripts/css/style.css">
+@*<script src="~/Scripts/js/bootstrap.min.js"></script>*@
+<script src="~/Scripts/js/smoothscroll.js"></script>
+<script src="~/Scripts/js/isotope.js"></script>
+<script src="~/Scripts/js/imagesloaded.min.js"></script>
+<script src="~/Scripts/js/nivo-lightbox.min.js"></script>
+<script src="~/Scripts/js/jquery.backstretch.min.js"></script>
+<script src="~/Scripts/js/wow.min.js"></script>
+<script src="~/Scripts/js/custom.js"></script>
+
+@using PagedList.Mvc;
+@using PagedList;
+
+
+<div ng-app="EpisodeApp" class="container">
+
+    <div ng-controller="EpisodeCntrl" id="epicontrol" ng-init="initpatient()">
+
+        <div ng-show="divPor" class="form-horizontal">
+
+            <section class="navbar navbar-fixed-top custom-navbar" role="navigation">
+                <div class="container">
+
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li>
+                                <a href="@Url.Action("Index","Home")">HOME</a>
+
+                            </li>
+                            <li>
+                                <input type="submit" ng-click="" onclick="validate();" value="Save" class="btn-primary btn-sm" />
+
+
+
+                            </li>
+                            <li>
+                                <div ng-show="showerror">
+                                    <span style="background-color:black">Error!</span>
+                                </div>
+
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#work">TOP</a></li>
+                            @* <li><a href="#work" class="smoothScroll">NURSE</a></li>*@
+                            @*<li><a href="#about" class="smoothScroll">ABOUT</a></li>*@
+                            <li><a href="#portfolio">DOCTOR</a></li>
+                            <li><a href="#team">EXAMINATION</a></li>
+                            <li><a href="#pricing">INVESTIGATIONS</a></li>
+                            <li><a href="#about">DIAGNOSIS</a></li>
+                            <li><a href="#contact">HISTORY</a></li>
+
+                        </ul>
+
+
+                    </div>
+
+
+
+                </div>
+            </section><div class="row">
+                <div class=" col-ld-2">
+                </div>
+                <div class=" col-ld-2">
+                    @Session["loginuser"].ToString()
+                </div>
+            </div>
+            <section id="work">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <h3>OPD Patients</h3>
+                        </div><div class="form-group">
+                            <div class="col-md-7">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" style="color:blue" ng-model="SearchString" />
+                                </div>
+                                <div class="col-md-2"><a class="btn-primary btn text-uppercase " href="@Url.Action("Create","Patient_Detail")?id={{SearchString}}">Search</a> </div>
+                            </div>
+                        </div>
+                        <div class="form-horizontal" style="border:1px solid #0094ff; overflow-y:hidden">
+                            @if (ViewBag.OnePageOfProducts.Count > 0)
+                            {
+                                <table id="asdfhg" class="table table-striped">
+                                    <tr>
+                                        <th>
+
+                                        </th>
+                                        <th>
+                                            Service No
+                                        </th>
+                                        <th>
+                                            Name
+                                        </th>
+                                        <th>
+                                            Present Complain
+                                        </th>
+                                        <th>
+                                            Date
+                                        </th>
+                                        <th>
+                                            Daignosis
+                                        </th>
+                                        <th>
+                                            Status
+                                        </th>
+
+
+                                    </tr>
+
+                                    @foreach (var item in (IEnumerable<MMS.Models.getdocdetail>)ViewBag.OnePageOfProducts)
+                                    {
+                                        <tr>
+                                            <td align="left">
+                                                @item.relasiondet
+                                            </td>
+                                            <td align="left">
+                                                <a href="#portfolio" ng-click="GetOPDPatient('@item.pdids');loadchild1('@item.sno');">@item.sno</a>
+                                            </td>
+                                            <td align="left">
+                                                <a href="#portfolio" ng-click="GetOPDPatient('@item.pdids');loadchild1('@item.sno');">
+                                                    @*@if (item.relasiont == 1)
+                                                        { @item.rnkname}*@
+                                                    @item.inililes @item.sname
+                                                </a>
+
+                                            </td>
+                                            <td align="left">
+                                                @item.pcomoplian
+                                            </td>
+                                            <td align="left">
+                                                @item.crdate
+                                            </td>
+                                            <td align="left">
+                                                @if (item.opddiag.Contains("null"))
+                                                { }
+                                                else
+                                                { @item.opddiag}
+                                            </td>
+                                            <td align="left">
+                                                @item.pstatus
+                                            </td>
+
+                                        </tr>
+                                    }
+
+                                </table>
+                            }
+                            else
+                            {
+                                //Response.Redirect("~/Home/Index/");
+                                <div><center>No Results</center></div>
+                            }
+                            @Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("Create", new { page, currentFilter = ViewBag.CurrentFilter }))
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+            <div ng-show="showloader" id="loading">
+                <img id="loading-image" src="~/Content/Images/loading.png" />
+            </div>
+
+            <section id="portfolio">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-md-12 col-sm-12">
+                            <div class="section-title">
+                                <h1 class="heading bold">DOCTOR</h1>
+                                <hr>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+
+                                <div class="panel-heading">
+                                    Presenting Complain
+                                </div>
+
+                                <div class="panel-body">
+                                    <div class="form-group  has-success" style=" height:300px; overflow-y:auto;">
+
+                                        <div class="col-md-7">
+                                            <span class=" test" style="font-weight:bold"> {{ patienthst[0].Relationship=='SELF' ? patienthst[0].RNK_NAME : patienthst[0].Relationship }}</span>  {{patienthst[0].Initials}}    {{patienthst[0].Surname}}
+
+                                            </br> Medical Category:  {{patienthst[0].Category}}
+                                            </br> Blood Group:       {{patienthst[0].BloodType}}
+
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="panel-group ">
+                                                <div class="panel panel-default " style="width:120px;">
+
+                                                    <div class="panel-body">
+                                                        <img data-ng-src="{{primage1}}" style="width:100px;" />
+
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="collapse" class="panel-collapse @*collapse*@">
+
+                                            <table class="table table-striped">
+
+                                                <tbody>
+
+                                                    <tr ng-repeat-start="r1 in patienthsthyp">
+                                                        <td>
+                                                            <button ng-if="r1.expanded" ng-click="r1.expanded = false">-</button>
+                                                            <button ng-if="!r1.expanded" ng-click="r1.expanded = true">+</button>
+                                                        </td>
+                                                        <td>Allergies- </td>
+                                                        <td>{{r1.HypersenceMainCategory}}</td>
+                                                        @*
+                                                            <td>{{person.RNK_NAME}}</td>*@
+                                                    </tr>
+                                                    <tr ng-if="r1.expanded" ng-repeat-end="">
+                                                        <td colspan="3">{{r1.HypersenseDetail}}</td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group has-success">
+
+                                        @Html.Label("Presenting Complain", htmlAttributes: new { @class = "control-label", @for = "Present_Complain" })
+
+
+                                        <textarea ng-model="Present_Complain" cols="50" rows="5"> </textarea>
+
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    Other Complain
+                                </div><div class="panel-body">
+                                    <div class="form-group has-success">
+
+                                        @Html.Label("History of Presenting Complain", htmlAttributes: new { @class = "control-label" })
+
+                                        <textarea ng-model="History_PresentComplain" cols="50" rows="5"></textarea>
+
+                                    </div>
+                                    <div class="form-group has-success">
+
+                                        @Html.Label("Other Complain", htmlAttributes: new { @class = "control-label" })
+
+                                        <textarea ng-model="Other_Complain" cols="50" rows="5"></textarea>
+
+                                    </div>
+
+                                    <div class="form-group has-success">
+
+                                        @Html.Label("History of Other Complain", htmlAttributes: new { @class = "control-label" })
+
+                                        <textarea ng-model="History_OtherComplain" cols="50" rows="5"></textarea>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @*Diagnosis*@
+
+
+
+                        <div class="col-lg-4">
+
+
+
+
+                            <div class="panel panel-primary " style="height:400px; overflow-y:auto;">
+                                <div class="panel-heading">
+
+                                    <h4 class="panel-title">
+
+                                        History@*<a ng-click="toggle()" data-toggle="collapse" href="#collapse"><b>        +</b></a>*@
+                                    </h4>
+
+                                </div>
+
+                                <div id="collapse" class="panel-collapse @*collapse*@">
+
+                                    <div class="panel-body">
+
+
+                                        @*<table>
+
+                                                <tbody>
+
+                                                    <tr ng-repeat-start="r1 in patienthstvit">
+                                                        <td>
+                                                            <button ng-if="r1.expanded" ng-click="r1.expanded = false">-</button>
+                                                            <button ng-if="!r1.expanded" ng-click="r1.expanded = true">+</button>
+                                                        </td>
+                                                        <td>Vitals- </td>
+                                                        <td>{{r1.Reading_Time |limitTo:-15 |limitTo:13 | date :'medium' }}</td>
+
+                                                    </tr>
+                                                    <tr ng-if="r1.expanded" ng-repeat-end="">
+                                                        <td colspan="3">{{r1.VitalType}},{{r1.VitalValues}}</td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>*@
+                                        <table class="table table-striped">
+
+                                            <tbody>
+
+                                                <tr ng-repeat-start="r2 in patienthstall">
+                                                    <td>
+                                                        <button ng-if="r2.expanded" ng-click="r2.expanded = false">-</button>
+                                                        <button ng-if="!r2.expanded" ng-click="r2.expanded = true">+</button>
+                                                    </td>
+
+                                                    <td><a href="#contact" ng-click="PatientHystory(r2.PDID);">Reported-{{r2.CreatedDate |limitTo:-15 |limitTo:13 | date:'dd/MM/yyyy' }}--{{r2.Clinic_Detail}}</a></td>
+                                                    @*
+                                                        <td>{{person.RNK_NAME}}</td>*@
+                                                </tr>
+                                                <tr ng-if="r2.expanded" ng-repeat-end="">
+                                                    <td colspan="3">{{r2.dgdetail}}</td>
+                                                    @*
+                                                        <td colspan="3">{{r2.OPD_Diagnosis}}</td>
+                                                        <td colspan="3">{{r2.Drug_Prescription.ItemNo}}</td>*@
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    @*/*----------------------*/*@
+                    <div class="row">
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+
+                                <div class="panel-heading">
+                                    Vitals   <input type="checkbox" ng-model="pvit" />
+                                </div>
+
+                                <div class="panel-body" ng-show="pvit">
+                                    <div class="form-group  has-success">
+
+                                        <table class="table table-striped">
+
+                                            <tbody>
+
+                                                <tr ng-repeat-start="r1 in patientvit">
+                                                    <td>
+                                                        <button ng-if="r1.expanded" ng-click="r1.expanded = false">-</button>
+                                                        <button ng-if="!r1.expanded" ng-click="r1.expanded = true">+</button>
+                                                    </td>
+
+                                                    <td>{{r1.VitalType}}</td>
+                                                    <td>{{r1.VitalValues}}</td>
+                                                    <td>{{r1.ReadingUnit}}</td>
+
+                                                </tr>
+                                                <tr ng-if="r1.expanded" ng-repeat-end="">
+                                                    <td colspan="3">{{r1.Reading_Time |limitTo:-15 |limitTo:13 | date:'short'}}</td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    Past Medical History  <input type="checkbox" ng-model="ppmed" />
+                                </div>
+
+                                <div class="panel-body" ng-show="ppmed">
+                                    <div class="form-group has-success">
+
+
+
+                                        <textarea ng-model="pastmedhys" cols="50" rows="5"></textarea>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+
+                                <div class="panel-heading">
+                                    Add Vitals  <input type="checkbox" ng-model="padvit" />
+                                </div>
+
+                                <div class="panel-body" ng-show="padvit">
+                                    <div class="form-group  has-success">
+
+                                        <div class="form-group">
+                                            @Html.Label("Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <div class="col-md-10">
+                                                <select id="VTID" ng-model="VTID" ng-options="c as c.VitalType for c in VitalTypes">
+                                                    <option value="">-- Select Vital Type --</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.Label("Value", htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <div class="col-md-10">
+                                                <input value="" type="text" ng-model="vvalue" />
+                                                <input type="button" ng-click="addItem(VTID.VTID,vvalue)" value="Add" />
+                                            </div>
+                                        </div>
+                                        <table class="table table-striped">
+
+                                            <tr ng-repeat="item in items" class="item">
+                                                <td><b>{{item.name}}</b> </td>
+                                                <td><b>:</b>{{item.amount}} </td>
+                                                <td><button ng-click="removeItem($index)">Remove</button></td>
+                                            </tr>
+                                        </table>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+
+                                <div class="panel-heading">
+                                    Plan of Management  <input type="checkbox" ng-model="ppmgt" />
+                                </div>
+
+                                <div class="panel-body" ng-show="ppmgt">
+                                    <div class="form-group has-success">
+
+
+
+                                        <textarea ng-model="planofmgt" cols="50" rows="5"></textarea>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+
+                                <div class="panel-heading">
+                                    Drug History  <input type="checkbox" ng-model="pdrugh" />
+                                </div>
+                                <div class="panel-body" ng-show="pdrugh">
+
+                                    <div class="form-group has-success">
+
+
+
+                                        <textarea ng-model="drughyst" cols="50" rows="5"></textarea>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+
+                                <div class="panel-heading">
+                                    Allergies  <input type="checkbox" ng-model="palg" />
+
+                                </div>
+                                <div class="panel-body" ng-show="palg">
+                                    <div class="form-group has-success">
+
+
+
+                                        @Html.Label("Type", htmlAttributes: new { @class = "control-label col-md-2" })
+
+                                        <select id="HID" ng-model="HyperType1" ng-change=" GetHyperSubType(HyperType1);" ng-options="c as c.HypersenceMainCategory for c in HyperType">
+                                            <option value="">-- Select Allergy Type --</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group has-success">
+                                        @Html.Label("Detail", htmlAttributes: new { @class = "control-label col-md-2" })
+
+                                        <input type="text" ng-model="HDetail" />
+                                        <input type="button" ng-click="haddItem(HyperType1.HypersenceMainCatID,HyperType1.HypersenceMainCategory,HDetail)" value="Add" />
+                                    </div>
+                                    <table class="table table-striped">
+
+                                        <tr ng-repeat="hitem in hitems" class="item">
+                                            <td><b>{{hitem.htype}}->{{hitem.hstype1}}</b> </td>
+                                            @*
+                                                <td><b>:</b>{{hitem.htype1}} </td>*@
+                                            <td><button ng-click="hremoveItem($index)">Remove</button></td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </section>
+
+            <section id="team">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-md-12 col-sm-12">
+                            <div class="section-title">
+
+                                <h1 class="heading bold">Examination</h1>
+                                <hr>
+                            </div>
+                        </div>
+
+
+                        @*General Examination*@
+                        <div class="col-lg-4 ">
+
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    General Examination <input type="checkbox" ng-model="ge" />
+                                </div>
+                                <div class="panel-body" ng-show="ge">
+                                    <div class="form-group">
+
+
+                                        <div class="col-lg-12" style="padding-left:0px;"> @*@Html.Label("Alert", htmlAttributes: new { @class = "control-label col-md-2" })*@ </div>
+                                        <div class="col-md-12">
+                                            <label ng-style="c1">Alert</label> <input type="checkbox" ng-model="Alert" ng-change="changeColor1(Alert);" /> <label ng-style="c2">Confused </label><input type="checkbox" ng-model="Confused" ng-change="changeColor2(Confused);" /> <label ng-style="c3">Drowsy</label> <input type="checkbox" ng-model="Drowsy" ng-change="changeColor3(Drowsy);" /> <label ng-style="c4">Unconscious</label> <input type="checkbox" ng-model="Unconscious" ng-change="changeColor4(Unconscious);" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Label("Pain ", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-6">
+                                            <label ng-style="c5"> Yes</label><input type="radio" ng-model="IsPain" value="true" name="pain" ng-change="changeColor5(IsPain);" /><label ng-style="c54"> No</label><input type="radio" ng-model="IsPain" value="false" name="pain" ng-change="changeColor52(IsPainno);" />
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        @Html.Label("Pain Score", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            <input type="text" ng-model="PainScore" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Label("Location", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            <input type="text" ng-model="PainLoc" />
+                                        </div>
+                                    </div>
+
+                                    <hr />
+                                    <div class="form-group">
+                                        @Html.Label("Build:", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            <label ng-style="c6">Lean</label><input type="checkbox" ng-model="Lean" ng-change="changeColor6(Lean);" /><label ng-style="c7"> Average</label><input type="checkbox" ng-model="Average" ng-change="changeColor7(Average);" /> <label ng-style="c8"> Obese</label> <input type="checkbox" ng-model="Obese" ng-change="changeColor8(Obese);" />
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div class="form-group">
+                                        @*@Html.Label("Location", htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                        <div class="col-md-9">
+                                            <label ng-style="c9"> Dyspnoea</label><input type="checkbox" ng-model="Dyspnoea" ng-change="changeColor9(Dyspnoea);" /> <label ng-style="c10">Cyanosis</label><input type="checkbox" ng-model="Cyanosis" ng-change="changeColor10(Cyanosis);" />
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div class="form-group">
+                                        @*@Html.Label("Location", htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                        <div class="col-md-12">
+
+                                            <label ng-style="c11"> Pallor</label><input type="checkbox" ng-model="Pallor" ng-change="changeColor11(Pallor);" /> <label ng-style="c12">Icterus</label><input type="checkbox" ng-model="Icterus" ng-change="changeColor12(Icterus);" /> <label ng-style="c13">Arcus</label>  <input type="checkbox" ng-model="Arcus" ng-change="changeColor13(Arcus);" /> <label ng-style="c14">Xanthomata</label> <input type="checkbox" ng-model="Xanthomata" ng-change="changeColor14(Xanthomata);" />
+                                        </div>
+                                    </div>
+
+                                    <hr />
+                                    <div class="form-group">
+                                        @*@Html.Label("Location", htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                        <div class="col-md-16">
+                                            <label ng-style="c15"> Extremities warm</label><input type="checkbox" ng-model="warm" ng-change="changeColor15(warm);" /><label ng-style="c16">  Cold and Clammy</label><input type="checkbox" ng-model="Clammy" ng-change="changeColor16(Clammy);" /> <br> <label ng-style="c17">Pedal Oedema</label> <input type="checkbox" ng-model="Oedema" ng-change="changeColor17(Oedema);" /> <label ng-style="c18">Clubbing</label><input type="checkbox" ng-model="Clubbing" ng-change="changeColor18(Clubbing);" />
+                                        </div>
+                                    </div>
+
+                                    <hr>
+                                    <div class="form-group">
+                                        @Html.Label("Skin:", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            <label ng-style="c19">Rashes</label><input type="checkbox" ng-model="Rashes" ng-change="changeColor19(Rashes);" /> <label ng-style="c20">Ulcers</label><input type="checkbox" ng-model="Ulcers" ng-change="changeColor20(Ulcers);" /> <label ng-style="c21"> Wounds</label> <input type="checkbox" ng-model="Wounds" ng-change="changeColor21(Wounds);" /> <label ng-style="c22"> Tattoos</label><input type="checkbox" ng-model="Tattoos" ng-change="changeColor22(Tattoos);" /> <label ng-style="c23"> Moles</label> <input type="checkbox" ng-model="Moles" ng-change="changeColor23(Moles);" /> <label ng-style="c24">Navi</label> <input type="checkbox" ng-model="Navi" ng-change="changeColor24(Navi);" /> <label ng-style="c25">Scars</label> <input type="checkbox" ng-model="Scars" ng-change="changeColor25(Scars);" /> <label ng-style="c26">Details:</label> <input type="checkbox" ng-model="SkinDetails" ng-change="changeColor26(SkinDetails);" />
+                                        </div>
+                                    </div>
+
+                                    <hr>
+                                    <div class="form-group">
+                                        @*@Html.Label("Skin:", htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                        <div class="col-md-7">
+                                            <label ng-style="c27">Carius Teeth</label><input type="checkbox" ng-model="Carius" ng-change="changeColor27(Carius);" /> <br> <label ng-style="c28">Oral Ulcers</label><input type="checkbox" ng-model="OralUlcers" ng-change="changeColor28(OralUlcers);" />
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        @*Cardiovascular System Examination*@
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    Cardiovascular System Examination<input type="checkbox" ng-model="ce" />
+                                </div>
+
+                                <div class="panel-body" ng-show="ce">
+                                    <div class="form-group">
+                                        <div class="col-lg-12" style="padding-left:0px;">
+                                            @Html.Label("Pulse:", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        </div>
+                                        <br>
+                                        <div class="col-lg-8" style="padding-left:0px;">
+
+                                            Rhythm: <label ng-style="c29">Regular</label><input type="radio" name="Rhythm" value="true" ng-model="RhythmReg" ng-change="changeColor29(RhythmReg);" /><label ng-style="c30">Irregular</label> <input type="radio" value="false" name="Rhythm" ng-model="RhythmIreg" ng-change="changeColor30(RhythmIreg);" />
+                                        </div>
+
+
+                                        <div class="col-md-6">
+
+
+                                            <div class="col-lg-8" style="padding-left:0px;">       Pulse Volume </div>
+                                        </div>
+
+                                        <div class="col-md-11">
+
+                                            <input type="text" ng-model="Pulsevolume" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Label("JVP(cmH2O)", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="JVP" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Label("Apex Beat", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="ApexBeat" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Label("Heart Sounds", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="HeartSounds" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Label("Murmurs", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="Murmurs" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Label("Other", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="CardioOther" />
+                                        </div>
+                                    </div>
+
+
+                                    <hr>
+                                    <div class="form-group">
+                                        @Html.Label("Carotid bruit", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-7">
+                                            <label ng-style="c31"> Yes </label><input type="radio" value="true" name="Carotid" ng-model="Carotidbruit" ng-change="changeColor31(Carotidbruit);" /><label ng-style="c55"> No </label><input type="radio" name="Carotid" value="false" ng-model="Carotidbruit1" ng-change="changeColor31(Carotidbruit);" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @*@Html.Label("Location", htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                        <table border="1" class="table table-striped">
+                                            <thead>
+                                                <tr><td width="30%"><b>Peripheral Pulses</b> </td><td width="30%"><b> Left </b> </td> <td width="30%"> <b> Right</b> </td>   </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr><td align="left">Brachial </td><td> <input type="checkbox" ng-model="BrachialLeft" style="width:75%" /> </td><td> <input type="checkbox" ng-model="BrachialRight" style="width:75%" /> </td>   </tr>
+                                                <tr><td align="left"> Radial </td><td> <input type="checkbox" ng-model="RadialLeft" style="width:75%" /> </td><td> <input type="checkbox" ng-model="RadialRight" style="width:75%" /> </td>   </tr>
+                                                <tr><td align="left">Femoral </td><td> <input type="checkbox" ng-model="FemoralLeft" style="width:75%" /> </td><td> <input type="checkbox" ng-model="FemoralRight" style="width:75%" /> </td>   </tr>
+                                                <tr><td align="left">Dorsalis Pedis </td><td> <input type="checkbox" ng-model="DorsalisLeft" style="width:75%" /> </td><td> <input type="checkbox" ng-model="DorsalisRight" style="width:75%" /> </td>   </tr>
+                                                <tr><td align="left">Posterior Tibial </td><td> <input type="checkbox" ng-model="TibialLeft" style="width:75%" /> </td><td> <input type="checkbox" ng-model="TibialRight" style="width:75%" /> </td>   </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @*Central Nervous System Examination*@
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    Central Nervous System Examination <input type="checkbox" ng-model="cne" />
+                                </div>
+                                <div class="panel-body" ng-show="cne">
+                                    <div class="form-group" style="text-align:left">
+
+
+
+
+                                        <div class="col-lg-12" style="padding-left:0px;"> @Html.Label("Conciousness:", htmlAttributes: new { @class = "control-label lg-12" })</div>
+
+                                        <label ng-style="c32">Alert</label> <input type="checkbox" ng-model="NvAlert" ng-change="changeColor32(NvAlert);" />
+
+
+                                        <label ng-style="c33"> Confused</label> <input type="checkbox" ng-model="NvConfused" ng-change="changeColor6(NvConfused);" />
+
+
+                                        <label ng-style="c34">Drowsy</label> <input type="checkbox" ng-model="NvDrowsy" ng-change="changeColor34(NvDrowsy);" />
+
+
+                                        <label ng-style="c35">Unconscious</label> <input type="checkbox" ng-model="NvUnconscious" ng-change="changeColor35(NvUnconscious);" />
+
+
+
+                                    </div>
+
+
+                                    <div class="form-group">
+
+
+
+
+                                        <div class="col-lg-1" style="padding-left:0px;"> @Html.Label("Speech", htmlAttributes: new { @class = "control-label lg-12" })</div>
+                                        <div class="col-md-10">
+                                            <label ng-style="c36"> <br>Normal</label> <input type="checkbox" ng-model="NvNormal" ng-change="changeColor36(NvNormal);" /> <label ng-style="c37">Aphasia </label><input type="checkbox" ng-model="NvAphasia" ng-change="changeColor37(NvAphasia);" /><label ng-style="c38">Dysarthria </label><input type="checkbox" ng-model="NvDysarthria" ng-change="changeColor38(NvDysarthria);" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <div class="col-lg-12" style="padding-left:5px;text-align:left">
+                                            @Html.Label("Mental State", htmlAttributes: new { @class = "control-label lg-12" })
+                                        </div>
+                                        <div class="col-md-10">
+                                            <label ng-style="c39">Rational</label><input type="checkbox" ng-model="NvRational" ng-change="changeColor39(NvRational);" /> <label ng-style="c40">Oriented</label><input type="checkbox" ng-model="NvOriented" ng-change="changeColor40(NvOriented);" /> <label ng-style="c41">Confused </label><input type="checkbox" ng-model="NvMentalConfused" ng-change="changeColor41(NvMentalConfused);" /><br />
+                                        </div>
+                                    </div>
+
+                                    <h5></h5>
+                                    Examination Findings of Following
+                                    <hr />
+                                    <div class="form-group">
+                                        <label ng-style="c42">
+                                            Not Clinically Indicated
+                                        </label><input type="checkbox" ng-model="NvNotIndicated" ng-change="changeColor42(NvNotIndicated);" />
+                                        <div class="col-md-9">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Label("Cranial Nerves", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="CranialNerves" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Label("Motor System", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="MotorSystem" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Label("Sensory System", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="SensorySystem" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Label("Reflexes", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="NvReflexes" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Label("GCS", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="NvGcs" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix">  </div>
+                        @*Respiratory System Examination*@
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    Respiratory System Examination <input type="checkbox" ng-model="rse" />
+                                </div>
+                                <div class="panel-body" ng-show="rse">
+                                    <div class="form-group">
+                                        @Html.Label("SpO2(FiO2)", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="SpO2" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Label("PFR(L/min)", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="PFR" />
+                                        </div>
+                                    </div>
+
+                                    <hr />
+                                    <div class="form-group">
+                                        <h7><b>Mediastinal Shift</b></h7>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Label("Trachea", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="Trachea" /><br />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Label("Apex", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="Apex" />
+                                        </div>
+                                    </div>
+
+                                    <hr />
+                                    <div class="form-group">
+                                        @Html.Label("Chest Movement", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="ChestMovement" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Label("Percussion Note", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="Percussion" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Label("Auscultation", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="Auscultation" />
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        @*Other Relevant Clinical Examination*@
+                        <div class="col-lg-4 " data-wow-delay="0.1s">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    Other Relevant Clinical Examination <input type="checkbox" ng-model="oe" />
+                                </div><div class="panel-body" ng-show="oe">
+                                    <div class="form-group">
+
+                                        <div class="col-md-6">
+                                            <label ng-style="c43">  Not Clinically Indicated </label>  <input type="checkbox" ng-model="OiNotIndicated" ng-change="changeColor43(OiNotIndicated);" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Label("Details", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="OiNotIndicatedtxt" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @*Abdominal Examination*@
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    Abdominal Examination <input type="checkbox" ng-model="ae" />
+                                </div>
+                                <div class="panel-body" ng-show="ae">
+                                    <div class="form-group">
+                                        @Html.Label("Distension", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-9">
+                                            <label ng-style="c44">   Yes </label><input type="checkbox" ng-model="Distension" ng-change="changeColor44(Distension);" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Label("Free Fluid", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-9">
+                                            <label ng-style="c45"> Yes </label><input type="checkbox" ng-model="FreeFluid" ng-change="changeColor45(FreeFluid);" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Label("Liver", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-9">
+                                            <label ng-style="c46"> Yes</label> <input type="checkbox" ng-model="Liver" ng-change="changeColor46(Liver);" />
+                                        </div>
+
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="Livertxt" /><br />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Label("Spleen", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-9">
+                                            <label ng-style="c47">Yes</label><input type="checkbox" ng-model="Spleen" ng-change="changeColor47(Spleen);" />
+                                        </div>
+
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="Spleentxt" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Label("Pulsatile Lumps", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-9">
+                                            <label ng-style="c48">Yes</label><input type="checkbox" ng-model="PulsatileLumps" ng-change="changeColor48(PulsatileLumps);" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Label("Other Lumps", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-9">
+                                            <label ng-style="c49"> Yes</label> <input type="checkbox" ng-model="OtherLumps" ng-change="changeColor49(OtherLumps);" />
+                                        </div>
+
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="OtherLumpstxt" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Label("Bowel Sounds", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-9">
+                                            <label ng-style="c50">Absent</label> <input type="checkbox" ng-model="BowelAbsent" ng-change="changeColor50(BowelAbsent);" /> <label ng-style="c51">Sluggish</label> <input type="checkbox" ng-model="BowelSluggish" ng-change="changeColor51(BowelSluggish);" /> <label ng-style="c52">Normal </label><input type="checkbox" ng-model="BowelNormal" ng-change="changeColor52(BowelNormal);" /><label ng-style="c53"> Exaggereted </label><input type="checkbox" ng-model="BowelExaggereted" ng-change="changeColor53(BowelExaggereted);" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("Other ", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="AbdOther" />
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="col-lg-4 col-md-4 col-sm-4 wow fadeInUp" data-wow-delay="0.1s">
+                                <div class="form-group">
+                                    <div class="col-md-10">
+                                        <input type="submit" ng-click="Savepatient();" value="Save" class="btn btn-default" />
+
+                                    </div>
+                                </div>
+                            </div>*@
+
+                    </div>
+                </div>
+            </section>
+            <section id="pricing">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="section-title">
+                                <h1 class="heading bold">Investigations</h1>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Investigations</div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+
+                                        <input type="text" ng-model="lName1" uib-typeahead="g as g.CategoryName for g in lName | filter:{CategoryName : $viewValue}:startsWith| limitTo:20">
+                                        <a class="clear" ng-click="lName1=null">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                        </a>
+
+                                        <input type="button" ng-click="laddItem(lName1.CategoryID,lName1.CategoryName)" value="Add" />
+                                        <table class="table table-striped">
+
+                                            <tr ng-repeat="litem in litems" class="item">
+                                                <td width="50%"><b>{{litem.labcat}}</b> </td>
+
+
+                                                <td><button ng-click="lremoveItem($index)">Remove</button></td>
+                                            </tr>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        @*<div class="clearfix">  </div>*@
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Test Name</div>
+                                <table class="table table-striped  ">
+                                    <thead>
+                                        <tr>
+                                            <th width="40%" align="left"></th>
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-repeat="field in lablist">
+                                        <tr>
+                                            <td width="20%" align="left"><a ng-click="viewlabtest(field.TestSID,field.CategoryID);"> {{field.CategoryName}} </a></td>
+                                            <td width="20%" align="left">{{field.RequestedTime |limitTo:-15 |limitTo:13 | date:'dd/MM/yyyy HH:mm'  }}</td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading"></div>
+                                <table class="table table-striped  ">
+                                    <thead>
+                                        <tr>
+                                            <th width="40%" align="left">Test Name</th>
+                                            <th width="20%" align="left">Result</th>
+                                            <th width="20%" align="left">Result Status</th>
+                                            <th width="20%" align="left">Reference Range Unit</th>
+                                            <th width="20%" align="left">Reference Range</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-repeat="field in viewlab">
+                                        <tr>
+                                            <td width="40%" align="left"> {{field.SubCategoryName}}</td>
+                                            <td width="20%" align="left"> {{field.testResult}}</td>
+                                            <td width="20%" align="left"> {{field.teststatus}}</td>
+                                            <td width="20%" align="left">{{ field.ReferenceRangeUnit }}</td>
+                                            <td width="20%" align="left"> {{field.ReferenceRange}}</td>
+                                        </tr>
+                                    </tbody>
+
+
+
+                                    @*
+                                        <span ng-show="myForm.{{field.name}}.$dirty && myForm.{{field.name}}.$error.required">Required!</span>*@
+                                    @*
+                                        <span ng-show="myForm.{{field.name}}.$dirty && myForm.{{field.name}}.$error.email">Not email!</span>*@
+                                </table>
+                            </div>
+                        </div>
+                        @*<div class="col-lg-4 col-md-4 col-sm-4 wow fadeInUp" data-wow-delay="0.1s">
+                                <div class="form-group">
+                                    <div class="col-md-10">
+                                        <input type="submit" ng-click="Savepatient();" value="Save" class="btn btn-default" />
+
+                                    </div>
+                                </div>
+                            </div>*@
+
+
+                    </div>
+
+                </div>
+            </section>
+            <section id="about">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-md-12 col-sm-12">
+                            <div class="section-title">
+
+                                <h1 class="heading bold">Daignosis</h1>
+                                <hr>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="col-lg-4 ">
+
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Diagnosis</div>
+                                <div class="panel-body">
+
+                                    @*<div class="col-md-10">
+                                            @Html.Label("Diagnosis", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        </div>*@
+
+
+
+                                    <div class="form-group">
+
+                                        <div class="col-md-10">
+
+                                            <input type="text" id="dgcat" ng-model="dgn1" typeahead-on-select="baddItem(dgn1.dgid,dgn1.dgdetail);dgn1=null;" uib-typeahead="g as g.dgdetail for g in Getdgn1 | filter:$viewValue | limitTo:20">
+                                            <a class="clear" ng-click="dgn1=null">
+                                                <span class="glyphicon glyphicon-remove"></span>
+                                            </a>
+
+                                            @*<input type="button" ng-click="baddItem(dgn1.dgid,dgn1.dgdetail);dgn1=null;" value="Add" />*@
+                                        </div>
+
+                                        <table class="table table-striped">
+
+                                            <tr ng-repeat="item in bitems" class="item">
+
+                                                <td>{{item.dgdet}} </td>
+                                                <td><button ng-click="bremoveItem($index)">Remove</button></td>
+                                            </tr>
+                                        </table>
+
+
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea ng-model="OPD_Diagnosis" rows="10" cols="45"></textarea>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-4 ">
+
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Prescription</div>
+                                <div class="panel-body">
+
+                                    <div class="form-group">
+
+                                        @Html.Label("Name", htmlAttributes: new { @class = "control-label col-md-2" })
+
+                                        @*<select id="DrugName" ng-model="DName1" ng-change=" " ng-options="g as g.itemdescription for g in DName">
+                                                <option value="">-- Select Drug --</option>
+                                            </select>*@
+
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="col-md-10">
+                                            <input class="form-control" type="text" ng-model="DName1" uib-typeahead="g as g.itemdescription for g in DName | filter: $viewValue| limitTo:20" typeahead-on-select='Getdrugalldep(DName1.itemno)'>
+
+                                        </div>
+                                        <div class="col-md-1">
+                                            <a class="clear" ng-click="DName1=null">
+                                                <span class="glyphicon glyphicon-remove"></span>
+                                            </a>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Label("Tablets per one Dose", htmlAttributes: new { @class = "control-label col-md-6" })
+
+                                    </div>
+                                    <div class="form-group ">
+                                        <div class="col-md-2">
+                                        </div>
+                                        <div class="col-md-10">
+                                            <select class="form-control " ng-change=" " id="Dose1" ng-model="Dose" ng-options="g as g.DrugGroupName for g in Dose3"></select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("Route", htmlAttributes: new { @class = "control-label col-md-2" })
+
+                                        <select class="form-control" id="Route" ng-model="Route2" ng-change=" " ng-options="g as g.RouteDetail for g in Route3">
+                                            <option value="">-- Select Route --</option>
+                                        </select>
+
+
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("Time", htmlAttributes: new { @class = "control-label col-md-2" })
+
+                                        <select class="form-control" id="dtime" ng-model="dtime2" ng-change=" " ng-options="g as g.StockType for g in dtime3"></select>
+
+
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("Method", htmlAttributes: new { @class = "control-label col-md-2", id = "method4" })
+
+                                        <select class="form-control" id="Method" ng-model="Method2" ng-change=" " ng-options="g as g.MethodDetail for g in Method3">
+                                            <option value="">-- Select Method --</option>
+                                        </select>
+
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("Days", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-9">
+                                            <input type="number" ng-model="Duration" />
+                                            <input type="button" class="f1" ng-click="daddItem(DName1.itemno,DName1.itemdescription,Dose.DrugGroupName,Route2.RouteID,Route2.RouteDetail,Method2.MethodID,Method2.MethodDetail,Duration,dtime2.StockTypeID)" value="Add" />
+                                        </div>
+                                        <table class="table table-striped">
+
+                                            <tr ng-repeat="ditem in ditems" class="item">
+                                                <td width="50%"><b>{{ditem.dItemno1}}</b> </td>
+                                                <td><b>:</b>{{ditem.dDose}} </td>
+                                                <td><b>:</b>{{ditem.dRoute1}} </td>
+                                                <td><b>:</b>{{ditem.dMethod1}} </td>
+                                                <td><b>:</b>{{ditem.dDuration}} </td>
+                                                <td><button ng-click="dremoveItem($index)">Remove</button></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <input type="submit" ng-click="Savepatient();" value="Save" class="btn btn-default" />
+                                            <span id="errormsgspan" asp-validation-for="Year" style="background-color:#1bff00"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <table class="table table-striped " name="sd">
+                                            <thead>
+                                                <tr>
+                                                    <th width="40%" align="left">Drug Name </th>
+                                                    <th width="20%" align="left">Duration </th>
+                                                    <th width="20%" align="left">Dose </th>
+                                                    <th width="20%" align="left">Method </th>
+                                                    <th width="20%" align="left">Route </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody ng-repeat="field in druglist">
+                                                <tr>
+
+                                                    <td width="40%" align="left">{{ field.itemdescription }}</td>
+                                                    <td width="20%" align="left">{{ field.Duration }}</td>
+                                                    <td width="20%" align="left">{{ field.Dose }}</td>
+                                                    <td width="20%" align="left">{{ field.MethodDetail }}</td>
+                                                    <td width="20%" align="left"> {{field.RouteDetail}}</td>
+                                                </tr>
+                                            </tbody>
+                                            @*
+                                                <span ng-show="myForm.{{field.name}}.$dirty && myForm.{{field.name}}.$error.required">Required!</span>*@
+                                            @*
+                                                <span ng-show="myForm.{{field.name}}.$dirty && myForm.{{field.name}}.$error.email">Not email!</span>*@
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 ">
+
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Sick Category</div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        @Html.Label("Category Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            <select class="form-control" id="CategoryName" ng-model="CName1" ng-change=" " ng-options="g as g.Category for g in CName">
+                                                <option value="">-- Select --</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("Category Days", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            <input type="text" ng-model="SickDays" rows="5" cols="20" />
+                                            <input type="button" ng-click="saddItem(CName1.CatID,CName1.Category,SickDays)" value="Add" />
+                                        </div>
+                                        <table class="table table-striped">
+
+                                            <tr ng-repeat="sitem in sitems" class="item">
+                                                <td><b>{{sitem.scategory}}</b> </td>
+                                                <td><b>:</b>{{sitem.sdays}} Days </td>
+
+                                                <td><button ng-click="sremoveItem($index)">Remove</button></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+                                    <table class="table table-striped" name="sd" ng-repeat="field in siclist">
+
+
+
+
+
+                                        <tr>
+
+                                            <td width="40%" align="left">{{ field.Category_Type }}</td>
+                                            <td width="20%" align="left">{{ field.CatPeriod }} Days</td>
+
+                                        </tr>
+
+                                        @*
+                                            <span ng-show="myForm.{{field.name}}.$dirty && myForm.{{field.name}}.$error.required">Required!</span>*@
+                                        @*
+                                            <span ng-show="myForm.{{field.name}}.$dirty && myForm.{{field.name}}.$error.email">Not email!</span>*@
+
+                                    </table>
+
+
+
+                                    <div class="form-group">
+                                        @Html.Label("Patient Status", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            <select id="pntstatus" ng-model="pntstatus" ng-change=" " ng-options="g as g.StatusDec for g in patientstatus">
+                                                <option value="">-- Select --</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div ng-show="pntstatus.Status1==7">
+                                        <div class="form-group">
+                                            @Html.Label("Clinic", htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <select id="GClinic" ng-model="GClinic" ng-options="f as f.ClinicDetails for f in GetClinic">
+                                                <option value="">-- Select Clinic --</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div ng-show="pntstatus.Status1==9">
+                                        <div class="form-group">
+                                            @Html.Label("Referrals", htmlAttributes: new { @class = "control-label" })
+                                            <textarea ng-model="reftohosp" cols="80" rows="5"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Drug Availability</div>
+                                <div class="panel-body">
+                                    <table class="table table-striped" name="sd">
+
+                                        <thead>
+                                            <tr>
+
+                                                <th width="20%" align="left">Item Description</th>
+                                                <th width="20%" align="left">Drug Quantity</th>
+                                                <th width="20%" align="left">Location</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody ng-repeat="field in epasonr">
+                                            <tr>
+
+                                                <td width="40%" align="left"> {{field.itemdescription}}</td>
+                                                <td width="20%" align="left"> {{field.DrugQuantity}}</td>
+                                                <td width="20%" align="left"> {{field.LOC}}</td>
+                                            </tr>
+                                        </tbody>
+                                        @* <span ng-show="myForm.{{field.name}}.$dirty && myForm.{{field.name}}.$error.required">Required!</span>*@
+                                        @* <span ng-show="myForm.{{field.name}}.$dirty && myForm.{{field.name}}.$error.email">Not email!</span>*@
+                                    </table>
+                                    @*<button ng-disabled="myForm.$invalid">Submit</button>*@
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact">
+                <div class="container">
+                    <div class="row">
+
+
+
+                        <div class="col-md-12 col-sm-12">
+                            <div class="section-title">
+
+                                <h1 class="heading bold">Patient History</h1>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Diagnosis</div>
+                                <table name="sd" ng-repeat="field in hyspatient" class="table table-striped  ">
+
+                                    <tr>
+                                        <td width="40%" align="left"><b>Name:</b> {{field.Initials}}   {{field.Surname}}</td>
+
+                                    </tr>
+                                    <tr><td width="20%" align="left"><b> Complain:</b> {{field.Present_Complain}}</td></tr>
+                                    <tr><td width="20%" align="left"><b>History of PresentComplain:</b> {{field.History_PresentComplain}}</td></tr>
+                                    <tr><td width="20%" align="left"><b>Other Complain:</b> {{field.Other_Complain}}</td></tr>
+                                    <tr><td width="20%" align="left"><b>History of Other Complain:</b> {{field.History_OtherComplain}}</td></tr>
+                                    <tr><td width="20%" align="left"><b>Past Medical Hystory:</b> {{field.PMHDetail}}</td></tr>
+                                    <tr><td width="20%" align="left"><b>Drug Hystory:</b> {{field.DrugHistory}}</td></tr>
+                                    <tr><td width="20%" align="left"><b>Plan of Management:</b> {{field.PlanofMgt}}</td></tr>
+                                    <tr><td width="20%" align="left"><b>Refferals:</b> {{field.ReffNote}}</td></tr>
+                                    <tr>
+                                        <td width="20%" align="left">
+                                            <b>Diagnosis:</b>
+                                            <table class="table table-striped">
+
+                                                <tr ng-repeat="item in hysdiag" class="item">
+
+                                                    <td>{{item.dgdetail}} </td>
+
+                                                </tr>
+                                            </table>
+                                            </br>{{field.OPD_Diagnosis}}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Vitals</div>
+
+
+                                <table name="sd" class="table table-striped  ">
+                                    <thead>
+                                        <tr>
+                                            <th width="40%" align="left">Vital Type </th>
+                                            <th width="20%" align="left">Value </th>
+                                            <th width="40%" align="left">Reading Time </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-repeat="field in hysvital">
+                                        <tr>
+                                            <td width="40%" align="left"> {{field.VitalType}}</td>
+                                            <td width="20%" align="left"> {{field.VitalValues}}</td>
+                                            <td width="40%" align="left">{{ field.Reading_Time |limitTo:-15 |limitTo:13 | date :'short' }}</td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Prescription</div>
+
+
+
+                                <table name="sd" class="table table-striped  ">
+                                    <thead>
+                                        <tr>
+                                            <th width="40%" align="left">Drug Name</th>
+                                            <th width="20%" align="left">Duration </th>
+                                            <th width="20%" align="left">Dose </th>
+                                            <th width="20%" align="left">Location </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-repeat="field in hysdrug">
+                                        <tr>
+                                            <td width="40%" align="left">{{ field.itemdescription }}</td>
+                                            <td width="20%" align="left">{{ field.Duration }}</td>
+                                            <td width="20%" align="left">{{ field.Dose }}</td>
+                                            <td width="20%" align="left">{{ field.Clinic_Detail }}{{ field.OPD_Detail }}</td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+
+
+                        <div class="clearfix"></div>
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Investigation</div>
+
+
+                                <table name="sd" class="table table-striped  ">
+                                    <thead>
+                                        <tr>
+                                            <th width="40%" align="left">Investigation Name </th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-repeat="field in hyslab">
+                                        <tr>
+                                            <td width="40%" align="left"> <a ng-click="viewlabtest2(field.TestSID,field.CategoryID);"> {{field.CategoryName}} </a></td>
+
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+
+
+                            </div>
+
+                        </div>
+                        <div class="col-lg-4 ">
+
+                            <div class="panel panel-primary">
+                                <div class="panel-heading"></div>
+                                <table name="sd" class="table table-striped  ">
+                                    <thead>
+                                        <tr>
+                                            <th width="40%" align="left">Test Name</th>
+                                            <th width="20%" align="left">Result</th>
+                                            <th width="20%" align="left">Result Status</th>
+                                            <th width="20%" align="left">Reference Range Unit</th>
+                                            <th width="20%" align="left">Reference Range</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-repeat="field in viewlab2">
+                                        <tr>
+                                            <td width="40%" align="left"> {{field.SubCategoryName}}</td>
+                                            <td width="20%" align="left"> {{field.testResult}}</td>
+                                            <td width="20%" align="left"> {{field.teststatus}}</td>
+                                            <td width="20%" align="left">{{ field.ReferenceRangeUnit }}</td>
+                                            <td width="20%" align="left"> {{field.ReferenceRange}}</td>
+                                        </tr>
+                                    </tbody>
+
+
+
+
+                                    @*
+                                        <span ng-show="myForm.{{field.name}}.$dirty && myForm.{{field.name}}.$error.required">Required!</span>*@
+                                    @*
+                                        <span ng-show="myForm.{{field.name}}.$dirty && myForm.{{field.name}}.$error.email">Not email!</span>*@
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Sick Category</div>
+
+                                <table name="sd" ng-repeat="field in hyscat" class="table table-striped  ">
+
+                                    <tr>
+                                        <td width="40%" align="left">{{ field.Category_Type }}</td>
+                                        <td width="20%" align="left">{{ field.CatPeriod }} Days</td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                            <div class="panel panel-primary">
+
+
+                                <table name="sd" ng-repeat="field in hysdoc" class="table table-striped  ">
+
+                                    <tr>
+                                        <td width="40%" align="left"><b>Investigated By:</b> {{field.Salutation}}  {{field.FName}}   {{field.LName}}</td>
+
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="col-md-12 col-sm-12">
+                            <div class="section-title">
+
+                                <h1 class="heading bold">----</h1>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">General Examination <input type="checkbox" ng-model="ger" /></div>
+                                <div class="panel-body" ng-show="ger">
+                                    <table name="sd" ng-repeat="(colheadr3,val3) in hysexamf" class="table table-striped  ">
+                                        <tr>
+                                            <th>
+                                                {{colheadr3}}
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>{{val3}}</td>
+
+                                        </tr>
+
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Cardio Vascular Examination<input type="checkbox" ng-model="cver" /></div>
+                                <div class="panel-body" ng-show="cver">
+                                    <table name="sd" ng-repeat="(colheadr1,val1) in hysexamd" class="table table-striped  ">
+                                        <tr>
+                                            <th>
+                                                {{colheadr1}}
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>{{val1}}</td>
+
+                                        </tr>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Central Nervous System  Examination<input type="checkbox" ng-model="cnser" /></div>
+                                <div class="panel-body" ng-show="cnser">
+                                    <table name="sd" ng-repeat="(colheadr2,val2) in hysexame" class="table table-striped  ">
+                                        <tr>
+                                            <th>
+                                                {{colheadr2}}
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>{{val2}}</td>
+
+                                        </tr>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Respiratory System Examination<input type="checkbox" ng-model="rser" /></div>
+                                <div class="panel-body" ng-show="rser">
+                                    <table name="sd" ng-repeat="(colheadr4,val4) in hysexamg" class="table table-striped  ">
+                                        <tr>
+                                            <th>
+                                                {{colheadr4}}
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>{{val4}}</td>
+
+                                        </tr>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Visual Examination<input type="checkbox" ng-model="rve" /></div>
+
+                                <div class="panel-body" ng-show="rve">
+                                    <table name="sd" ng-repeat="(colheadr5,val5) in hysexamh" class="table table-striped  ">
+                                        <tr>
+                                            <th>
+                                                {{colheadr5}}
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>{{val5}}</td>
+
+                                        </tr>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Abdorminal System Examination<input type="checkbox" ng-model="rabd" /></div>
+                                <div class="panel-body" ng-show="rbd">
+                                    <table name="sd" ng-repeat="(colheadr6,val6) in hysexams" class="table table-striped  ">
+                                        <tr>
+                                            <th>
+                                                {{colheadr6}}
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>{{val6}}</td>
+
+                                        </tr>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            @*<div style="position:fixed;left:30px;top:50%;">
+                    <input type="submit" ng-click="" onclick="validate();" value="Save" class="btn-lg btn-primary" />
+                </div>*@
+        </div>
+    </div>
+
+</div>
+<script>
+    function validate() {
+        debugger;
+        var selectv = $("#dgcat").find(":selected").text();
+        if (selectv == "-- Select --") {
+            $("#errormsgspan").text("Please Select Daignosis catagory");
+            return false;
+        } else {
+            $("#errormsgspan").text(" ");
+            angular.element(document.getElementById('epicontrol')).scope().Savepatient();
+            return true;
+        }
+
+    }
+    $("form").submit(function () {
+
+    });
+</script>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

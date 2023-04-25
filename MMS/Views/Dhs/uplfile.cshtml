@@ -1,0 +1,156 @@
+﻿
+
+@model medreport
+
+@{
+    ViewBag.Title = "MMS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts
+{
+    <script src="~/Scripts/Episode/v6/Module.js"></script>
+    <script src="~/Scripts/Episode/v6/Service.js"></script>
+    <script src="~/Scripts/Episode/v6/Controller.js"></script>
+}
+
+<script src="~/Scripts/Angular/angular.js"></script>
+<script src="~/Scripts/Angular/angular-sanitize.js"></script>
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/angular-route.js"></script>
+
+<script src="~/Scripts/js/jquery.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/ui-bootstrap-tpls-1.3.3.min.js"></script>
+<link rel="stylesheet" href="~/Scripts/css/bootstrap.min.css">
+<link rel="stylesheet" href="~/Scripts/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/Scripts/css/animate.min.css">
+<link rel="stylesheet" href="~/Scripts/css/et-line-font.css">
+<link rel="stylesheet" href="~/Scripts/css/nivo-lightbox.css">
+@*<link rel="stylesheet" href="~/Scripts/css/nivo_themes/default/default.css">*@
+<link rel="stylesheet" href="~/Scripts/css/style.css">
+
+
+@*<script src="~/Scripts/js/bootstrap.min.js"></script>*@
+<script src="~/Scripts/js/smoothscroll.js"></script>
+<script src="~/Scripts/js/isotope.js"></script>
+<script src="~/Scripts/js/imagesloaded.min.js"></script>
+<script src="~/Scripts/js/nivo-lightbox.min.js"></script>
+<script src="~/Scripts/js/jquery.backstretch.min.js"></script>
+<script src="~/Scripts/js/wow.min.js"></script>
+<script src="~/Scripts/js/custom.js"></script>
+
+
+
+@using (Html.BeginForm("uplfile", "Dhs", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal col-md-10">
+
+        <div ng-app="EpisodeApp" class="container">
+
+
+            <div ng-controller="EpisodeCntrl" data-ng-init="">
+
+                <section class="navbar navbar-fixed-top custom-navbar" role="navigation">
+                    <div class="container">
+
+                        <div class="collapse navbar-collapse">
+                            <ul class="nav navbar-nav navbar-left">
+                                <li>
+                                    <a href="@Url.Action("Index","Home")">HOME</a>
+
+                                </li>
+                                <li>
+                                    <div ng-show="showerror">
+                                        <span style="background-color:white">Error!</span>
+                                    </div>
+
+                                </li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="/MMS/Patients/Index">Back to Patient List</a></li>
+                                <li><a href="/MMS/Patient_Detail/NurseCreate">Back To Sick Parade</a></li>
+                                @*<li><a href="#work">Lab Report</a></li>*@
+                                @*<li><a href="#about" class="smoothScroll">ABOUT</a></li>*@
+
+                                @*<li><a href="#portfolio" class="smoothScroll">PORTFOLIO</a></li>*@
+
+                            </ul>
+
+                        </div>
+
+
+
+                    </div>
+                </section>
+
+                <hr />
+           
+
+
+
+                <div class="form-group row-fluid form-inline">
+                    Service No
+                    <input type="text" ng-model="sno">
+                </div>
+
+                <div class="form-group row-fluid form-inline">
+                    Document Name
+                    <input type="text" ng-model="dname">
+                </div>
+
+               
+             
+                <div class="form-group row-fluid form-inline">
+                    <input type="file" file-model="fdoc" name="file" accept="application/pdf" />
+
+                    <input type="submit" ng-click="Submitdoc();" value="Upload" class="btn-sm btn-primary" />
+                </div>
+
+
+
+
+                
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                      
+                        <span id="errormsgspan" asp-validation-for="Year" style="background-color:hotpink"></span>
+                        <script>
+
+                                        function validate(event) {
+                                          
+                                        }
+                                        $("form").submit(function () {
+                                            debugger;
+                                            var selectv = $("#loclisd1").find(":selected").text();
+                                            var selectv2 = $("#pdnew").find(":selected").text();
+                                            var selectv1 = $("#loclisd2").val();
+                                            if (selectv1 == "5" && selectv2 == "-- Select Child --") {
+                                                $("#errormsgspan").text("Please Select Child");
+                                                return false;
+                                            }
+                                            if (selectv == "-select-") {
+                                                $("#errormsgspan").text("Please Select Blood Group");
+                                                return false;
+                                            } else {
+                                                $("#errormsgspan").text(" ");
+                                                return true;
+                                            }
+                                        });
+                        </script>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@

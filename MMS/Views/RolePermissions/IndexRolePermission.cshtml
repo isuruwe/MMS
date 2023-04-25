@@ -1,0 +1,113 @@
+﻿@model IEnumerable<MMS.Models.RolePermissionModel>
+
+@{
+    ViewBag.Title = "IndexRolePermission";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>IndexRolePermission</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.Hidden("Role Permission ID")
+        </th>
+        <th>
+            @Html.DisplayName("Role ID")
+        </th>
+        <th>
+            @Html.DisplayName("System ID")
+        </th>
+        <th>
+            @Html.Hidden("Menu ID")
+        </th>
+        <th>
+            @Html.DisplayName("Menu Name")
+        </th>
+        <th>
+            @Html.DisplayName("Show")
+        </th>
+        <th>
+            @Html.DisplayName("New")
+        </th>
+        <th>
+            @Html.DisplayName("Edit")
+        </th>
+        <th>
+            @Html.DisplayName("Delete")
+        </th>
+        <th>
+            @Html.DisplayName("Print")
+        </th>
+        <th>
+            @Html.DisplayName("Search")
+        </th>
+        <th>
+            @Html.DisplayName("Clear")
+        </th>
+        <th>
+            @Html.DisplayName("Crated Date")
+        </th>
+        <th>
+            @Html.DisplayName("Created User")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.HiddenFor(modelItem => item.RPermID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoleID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SysID)
+            </td>
+            <td>
+                @Html.HiddenFor(modelItem => item.MenuID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MenuName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SHO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NEW)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EDT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DEL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PRN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SER)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CER)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedUser)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.RPermID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.RPermID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.RPermID })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,274 @@
+﻿@model MMS.Models.UserModel
+
+@{
+    ViewBag.Title = "MMS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts
+{
+    <script src="~/Scripts/Episode/v6/Module.js"></script>
+    <script src="~/Scripts/Episode/v6/Service.js"></script>
+    <script src="~/Scripts/Episode/v6/Controller.js"></script>
+}
+<link href="~/Scripts/css/jquery.booklet.latest.css" type="text/css" rel="stylesheet" media="screen, projection, tv" />
+<script src="~/Scripts/js/jquery.js"></script>
+<script src="~/Scripts/jquery-ui.min.js"></script>
+<script src="~/Scripts/jquery.min.js"></script>
+<script src="~/Scripts/js/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/js/metisMenu.min.js"></script>
+<script src="~/Scripts/js/sb-admin-2.js"></script>
+<script src="~/Scripts/js/dataTables.bootstrap.min.js"></script>
+<script src="~/Scripts/js/dataTables.responsive.js"></script>
+<script src="~/Scripts/Angular/angular.js"></script>
+
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/jquery.easing.1.3.js"></script>
+<script src="~/Scripts/jquery.booklet.latest.js"></script>
+<script src="~/Scripts/angular-route.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/ui-bootstrap-tpls-1.3.3.min.js"></script>
+
+<link rel="stylesheet" href="~/Scripts/css/bootstrap.min.css">
+<link rel="stylesheet" href="~/Scripts/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/Scripts/css/animate.min.css">
+<link rel="stylesheet" href="~/Scripts/css/et-line-font.css">
+<link rel="stylesheet" href="~/Scripts/css/nivo-lightbox.css">
+@*<link rel="stylesheet" href="~/Scripts/css/nivo_themes/default/default.css">*@
+<link rel="stylesheet" href="~/Scripts/css/style.css">
+@*<script src="~/Scripts/js/bootstrap.min.js"></script>*@
+<script src="~/Scripts/js/smoothscroll.js"></script>
+<script src="~/Scripts/js/isotope.js"></script>
+<script src="~/Scripts/js/imagesloaded.min.js"></script>
+<script src="~/Scripts/js/nivo-lightbox.min.js"></script>
+<script src="~/Scripts/js/jquery.backstretch.min.js"></script>
+<script src="~/Scripts/js/wow.min.js"></script>
+<script src="~/Scripts/js/custom.js"></script>
+<div ng-app="EpisodeApp" class="container">
+
+    <div ng-controller="EpisodeCntrl" id="usercontrol" ng-init="inituser()">
+
+        <div ng-show="divPor" class="form-horizontal">
+            <section class="navbar navbar-fixed-top custom-navbar" role="navigation">
+                <div class="container">
+
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li>
+                                <a href="@Url.Action("Index","Home")">HOME</a>
+                            </li>
+                            <li>
+                                <input type="submit" ng-click="" onclick="validate();" value="Save" class="btn-primary btn-sm" />
+
+
+
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right"></ul>
+
+
+                    </div>
+
+
+
+                </div>
+            </section>
+
+            @using (Html.BeginForm())
+            {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4><span id="errormsgspan" asp-validation-for="Year" style="background-color:#ffffff"></span></h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ServiceNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="text" id="svc" ng-model="ServiceNo" ng-required="true" ng-blur="Getuser(ServiceNo,1);" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("First Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="text" ng-model="fname" ng-required="true"  />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Last Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="text" ng-model="lname" ng-required="true" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Password", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="password" id="pass1" ng-model="pass" ng-required="true"  />
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Confirm Password", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="password" id="pass2" ng-model="conpass" ng-required="true"  />
+                    </div>
+                </div>
+
+
+
+
+
+               
+
+
+
+                <div class="form-group row-fluid form-inline">
+                    @Html.Label("Location", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <select class="form-control" id="loc1" ng-model="loc"  ng-options="g as g.LocationName for g in locc"></select>
+                    </div>
+                </div>
+                <div class="form-group row-fluid form-inline">
+                    @Html.Label("Speciality Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <select class="form-control" id="cltp1" ng-model="cltyp" ng-change=" Getdiv(loc);" ng-options="g as g.ClinicDetails for g in cltp">
+                           
+                        </select>
+                    </div>
+                </div>
+
+
+               
+
+                <div class="form-group row-fluid form-inline">
+                    @Html.Label("Division", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <select class="form-control" id="div1" ng-model="div"  ng-options="g as g.DivisionName for g in divv"></select>
+                    </div>
+                </div>
+                <table class="table table-striped ">
+
+                    <thead class="panel-heading">
+                        <tr>
+                            <th width="25%" align="left">Menu</th>
+
+                            <th width="10%" align="left">Sub Menu  </th>
+                          
+                            <th width="10%" align="left"> </th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <tr>
+
+                            <td width="25%" align="left">
+                                <select class="form-control" id="menu1" ng-model="menu" ng-change="Getsubmmenu(menu.MenuID);" ng-options="g as g.MenuName for g in mmenu"></select>
+                            </td>
+
+
+                            <td width="10%" align="left">
+                                <select class="form-control" id="smenu1" ng-model="smenu" ng-options="g as g.MenuName for g in smmenu">
+                                 
+                                </select>
+                            </td>
+                           
+                            <td width="10%" align="left">
+
+                                <input type="button" id="mataddl" class="f1" ng-click="usItem(menu.MenuID,menu.MenuName,smenu.MenuID,smenu.MenuName)" value="Add" />
+                                <span id="errormsgspan" asp-validation-for="Year" style="background-color:#1bff00"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+
+                <table class="table table-striped">
+
+                    <tr ng-repeat="item in userItems" class="item">
+                        <td><b>{{item.tmenu}}</b> </td>
+                        <td><b>:</b>{{item.tsmenu}} </td>
+                      
+                        <td><button ng-click="usremoveItem($index)">Remove</button></td>
+                    </tr>
+                </table>
+               
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                     
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+
+       <script>
+   
+    function validate() {
+        debugger;
+       // var selectv = $("#dgcat").find(":selected").text();
+        //if (angular.element(document.getElementById('usercontrol')).scope().bitems.length < 1) {
+        //    alert("Please Select Daignosis catagory");
+        //    //$("#errormsgspan").text("Please Select Daignosis catagory");
+        //    return false;
+    
+        var selectv4 = $("#pass1").val();
+        var selectv5 = $("#pass2").val();
+        var selectv6 = $("#svc").val();
+     if (selectv4 == "") {
+            $("#errormsgspan").text("Password Required!");
+            return false;
+        }
+    else if (selectv5 == "") {
+            $("#errormsgspan").text("Confirm Password Required!");
+            return false;
+        }
+       else if (selectv4 != selectv5) {
+            $("#errormsgspan").text("Password Not Match!");
+            return false;
+        }
+       else if (selectv6 == "") {
+           $("#errormsgspan").text("Service No Required!");
+           return false;
+       }
+         else {
+            $("#errormsgspan").text(" ");
+            angular.element(document.getElementById('usercontrol')).scope().Saveuser();
+            return true;
+        }
+
+    }
+    
+</script>

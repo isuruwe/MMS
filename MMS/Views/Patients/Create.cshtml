@@ -1,0 +1,298 @@
+﻿@model Patient
+
+@{
+    ViewBag.Title = "MMS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts
+{
+    <script src="~/Scripts/Episode/v6/Module.js"></script>
+    <script src="~/Scripts/Episode/v6/Service.js"></script>
+    <script src="~/Scripts/Episode/v6/Controller.js"></script>
+}
+
+<script src="~/Scripts/Angular/angular.js"></script>
+<script src="~/Scripts/Angular/angular-sanitize.js"></script>
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/angular-route.js"></script>
+
+<script src="~/Scripts/js/jquery.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/ui-bootstrap-tpls-1.3.3.min.js"></script>
+<link rel="stylesheet" href="~/Scripts/css/bootstrap.min.css">
+<link rel="stylesheet" href="~/Scripts/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/Scripts/css/animate.min.css">
+<link rel="stylesheet" href="~/Scripts/css/et-line-font.css">
+<link rel="stylesheet" href="~/Scripts/css/nivo-lightbox.css">
+@*<link rel="stylesheet" href="~/Scripts/css/nivo_themes/default/default.css">*@
+<link rel="stylesheet" href="~/Scripts/css/style.css">
+
+
+@*<script src="~/Scripts/js/bootstrap.min.js"></script>*@
+<script src="~/Scripts/js/smoothscroll.js"></script>
+<script src="~/Scripts/js/isotope.js"></script>
+<script src="~/Scripts/js/imagesloaded.min.js"></script>
+<script src="~/Scripts/js/nivo-lightbox.min.js"></script>
+<script src="~/Scripts/js/jquery.backstretch.min.js"></script>
+<script src="~/Scripts/js/wow.min.js"></script>
+<script src="~/Scripts/js/custom.js"></script>
+
+
+
+@*@using (Html.BeginForm("Create", "Patients", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal col-md-10">
+      
+            <div ng-app="EpisodeApp" class="container">
+
+               
+                    <div ng-controller="EpisodeCntrl" data-ng-init="Getrnks();getsex();">*@
+
+                        <section class="navbar navbar-fixed-top custom-navbar" role="navigation">
+                            <div class="container">
+
+                                <div class="collapse navbar-collapse">
+                                    <ul class="nav navbar-nav navbar-left">
+                                        <li>
+                                            <a href="@Url.Action("Index","Home")">HOME</a>
+                                           
+                                        </li>
+                                        <li>
+                                            <div ng-show="showerror">
+                                                <span style="background-color:white">Error!</span>
+                                            </div>
+
+                                        </li>
+                                    </ul>
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <li><a href="/MMS/Patients/Index">Back to Patient List</a></li>
+                                        <li><a href="/MMS/Patient_Detail/NurseCreate">Back To Sick Parade</a></li>
+                                        @*<li><a href="#work">Lab Report</a></li>*@
+                                        @*<li><a href="#about" class="smoothScroll">ABOUT</a></li>*@
+
+                                        @*<li><a href="#portfolio" class="smoothScroll">PORTFOLIO</a></li>*@
+
+                                    </ul>
+
+                                </div>
+
+
+
+                            </div>
+                        </section>
+
+                        @*<hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+
+                        <h1>Manual Registration for Servicemen has stopped.</h1>
+
+                        @*<div class="form-group row-fluid form-inline">
+                    @Html.LabelFor(model => model.ServiceNo, "ServiceNo", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+
+                        @*<input type="text" ng-model="SerNo"  ng-blur="Getserviceno(SerNo)" />
+                        @Html.EditorFor(model => model.ServiceNo, new { htmlAttributes = new { @class = "form-control", ng_model = "ServicePersonnels[0].ActiveNo", ng_blur = "Getserviceno(ServicePersonnels[0].ActiveNo)" } })
+                        @Html.ValidationMessageFor(model => model.ServiceNo, "", new { @class = "text-danger" })
+                        @Html.ValidationMessage("CustomError", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row-fluid form-inline">
+                    @Html.LabelFor(model => model.RANK, "RANK", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("RANK", null, htmlAttributes: new { @class = "form-control", ng_model = "ranksa", ng_options = " c as c.RNK_NAME for c in rnks track by c.RANK1" })
+                        @Html.ValidationMessageFor(model => model.RANK, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+
+                <div class="form-group row-fluid form-inline">
+                    @Html.LabelFor(model => model.RelationshipType, "RelationshipType", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("RelationshipType", null, htmlAttributes: new { @class = "form-control", ng_model = "rt", id = "loclisd2" })
+                        @Html.ValidationMessageFor(model => model.RelationshipType, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div ng-show="rt=='5'">
+                    <div class="form-group">
+                        @Html.Label("Child", htmlAttributes: new { @class = "control-label col-md-2"  })
+                        <select id="pdnew" ng-model="pidnew" ng-change="ServicePersonnels[0].Surname=pidnew.ChildName;getdty(pidnew.DOB);getses(pidnew.Gender);getchno(pidnew.DOB);" ng-options="d as d.ChildName for d in childet">
+                            <option value="">-- Select Child --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Child No", htmlAttributes: new { @class = "control-label col-md-2" })
+                       @Html.EditorFor(model => model.ChildNo, new { htmlAttributes = new { @class = "form-control", ng_model = "chno" } })
+
+                            @Html.ValidationMessageFor(model => model.ChildNo, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+                <div ng-hide="rt=='5'">
+                    <div class="form-group row-fluid form-inline">
+                        @Html.LabelFor(model => model.Initials, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Initials, new { htmlAttributes = new { @class = "form-control", ng_model = "ServicePersonnels[0].Initials" } })
+                            @Html.ValidationMessageFor(model => model.Initials, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                    <div class="form-group row-fluid form-inline">
+                        @Html.LabelFor(model => model.Surname, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control", ng_model = "ServicePersonnels[0].Surname" } })
+
+                            @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="form-group row-fluid form-inline ">
+                        @Html.LabelFor(model => model.LocationID, "LocationID", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("LocationID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.LocationID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row-fluid form-inline">
+                        @Html.LabelFor(model => model.Service_Type, "Service Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("Service_Type", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Service_Type, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row-fluid form-inline">
+                        @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control", ng_model = "dtofb" } })
+                            @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row-fluid form-inline">
+                        @Html.LabelFor(model => model.Sex, "Sex", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("Sex", null, htmlAttributes: new { @class = "form-control", ng_model = "getsxs", ng_options = "c as c.SxDetail for c in sxs track by c.SxID" })
+                            @Html.ValidationMessageFor(model => model.Sex, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row-fluid form-inline">
+                        @Html.LabelFor(model => model.BGID, "Blood Group", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("BGID", null, htmlAttributes: new { @class = "form-control", asp_for = "Year", id = "loclisd1" })
+                            @Html.ValidationMessageFor(model => model.BGID, "", new { @class = "text-danger" })
+
+
+                        </div>
+                    </div>
+
+                    <div class="form-group row-fluid form-inline">
+                        @Html.LabelFor(model => model.MedCatID, "Medical Catagory", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("MedCatID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.MedCatID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row-fluid form-inline">
+                        @Html.LabelFor(model => model.Status, "Status", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("Status", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row-fluid form-inline">
+        @Html.LabelFor(model => model.CreatedBy, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row-fluid form-inline">
+        @Html.LabelFor(model => model.CreatedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CreatedDate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row-fluid form-inline">
+        @Html.LabelFor(model => model.CreatedMachine, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CreatedMachine, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CreatedMachine, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row-fluid form-inline">
+        @Html.LabelFor(model => model.ModifiedBy, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ModifiedBy, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ModifiedBy, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row-fluid form-inline">
+        @Html.LabelFor(model => model.ModifiedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ModifiedDate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ModifiedDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row-fluid form-inline">
+        @Html.LabelFor(model => model.ModifiedMachine, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ModifiedMachine, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ModifiedMachine, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="btn btn-default" />
+                            <span id="errormsgspan" asp-validation-for="Year" style="background-color:hotpink"></span>
+                            <script>
+                                function validate() {
+
+                                }
+                                $("form").submit(function () {
+                                    debugger;
+                                    var selectv = $("#loclisd1").find(":selected").text();
+                                    var selectv2 = $("#pdnew").find(":selected").text();
+                                    var selectv1 = $("#loclisd2").val();
+                                    if (selectv1 == "5" && selectv2 == "-- Select Child --") {
+                                        $("#errormsgspan").text("Please Select Child");
+                                        return false;
+                                    }
+                                    if (selectv == "-select-") {
+                                        $("#errormsgspan").text("Please Select Blood Group");
+                                        return false;
+                                    } else {
+                                        $("#errormsgspan").text(" ");
+                                        return true;
+                                    }
+                                });
+                            </script>
+                        </div>
+
+
+
+                    </div>
+                </div>
+        </div>
+    </div>
+                      
+    }
+                      
+            @*<div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>*@

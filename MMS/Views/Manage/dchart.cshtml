@@ -1,0 +1,272 @@
+﻿
+
+@{
+    ViewBag.Title = "dchart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/Angular/angular.js"></script>
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/angular-route.js"></script>
+<script src="@Url.Content("~/Scripts/js/jquery.min.js")"></script>
+
+<script src="~/Scripts/js/jquery.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/ui-bootstrap-tpls-1.3.3.min.js"></script>
+<link rel="stylesheet" href="~/Scripts/css/bootstrap.min.css">
+<link rel="stylesheet" href="~/Scripts/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/Scripts/css/animate.min.css">
+<link rel="stylesheet" href="~/Scripts/css/et-line-font.css">
+<link rel="stylesheet" href="~/Scripts/css/nivo-lightbox.css">
+@*<link rel="stylesheet" href="~/Scripts/css/nivo_themes/default/default.css">*@
+<link rel="stylesheet" href="~/Scripts/css/style.css">
+
+
+@*<script src="~/Scripts/js/bootstrap.min.js"></script>*@
+<script src="~/Scripts/js/smoothscroll.js"></script>
+<script src="~/Scripts/js/isotope.js"></script>
+<script src="~/Scripts/js/imagesloaded.min.js"></script>
+<script src="~/Scripts/js/nivo-lightbox.min.js"></script>
+<script src="~/Scripts/js/jquery.backstretch.min.js"></script>
+<script src="~/Scripts/js/wow.min.js"></script>
+<script src="~/Scripts/js/custom.js"></script>
+<h2></h2>
+<div class="col-lg-12">
+    <section class="navbar navbar-fixed-top custom-navbar" role="navigation">
+        <div class="container hidden-print  ">
+
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-left">
+                    <li>
+                        <a href="@Url.Action("Index","Home")">HOME</a>
+                    </li>
+                    <li>
+                       
+
+
+
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                 
+                    @*<li><a href="#about" class="smoothScroll">ABOUT</a></li>*@
+
+                    @*<li><a href="#portfolio" class="smoothScroll">PORTFOLIO</a></li>*@
+
+                </ul>
+
+            </div>
+
+
+
+        </div>
+    </section>
+    <div class="row">
+      
+
+        <select class="form-control" id="loc" >
+            <option value="">--Select Location--</option>
+            <option value="AHP"> AHP  </option>       
+              <option value="AMP">AMP</option>
+            <option value="BCL">BCL</option>
+            <option value="BIA">    BIA</option>
+            <option value="BTD">  BTD</option>
+            <option value="CBO">  CBO</option>
+            <option value="CBY">  CBY</option>
+            <option value="DLA">  DLA</option>
+            <option value="EKA"> EKA</option>
+            <option value="HIN"> HIN</option>
+            <option value="IRM">  IRM</option>
+            <option value="KAT"> KAT</option>
+            <option value="KGL">   KGL</option>
+            <option value="KTK">   KTK</option>
+            <option value="MGR">   MGR</option>
+    <option value="MOW">   MOW</option>
+            <option value="MTV">  MTV</option>
+            <option value="PGL">   PGL</option>
+            <option value="PKM">  PKM</option>
+            <option value="PLV">   PLV</option>
+            <option value="PLY">  PLY</option>
+            <option value="RMA">   RMA</option>
+            <option value="SGR">  SGR</option>  
+            <option value="VNA">   VNA</option>
+            <option value="WAN">    VNI</option>
+            <option value="WLA">    WLA</option>
+
+</select><input class="form-control" type="month" id="yerc" value="2019-03" />
+        <div class="form-group" id="c1">
+            @*<select class="btn-facebook" id="yerc">
+                <option value="10/2018">2018 October</option>
+                <option value="11/2018">2018 November</option>
+                <option value="12/2018">2018 December</option>
+                <option value="01/2019">2019 January</option>
+                <option value="02/2019">2019 Februery</option>
+                <option value="03/2019" selected="selected">2019 March</option>
+                <option value="04/2019">2019 April</option>
+            </select>*@
+          
+            <h1 style="text-align:center">Camp Sick Report Count</h1>
+            <canvas id="MultiLineChart" width="400" height="150"></canvas>
+        </div>
+    </div>
+</div>
+<div class="col-lg-12">
+    <div class="row" id="c2">
+        @*<h1 style="text-align:center">Sick Report Count vs Doctor Investigated CBO</h1>*@
+        <canvas id="LineChart" width="400" height="150"></canvas>
+    </div>
+</div>
+@*<div class="col-lg-12">
+    <div class="row" id="c3">
+        <h1 style="text-align:center">Sick Report Count vs Doctor Investigated RMA</h1>
+        <canvas id="Chart1" width="400" height="150"></canvas>
+    </div>
+</div>
+<div class="col-lg-12">
+    <div class="row" id="c4">
+        <h1 style="text-align:center">Sick Report Count vs Doctor Investigated KAT</h1>
+        <canvas id="Chart2" width="400" height="150"></canvas>
+    </div>
+</div>*@
+@section scripts {
+    <script src="~/Scripts/Chart.js"></script>
+    <script src="~/Scripts/Common.js"></script>
+    <script>
+        $(function () {
+            $("#yerc").change(function () {
+                debugger;
+                $('#MultiLineChart').remove();
+                $('#LineChart').remove();
+                //$('#Chart1').remove();
+                //$('#Chart2').remove();
+
+                $('#c1').append('<canvas id="MultiLineChart" width="400" height="150"></canvas>');
+                $('#c2').append('<canvas id="LineChart" width="400" height="150"></canvas>');
+                //$('#c3').append('<canvas id="Chart1" width="400" height="150"></canvas>');
+                //$('#c4').append('<canvas id="Chart2" width="400" height="150"></canvas>');
+                
+                var myLineChart = null;
+                var v = $(this).val();
+                var v1 = $("#loc").val();
+                
+                var c = document.getElementById("MultiLineChart");
+                var ctx = c.getContext("2d");
+                var tData = $.getValues("/MMS/Manage/MultiLineChartData?id=" + v);
+                if (myLineChart) {
+                   myLineChart.destroy();
+                }
+                 myLineChart = new Chart(ctx, {
+                    type: 'line',
+                    data: tData
+                 });
+                 myLineChart.update();
+                //----Multi Line Chart---------
+                 var myLineChart1 = null;
+                 if (myLineChart1) {
+                     window.myLineChart1.destroy();
+                 }
+                var c = document.getElementById("LineChart");
+                var ctx = c.getContext("2d");
+                var tData = $.getValues("/MMS/Manage/LineChartData?id=" + v + "&id1=" + v1);
+
+                 myLineChart1 = new Chart(ctx, {
+                    type: 'line',
+                    data: tData
+                 });
+                 myLineChart1.update();
+                //----Multi Line Chart---------
+                // var myLineChart2 = null;
+                // if (myLineChart2) {
+                //     myLineChart2.destroy();
+                // }
+                //var c = document.getElementById("Chart1");
+                //var ctx = c.getContext("2d");
+                //var tData = $.getValues("/Manage/Chart1?id=" + v);
+                // myLineChart2 = new Chart(ctx, {
+                //    type: 'line',
+                //    data: tData
+                // });
+                // myLineChart2.update();
+                //----Multi Line Chart---------
+                // var myLineChart3 = null;
+                // if (myLineChart3) {
+                //     myLineChart3.destroy();
+                // }
+                
+                //var c = document.getElementById("Chart2");
+                //var ctx = c.getContext("2d");
+                //var tData = $.getValues("/Manage/Chart2?id=" + v);
+                // myLineChart3 = new Chart(ctx, {
+                //    type: 'line',
+                //    data: tData
+                // });
+                // myLineChart3.update();
+                 
+            });
+        });
+
+        $('#MultiLineChart').remove();
+        $('#LineChart').remove();
+        //$('#Chart1').remove();
+        //$('#Chart2').remove();
+
+        $('#c1').append('<canvas id="MultiLineChart" width="400" height="150"></canvas>');
+        $('#c2').append('<canvas id="LineChart" width="400" height="150"></canvas>');
+        //$('#c3').append('<canvas id="Chart1" width="400" height="150"></canvas>');
+        //$('#c4').append('<canvas id="Chart2" width="400" height="150"></canvas>');
+        //----Line Chart---------
+        var myLineChart4 = null;
+        if (myLineChart4 ) {
+            myLineChart4.destroy();
+            
+        }
+        var f = $("#yerc").val();
+        var c = document.getElementById("MultiLineChart");
+        var ctx = c.getContext("2d");
+        var tData = $.getValues("/MMS/Manage/MultiLineChartData?id=" + f);
+         myLineChart4 = new Chart(ctx, {
+            type: 'line',
+            data: tData
+         });
+         myLineChart4.update();
+        //----Multi Line Chart---------
+         var myLineChart5 = null;
+         if (myLineChart5) {
+             myLineChart5.destroy();
+         }
+        var c = document.getElementById("LineChart");
+        var ctx = c.getContext("2d");
+        var tData = $.getValues("/MMS/Manage/LineChartData?id=" + f);
+         myLineChart5 = new Chart(ctx, {
+            type: 'line',
+            data: tData
+         });
+         myLineChart5.update();
+        //----Multi Line Chart---------
+        // var myLineChart6 = null;
+        // if (myLineChart6 ) {
+        //     myLineChart6.destroy();
+        // }
+        //var c = document.getElementById("Chart1");
+        //var ctx = c.getContext("2d");
+        //var tData = $.getValues("/MMS/Manage/Chart1?id=" + f);
+        // myLineChart6 = new Chart(ctx, {
+        //    type: 'line',
+        //    data: tData
+        // });
+        // myLineChart6.update();
+        //----Multi Line Chart---------
+        // debugger;
+        // var myLineChart7 = null;
+        // if (myLineChart7 ) {
+        //     myLineChart7.destroy();
+        // }
+        //var c = document.getElementById("Chart2");
+        //var ctx = c.getContext("2d");
+        //var tData = $.getValues("/MMS/Manage/Chart2?id="+f);
+        // myLineChart7 = new Chart(ctx, {
+        //    type: 'line',
+        //    data: tData
+        // });
+        // myLineChart7.update();
+    </script>
+}

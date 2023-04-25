@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Lab_Report>
+
+@{
+    ViewBag.Title = "MMS";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Lab_SubCategory.CategoryID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Patient_Detail.PID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Result)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestedLocID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Issued)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IssuedTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestedTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IssuedLocID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LabImg)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lab_SubCategory.CategoryID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Patient_Detail.PID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Result)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequestedLocID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Issued)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IssuedTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequestedTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IssuedLocID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LabImg)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Lab_Index }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Lab_Index }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Lab_Index })
+        </td>
+    </tr>
+}
+
+</table>

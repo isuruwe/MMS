@@ -1,0 +1,754 @@
+﻿
+
+@{
+    ViewBag.Title = "MMS";
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts
+{
+    <script src="~/Scripts/Episode/v6/Module.js"></script>
+    <script src="~/Scripts/Episode/v6/Service.js"></script>
+    <script src="~/Scripts/Episode/v6/Controller.js"></script>
+}
+<link rel="stylesheet" href="~/Scripts/js/yearpicker.css">
+<link href="~/Scripts/css/jquery.booklet.latest.css" type="text/css" rel="stylesheet" media="screen, projection, tv" />
+<script src="~/Scripts/js/jquery.js"></script>
+<script src="~/Scripts/jquery-ui.min.js"></script>
+<script src="~/Scripts/jquery.min.js"></script>
+<script src="~/Scripts/js/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/js/metisMenu.min.js"></script>
+<script src="~/Scripts/js/sb-admin-2.js"></script>
+<script src="~/Scripts/js/dataTables.bootstrap.min.js"></script>
+<script src="~/Scripts/js/dataTables.responsive.js"></script>
+<script src="~/Scripts/Angular/angular.js"></script>
+<script src="~/Scripts/js/yearpicker.js" ></script>
+
+
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/jquery.easing.1.3.js"></script>
+<script src="~/Scripts/jquery.booklet.latest.js"></script>
+<script src="~/Scripts/angular-route.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/ui-bootstrap-tpls-1.3.3.min.js"></script>
+
+<link rel="stylesheet" href="~/Scripts/css/bootstrap.min.css">
+<link rel="stylesheet" href="~/Scripts/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/Scripts/css/animate.min.css">
+<link rel="stylesheet" href="~/Scripts/css/et-line-font.css">
+<link rel="stylesheet" href="~/Scripts/css/nivo-lightbox.css">
+
+@*<link rel="stylesheet" href="~/Scripts/css/nivo_themes/default/default.css">*@
+<link rel="stylesheet" href="~/Scripts/css/style.css">
+@*<script src="~/Scripts/js/bootstrap.min.js"></script>*@
+<script src="~/Scripts/js/smoothscroll.js"></script>
+<script src="~/Scripts/js/isotope.js"></script>
+<script src="~/Scripts/js/imagesloaded.min.js"></script>
+<script src="~/Scripts/js/nivo-lightbox.min.js"></script>
+<script src="~/Scripts/js/jquery.backstretch.min.js"></script>
+<script src="~/Scripts/js/wow.min.js"></script>
+<script src="~/Scripts/js/custom.js"></script>
+<script>
+    jQuery.extend(jQuery.expr[':'], {
+    focusable: function (el, index, selector) {
+        return $(el).is('a, button, :input, [tabindex]');
+    }
+    });
+   
+   
+    $(document).on('keypress', 'input,select', function (e) {
+        if (e.which == 13) {
+            debugger;
+            e.preventDefault();
+            // Get all focusable elements on the page
+            var $canfocus = $(':focusable');
+            var index = $canfocus.index(document.activeElement) + 1;
+            if (index >= $canfocus.length) index = 0;
+            $canfocus.eq(index).focus();
+        }
+    });
+
+    $(document).on('keypress', '#srch', function (e) {
+
+        if (e.which == 13) {
+            debugger;
+            // Enter key pressed
+            document.location = $("#change1").attr('href');
+        }
+    });
+    $(document).on('keypress', '#drdur', function (e) {
+
+        if (e.which == 13) {
+            debugger;
+            // Enter key pressed
+           $("#draddl").trigger('click');
+        }
+    });
+    $(document).on('keypress', '#mdt', function (e) {
+
+        if (e.which == 13) {
+            debugger;
+            // Enter key pressed
+            $("#mbtn").click();
+        }
+    });
+
+
+
+
+</script>
+@using PagedList.Mvc;
+@using PagedList;
+
+
+<div ng-app="EpisodeApp" class="container">
+
+    <div ng-controller="EpisodeCntrl" id="epicontrol" ng-init="initpatient()">
+
+        <div ng-show="divPor" class="form-horizontal">
+
+            <section class="navbar navbar-fixed-top custom-navbar" role="navigation">
+                <div class="container">
+
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li>
+                                <a href="@Url.Action("Index","Home")">HOME</a>
+
+                            </li>
+                            <li>
+                                <input type="submit" ng-click="" onclick="validate();" value="Save" class="btn-primary btn-sm" />
+
+
+
+                            </li>
+                            <li>
+                                <div ng-show="showerror">
+                                    <span style="background-color:black">Error!</span>
+                                </div>
+
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a id="tp" href="#work">TOP</a></li>
+                            @* <li><a href="#work" class="smoothScroll">NURSE</a></li>*@
+                            @*<li><a href="#about" class="smoothScroll">ABOUT</a></li>*@
+                            <li><a href="#portfolio">Medical Examination</a></li>
+                           
+                        </ul>
+
+
+                    </div>
+
+
+
+                </div>
+            </section><div class="row">
+                <div class="col-ld-2">
+                </div>
+                <div class="col-ld-2">
+                    @Session["loginuser"].ToString()
+                </div>
+            </div>
+            <section id="work">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <h3>Patients</h3>
+                        </div><div class="form-group">
+                            <div class="col-md-7">
+                                <div class="col-md-6">
+                                    <input type="text" id="srch" class="form-control" style="color:blue" ng-model="SearchString" />
+                                </div>
+                                <div class="col-md-2"><a id="change1" type='submit' value='Search' name='Search' class="btn-primary btn text-uppercase " href="@Url.Action("mednurse","Patient_Detail")?id={{SearchString}}">search</a></div>
+                            </div>
+                        </div>
+                        <div class="form-horizontal" style="border:1px solid #0094ff; overflow-y:hidden">
+                            @if (ViewBag.OnePageOfProducts.Count > 0)
+                            {
+                                <table id="asdfhg" class="table table-striped">
+                                    <tr>
+                                        <th>
+
+                                        </th>
+                                        <th>
+                                            Service No
+                                        </th>
+                                        <th>
+                                            Name
+                                        </th>
+                                        <th>
+                                            Present Complain
+                                        </th>
+                                        <th>
+                                            Date
+                                        </th>
+
+                                        <th>
+                                            Status
+                                        </th>
+                                        @*<th></th>*@
+
+                                    </tr>
+
+                                    @foreach (var item in (IEnumerable<MMS.Models.getdocdetail>)ViewBag.OnePageOfProducts)
+                                    {
+                                        <tr>
+                                            <td align="left">
+                                                @item.relasiondet
+                                            </td>
+                                            <td align="left">
+                                                <a href="#portfolio" ng-click="GetPatientmedical('@item.sno',1);loadchild2('@item.sno');">@item.sno</a>
+                                            </td>
+                                            <td align="left">
+                                                <a href="#portfolio" ng-click="GetPatientmedical('@item.sno',1);loadchild2('@item.sno');">
+                                                    @if (item.relasiont == 1)
+                                                    { @item.rnkname}
+                                                    @item.inililes @item.sname
+                                                </a>
+
+                                            </td>
+                                            <td align="left">
+                                                @item.pcomoplian
+                                            </td>
+                                            <td align="left">
+                                                @item.crdate
+                                            </td>
+
+                                            <td align="left">
+                                                @if (item.pstatus == "2")
+                                                { <label>Active</label> }
+                                                else
+                                                {
+                                                    <label>Inactive</label>
+                                                }
+                                            </td>
+                                            @*<td>
+                                                <a href="" ng-click="delPatient('@item.pdids');">
+
+                                                    Delete
+                                                </a>
+                                            </td>*@
+                                        </tr>
+                                    }
+
+                                </table>
+                            }
+                            else
+                            {
+                                //Response.Redirect("~/Home/Index/");
+                                <div><center>No Results</center></div>
+                            }
+                            @Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("mednurse", new { page, currentFilter = ViewBag.CurrentFilter }))
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+            <section id="portfolio">
+                <div class="container">
+                    <div class="row">
+
+
+
+                        <div class="col-md-12 col-sm-12">
+                            <div class="section-title">
+
+                                <h1 class="heading bold">Medical Examination</h1>
+                                <hr>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 ">
+
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    Patient Details
+                                </div>
+                                <iv class="panel-body">
+
+
+                                    <span id="errormsgspannurse" asp-validation-for="Year" style="color:red"></span>
+                                    <div class="form-group">
+                                        @Html.Label("Service Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            <select id="st" ng-model="st">
+                                                <option value="1">Officer</option>
+                                                <option selected value="2">Other Rank</option>
+                                                <option selected value="3">Civilian</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        @Html.Label("ServiceNo", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            <input type="text" ng-model="ServiceNo" ng-required="true" ng-blur="GetPatientmedical(st,ServiceNo,1);loadimgbystp(st,ServiceNo);" />
+                                        </div>
+                                    </div>
+
+                                    @*<div class="form-group">
+                @Html.Label("RANK", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    {{ServicePersonnels[0].RNK_NAME}}
+                </div>
+            </div>*@
+
+                                    <div class="form-group">
+                                        @Html.Label("Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+
+                                            <span class="test" style="font-weight:bold"> {{  GetPatientDet[0].Relationship=='1' ? GetPatientDet[0].RNK_NAME : '' }}</span>            {{ GetPatientDet[0].Relationship!='5' ? GetPatientDet[0].Initials : ''}}    {{GetPatientDet[0].Surname}}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Label("Sex", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            {{GetPatientDet[0].SxDetail}}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.Label("Medical Category", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            {{  GetPatientDet[0].Relationship=='1' ?   GetPatientDet[0].Category : '' }}
+                                        </div>
+                                    </div>
+                                    <div class="panel-group ">
+                                        <div class="panel panel-default ">
+
+                                            <div class="panel-body">
+                                                <img data-ng-src="{{primage}}" style="width:200px;" />
+
+
+
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                        
+
+
+                            </div>
+                        </div>
+                        <div class="col-lg-4 ">
+
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                   Make Sure the PFT Year is Correct
+                                </div>
+                                <div class="panel-body">
+
+
+                                    <span id="errormsgspansick2" asp-validation-for="Year" style="color:red"></span>
+
+
+
+                                   
+                                    <div class="form-group">
+                                        @Html.Label("PFT Year", htmlAttributes: new { @class = "control-label col-md-5" })
+                                        <div class="col-md-5">
+                                            <input  type="number"   id="yrr2" ng-model="yrr" ng-required="true" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("PFT Session", htmlAttributes: new { @class = "control-label col-md-5" })
+                                        <div class="col-md-5">
+                                            <select id="sess1" ng-model="sess1">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">Special-1</option>
+                                                <option value="5">Special-2</option>
+                                                <option value="6">Special-3</option>
+                                               
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("Age", htmlAttributes: new { @class = "control-label col-md-5" })
+                                        <div class="col-md-5">
+                                            <input type="text" id="age" ng-model="age" ng-required="true" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("Height(m)", htmlAttributes: new { @class = "control-label col-md-5", @disabled = "disabled" })
+                                        *<div class="col-md-5">
+                                            @*<input type="text" id="hght" ng-model="hght" ng-required="true" disabled/>*@
+                                        <div class="col-md-10">
+                                            <span class="test" style="font-weight:bold"> {{  GetPatientDet[0].Relationship=='1' ? GetPatientDetv[0].Height : '' }}</span>           
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("Weight(Kg)", htmlAttributes: new { @class = "control-label col-md-5", @disabled = "disabled" })
+                                        <div class="col-md-5">
+                                            @*<input type="text" id="wght" ng-model="wght" ng-required="true" disabled/>*@
+                                            <div class="col-md-10">
+                                                <span class="test" style="font-weight:bold"> {{  GetPatientDet[0].Relationship=='1' ? GetPatientDetv[0].Weight : '' }}</span>        
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("BMI", htmlAttributes: new { @class = "control-label col-md-5", @disabled = "disabled" })
+                                        <div class="col-md-5">
+                                            @*<input type="text" id="bmi" ng-model="bmi" ng-required="true" disabled/>*@
+                                            <div class="col-md-10">
+                                                <span class="test" style="font-weight:bold"> {{  GetPatientDet[0].Relationship=='1' ? GetPatientDetv[0].BMI_Value : '' }}</span>          
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("Dental Status", htmlAttributes: new { @class = "control-label col-md-5", @disabled = "disabled" })
+                                        <div class="col-md-5">
+                                            @*<input type="text" id="bmi" ng-model="bmi" ng-required="true" disabled/>*@
+                                            <div class="col-md-10">
+                                                <span class="test" style="font-weight:bold"> {{  GetPatientDetv[0].MedicalStatus=='2' ? 'Dental Fit' : 'Dental Unfit' }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("Blood Presure", htmlAttributes: new { @class = "control-label col-md-5" })
+                                        <div class="col-md-5">
+                                            <input type="text" placeholder="120/80" title="Enter Correct Format"    id="bp"  name="bp" ng-model="bp" ng-required="true" />
+                                          
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("Vision", htmlAttributes: new { @class = "control-label col-md-5" })
+                                        <div class="col-md-3">
+                                            RE
+                                            <select  id="vsion1" ng-model="vsion1" >
+                                                <option value="6/6">6/6</option>
+                                                <option value="6/9">6/9</option>
+                                                <option value="6/12">6/12</option>
+                                                <option value="6/18">6/18</option>
+                                                <option value="6/24">6/24</option>
+                                                <option value="6/36">6/36</option>
+                                                <option value="6/60">6/60</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            LE
+                                            <select  id="vsion" ng-model="vsion">
+                                                <option value="6/6">6/6</option>
+                                                <option value="6/9">6/9</option>
+                                                <option value="6/12">6/12</option>
+                                                <option value="6/18">6/18</option>
+                                                <option value="6/24">6/24</option>
+                                                <option value="6/36">6/36</option>
+                                                <option value="6/60">6/60</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("With Spectacles Vision", htmlAttributes: new { @class = "control-label col-md-5" })
+                                        <div class="col-md-3">
+                                            RE
+                                            <select id="vsion1" ng-model="vsion2">
+                                                <option value="6/6">6/6</option>
+                                                <option value="6/9">6/9</option>
+                                                <option value="6/12">6/12</option>
+                                                <option value="6/18">6/18</option>
+                                                <option value="6/24">6/24</option>
+                                                <option value="6/36">6/36</option>
+                                                <option value="6/60">6/60</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            LE
+                                            <select id="vsion" ng-model="vsion3">
+                                                <option value="6/6">6/6</option>
+                                                <option value="6/9">6/9</option>
+                                                <option value="6/12">6/12</option>
+                                                <option value="6/18">6/18</option>
+                                                <option value="6/24">6/24</option>
+                                                <option value="6/36">6/36</option>
+                                                <option value="6/60">6/60</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 ">
+
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    Data
+                                </div>
+                                <div class="panel-body">
+
+
+                                    <span id="errormsgspansick2" asp-validation-for="Year" style="color:red"></span>
+
+
+
+
+                                    
+                                   
+                                    <div class="form-group">
+                                        @Html.Label("HBA1C", htmlAttributes: new { @class = "control-label col-md-5" })
+                                        <div class="col-md-5">
+                                            <input type="text" id="hbac" ng-model="hbac" ng-required="true" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("Urine Sugar (Over 30)", htmlAttributes: new { @class = "control-label col-md-5" })
+                                        <div class="col-md-5">
+                                            <input type="text" id="usugar" ng-model="usugar" ng-required="true" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("FBS (Over 35)", htmlAttributes: new { @class = "control-label col-md-5" })
+                                        <div class="col-md-5">
+                                            <input type="text" id="fbs" ng-model="fbs" ng-required="true" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("Total Cholestrol (Over 35)", htmlAttributes: new { @class = "control-label col-md-5" })
+                                        <div class="col-md-5">
+                                            <input type="text" id="tcol" ng-model="tcol" ng-required="true" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("LDL", htmlAttributes: new { @class = "control-label col-md-5" })
+                                        <div class="col-md-5">
+                                            <input type="text" id="ldl" ng-model="ldl" ng-required="true" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.Label("Triglyceride", htmlAttributes: new { @class = "control-label col-md-5" })
+                                        <div class="col-md-5">
+                                            <input type="text" id="tri" ng-model="tri" ng-required="true" />
+                                        </div>
+                                    </div>
+                                    @*<div class="form-group">
+                                        @Html.Label("Ex ECG(Over 45)", htmlAttributes: new { @class = "control-label col-md-5" })
+                                        <div class="col-md-5">
+                                            <input type="text" id="execg" ng-model="execg" ng-required="true" />
+                                        </div>
+                                    </div>*@
+
+                                    <div class="form-group">
+                                        @Html.Label("Ex ECG(Over 40)", htmlAttributes: new { @class = "control-label col-md-5" })
+                                        <div class="col-md-5">
+                                            <select id="EXID" ng-model="execg" ng-required="true" >
+                                                <option value="1">POSITIVE</option>
+                                                <option value="0">NEGATIVE</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row-fluid form-inline">
+                                        <input type="submit" onclick="validate();" value="Save Data" class="btn-sm btn-primary" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 ">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Last Issued Tests</div>
+                                <table class="table table-striped  ">
+                                    <thead>
+                                        <tr>
+                                            <th width="40%" align="left"></th>
+                                            <th></th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-repeat="field in lablist">
+                                        <tr>
+                                            <td width="20%" align="left">
+                                                <a ng-click="viewlabtest(field.TestSID,field.TubeCategory);">
+                                                    {{field.CategoryName}}
+                                                </a>
+                                            </td>
+                                            <td width="20%" align="left">{{field.RequestedTime |limitTo:-15 |limitTo:13 | date:'dd/MM/yyyy HH:mm'  }}</td>
+                                            <td>
+                                                <div ng-if="field.Issued=='0'"> Pending</div>
+                                                <div ng-if="field.Issued=='1'">Issued</div>
+                                            </td>
+                                           
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 ">
+
+                            <div class="panel panel-primary">
+
+                                <div class="panel-heading"></div>
+                                <div class="panel-body" id="prins">
+                                    <table class="table table-striped  ">
+
+                                        <thead>
+                                            <tr>
+                                                <th width="40%" align="left">Test Name</th>
+                                                <th width="20%" align="left">Result</th>
+                                                <th width="20%" align="left">Result Status</th>
+                                                <th width="20%" align="left">Reference Range Unit</th>
+                                                <th width="20%" align="left">Reference Range</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody ng-repeat="field in viewlab">
+                                            {{viewlab[0].CategoryName}}
+                                            <tr>
+                                                <td width="40%" align="left"> {{field.SubCategoryName}}</td>
+                                                <td width="20%" align="left"> {{field.testResult}}</td>
+                                                <td width="20%" align="left"> {{field.teststatus}}</td>
+                                                <td width="20%" align="left">{{ field.ReferenceRangeUnit }}</td>
+                                                <td width="20%" align="left"> {{field.ReferenceRange}}</td>
+                                            </tr>
+                                        </tbody>
+
+
+
+                                        @*
+                        <span ng-show="myForm.{{field.name}}.$dirty && myForm.{{field.name}}.$error.required">Required!</span>*@
+                                        @*
+                        <span ng-show="myForm.{{field.name}}.$dirty && myForm.{{field.name}}.$error.email">Not email!</span>*@
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+
+
+            <div ng-show="showloader" id="loading">
+                <img id="loading-image" src="~/Content/Images/loading.png" />
+            </div>
+
+       
+
+       
+         
+     
+
+      
+          
+         
+        </div>
+    </div>
+
+</div>
+<script>
+    $(document).ready(function () {
+
+       // $('.yrr').yearpicker();
+        // document.getElementById('mdt').valueAsDate = new Date();
+
+    });
+    $(function () {
+        //single book
+        debugger;
+
+        //$('#mybook').booklet({
+        //    width: '100%',
+        //    height: 800,
+        //   // closed: true,
+        //    autoCenter: true,
+        //    arrows: true,
+        //    direction: "RTL"
+
+        //});
+
+    });
+    function vwlb(id,id1) {
+        debugger;
+        angular.element(document.getElementById('epicontrol')).scope().viewlabtest(id,id1);
+    }
+    function validate1() {
+        debugger;
+        $('#mybook').booklet({
+            width: '100%',
+            height: 800,
+            //closed: true,
+            autoCenter: true,
+            arrows: true,
+            direction: "RTL"
+
+        });
+    }
+    function validate() {
+        debugger;
+
+        var selectv1 = $("#age").val();
+        var selectv10 = $("#yrr2").val();
+        var selectv2 = $("#hght").val();
+        var selectv3 = $("#wght").val();
+        var selectv4 = $("#bmi").val();
+        var selectv5 = $("#bp").val();
+        var selectv6 = $("#vsion").find(":selected").text();
+        var selectv8 = $("#vsion1").find(":selected").text();
+        var selectv7 = $("#hbac").val();
+        var selectv9 = $("#sess1").find(":selected").text();
+       
+        if (selectv1 == "") {
+            $("#errormsgspansick2").text("Please enter Age");
+            return false;
+        }
+
+        //else if (selectv2 == "") {
+        //    $("#errormsgspansick2").text("Please enter height");
+        //    return false;
+        //}
+        //else if (selectv3 == "") {
+        //    $("#errormsgspansick2").text("Please enter weight");
+        //    return false;
+        //}
+        //else if (selectv4 == "") {
+        //    $("#errormsgspansick2").text("Please enter bmi");
+        //    return false;
+        //}
+        else if (selectv5 == "") {
+            $("#errormsgspansick2").text("Please enter Blood Pressure");
+            return false;
+        }
+        else if (selectv10 == "") {
+            $("#errormsgspansick2").text("Please enter PFT Year");
+            return false;
+        }
+        else if (selectv6 == "") {
+            $("#errormsgspansick2").text("Please enter vision");
+            return false;
+        }
+        else if (selectv8 == "") {
+            $("#errormsgspansick2").text("Please enter vision");
+            return false;
+        }
+        else if (selectv9 == "") {
+            $("#errormsgspansick2").text("Please select Session");
+            return false;
+        }
+        else {
+            $("#errormsgspansick2").text(" ");
+
+            angular.element(document.getElementById('epicontrol')).scope().Submitmedex();
+
+            return true;
+        }
+
+    }
+    $("form").submit(function () {
+
+    });
+</script>
+
+

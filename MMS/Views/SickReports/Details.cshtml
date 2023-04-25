@@ -1,0 +1,106 @@
+﻿@model MMS.SickReport
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SickReport</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.svcid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.svcid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ismarried)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ismarried)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isliveout)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isliveout)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.age)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.age)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.service)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.service)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isduty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isduty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.islow)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.islow)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.regdate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.regdate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.createdby)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.createdby)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.modifiedby)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modifiedby)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.modifieddate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modifieddate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PDID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

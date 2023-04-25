@@ -1,0 +1,177 @@
+﻿@model Patient_Detail
+
+@{
+    ViewBag.Title = "MMS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Patient_Detail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OPD_Master.CurrentNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OPD_Master.CurrentNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Patient.LocationID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patient.LocationID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status1.StatusDec)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status1.StatusDec)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Present_Complain)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Present_Complain)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.History_PresentComplain)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.History_PresentComplain)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Other_Complain)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Other_Complain)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.History_OtherComplain)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.History_OtherComplain)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Special_Sickness)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Special_Sickness)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hypersensivity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hypersensivity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Examination)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Examination)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OPD_Diagnosis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OPD_Diagnosis)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedMachine)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedMachine)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedMachine)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedMachine)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DocSID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DocSID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Treatment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Treatment)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

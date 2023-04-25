@@ -1,0 +1,106 @@
+﻿@model MMS.DrugItem
+
+@{
+    ViewBag.Title = "MMS";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DrugItem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemShortDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemShortDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UOF)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UOF)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TypeOfForm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TypeOfForm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DrugGroup)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DrugGroup)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StorageCodition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StorageCodition)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remarks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StockQuantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StockQuantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LocationID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LocationID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DrugID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

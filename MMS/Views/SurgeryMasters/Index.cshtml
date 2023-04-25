@@ -1,0 +1,165 @@
+﻿@model IEnumerable<MMS.SurgeryMaster>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PDID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TheaterTable)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProcedureName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AnesthesiaType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateodProcedure)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Indication)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Surgeon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AssistedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Anesthetist)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MOAnesthesia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AntibioticP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Positioning)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DurationofSurgery)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Incision)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PrcedureDetail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DrainsInserted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BloodLoss)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClosureMethod)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SutureMaterials)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MonitoringInstruct)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nutrition)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SpecialIntruct)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PDID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TheaterTable)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProcedureName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AnesthesiaType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateodProcedure)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Indication)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Surgeon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AssistedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Anesthetist)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MOAnesthesia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AntibioticP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Positioning)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DurationofSurgery)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Incision)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PrcedureDetail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DrainsInserted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BloodLoss)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClosureMethod)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SutureMaterials)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MonitoringInstruct)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nutrition)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SpecialIntruct)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.SGID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.SGID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.SGID })
+        </td>
+    </tr>
+}
+
+</table>

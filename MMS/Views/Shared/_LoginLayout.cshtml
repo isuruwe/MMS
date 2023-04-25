@@ -1,0 +1,41 @@
+﻿<!DOCTYPE>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>MMS</title>
+
+
+    <link rel="stylesheet" href="~/Content/reset.css">
+
+
+
+    <link rel="stylesheet" href="~/Content/style.css">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+
+
+
+</head>
+
+<body>
+
+
+    <!-- Form Mixin-->
+    <!-- Input Mixin-->
+    <!-- Button Mixin-->
+    <!-- Pen Title-->
+    @RenderBody()
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="~/Content/html5shiv.js"></script>
+    <script src="~/Content/respond.js"></script>
+
+
+
+</body>
+</html>
+

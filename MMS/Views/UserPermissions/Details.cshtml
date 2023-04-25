@@ -1,0 +1,139 @@
+﻿@model UserPermission
+
+@{
+    ViewBag.Title = "MMS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UserPermission</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MenuItem.MenuName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MenuItem.MenuName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.RoleID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.RoleID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SysID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SysID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LocationID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LocationID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DivisionID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DivisionID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RoleID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RoleID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SHO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SHO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NEW)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NEW)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EDT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EDT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DEL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DEL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SER)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SER)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CER)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CER)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedUser)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.UserProfID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,111 @@
+﻿@model IEnumerable<Patient_Detail>
+
+@*@using PagedList.Mvc;
+@using PagedList;*@
+@*<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />*@
+
+@{
+    ViewBag.Title = "MMS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            CurrentNo
+        </th>
+        <th>
+            LocationID
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Present_Complain
+        </th>
+        <th>
+            History_PresentComplain
+        </th>
+        <th>
+            Other_Complain
+        </th>
+        <th>
+            History_OtherComplain
+        </th>
+        <th>
+            Special_Sickness
+        </th>
+        <th>
+            Hypersensivity
+        </th>
+        <th>
+            Examination
+        </th>
+        <th>
+            OPD_Diagnosis
+        </th>
+
+        <th>
+            DocSID
+        </th>
+        <th>
+            Treatment
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @*@item.OPD_Master.CurrentNo*@
+        </td>
+        <td>
+            @item.Patient.LocationID
+        </td>
+        <td>
+            @item.Status1.StatusDec
+        </td>
+        <td>
+            @item.Present_Complain
+        </td>
+        <td>
+            @item.History_PresentComplain
+        </td>
+        <td>
+            @item.Other_Complain
+        </td>
+        <td>
+            @item.History_OtherComplain
+        </td>
+        <td>
+            @item.Special_Sickness
+        </td>
+        <td>
+            @item.Hypersensivity
+        </td>
+        <td>
+            @item.Examination
+        </td>
+        <td>
+            @item.OPD_Diagnosis
+        </td>
+        <td>
+            @item.DocSID
+        </td>
+        <td>
+            @item.Treatment
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PDID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PDID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PDID })
+        </td>
+    </tr>
+}
+
+</table>

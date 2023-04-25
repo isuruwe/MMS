@@ -1,0 +1,327 @@
+﻿
+@{
+    ViewBag.Title = "AcceptReport";
+}
+
+
+@using PagedList.Mvc;
+@using PagedList;
+
+@section scripts
+{
+    <script src="~/Scripts/Lab/Module.js"></script>
+    <script src="~/Scripts/Lab/Service.js"></script>
+    <script src="~/Scripts/Lab/Controller.js"></script>
+}
+
+<script src="~/Scripts/js/jquery.js"></script>
+<script src="~/Scripts/js/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/js/metisMenu.min.js"></script>
+<script src="~/Scripts/js/sb-admin-2.js"></script>
+<script src="~/Scripts/js/dataTables.bootstrap.min.js"></script>
+<script src="~/Scripts/js/dataTables.responsive.js"></script>
+<script src="~/Scripts/Angular/angular.js"></script>
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/angular-route.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/ui-bootstrap-tpls-1.3.3.min.js"></script>
+<script src="~/Scripts/angular-filter.js"></script>
+<link rel="stylesheet" href="~/Scripts/css/bootstrap.min.css">
+<link rel="stylesheet" href="~/Scripts/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/Scripts/css/animate.min.css">
+<link rel="stylesheet" href="~/Scripts/css/et-line-font.css">
+<link rel="stylesheet" href="~/Scripts/css/nivo-lightbox.css">
+@*<link rel="stylesheet" href="~/Scripts/css/nivo_themes/default/default.css">*@
+<link rel="stylesheet" href="~/Scripts/css/style.css">
+@*<script src="~/Scripts/js/bootstrap.min.js"></script>*@
+<script src="~/Scripts/js/smoothscroll.js"></script>
+<script src="~/Scripts/js/isotope.js"></script>
+<script src="~/Scripts/js/imagesloaded.min.js"></script>
+<script src="~/Scripts/js/nivo-lightbox.min.js"></script>
+<script src="~/Scripts/js/jquery.backstretch.min.js"></script>
+<script src="~/Scripts/js/wow.min.js"></script>
+<script src="~/Scripts/js/custom.js"></script>
+<style>
+    #labtb {
+        font-size: 12px;
+    }
+</style>
+
+<div ng-app="LabApp" class="container">
+
+    <div ng-controller="LabCntrl">
+
+        <div ng-show="divPor" class="form-horizontal ">
+
+            <section class="navbar navbar-fixed-top custom-navbar" role="navigation">
+                <div class="container hidden-print  ">
+
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li>
+                                <a href="@Url.Action("Index","Home")">HOME</a>
+                            </li>
+                            <li>
+                                <input type="submit" ng-click="printDiv('prins');" value="Print" class="btn-primary btn-sm" />
+
+
+
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#about">HOME</a></li>
+                            <li><a href="#work">Lab Report</a></li>
+                            @*<li><a href="#about" class="smoothScroll">ABOUT</a></li>*@
+
+                            @*<li><a href="#portfolio" class="smoothScroll">PORTFOLIO</a></li>*@
+
+                        </ul>
+
+                    </div>
+
+
+
+                </div>
+            </section>
+
+            <section id="about">
+                <div class="container " id="uper">
+                    <div class="row">
+
+                        <div class="col-md-12 col-sm-12">
+                            <h3></h3>
+
+                        </div>
+
+                        @*<script>
+                            $(document).ready(function () {
+
+                                document.getElementById('datest').valueAsDate = new Date();
+                            });
+
+                            </script>*@
+
+
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <div class="col-md-6">
+                                    Service No
+                                    <input type="text" class="form-control" style="color:blue" ng-model="SearchString" />
+                                </div><div class="col-md-6">
+                                    Date
+                                    <input id="datest" type="date" class="form-control" style="color:blue" ng-model="SearchString1" />
+                                </div>
+                                <div class="col-md-2">
+                                    <a class="btn-primary btn text-uppercase" href="@Url.Action("AcceptReport","Lab_Report")?id={{SearchString}}&id1={{SearchString1}}">Search</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-horizontal" style="border:1px solid #0094ff; overflow-y:hidden">
+                            @if (ViewBag.OnePageOfProducts.Count > 0)
+                            {
+                                <table id="ladt" class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>
+
+                                            </th>
+                                            <th>
+                                                Service No
+                                            </th>
+                                            <th>
+                                                Name
+                                            </th>
+                                            <th>
+                                                Date
+                                            </th>
+                                            <th>
+                                                Test Name
+                                            </th>
+
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var item in (IEnumerable<MMS.Models.getlabdata>)ViewBag.OnePageOfProducts)
+                                        {
+
+
+                                            <tr>
+                                                <td align="left">
+                                                    @item.relasiont
+                                                </td>
+
+                                                <td align="left">
+
+                                                    <a href="#work" ng-click="viewlabtest('@item.tsid','@item.tubecat');loadcamp();">@item.sno </a>
+                                                </td>
+                                                <td align="left">
+
+                                                    <a href="#work" ng-click="viewlabtest('@item.tsid','@item.tubecat');loadcamp();">@item.rnkname&nbsp;@item.inililes&nbsp;@item.sname</a>
+                                                </td>
+                                                <td align="left">
+                                                    @item.rtime
+                                                </td>
+
+                                                <td align="left">
+                                                    @item.catname
+                                                </td>
+
+
+                                            </tr>
+                                        }
+                                    </tbody>
+
+</table>
+                            }
+                            else
+                            {
+                                //Response.Redirect("~/Home/Index/");
+                                <div><center>No Results</center></div>
+                            }
+                             </div>
+
+                    </div>
+                </div>
+            </section>
+            <div ng-show="showloader" id="loading">
+                <img id="loading-image" src="~/Content/Images/loading.png" />
+            </div>
+
+            <section id="work">
+                <div class="container">
+                    <div class="row">
+
+
+                        <div name="prins" id="prins" class="psa " align="center">
+                            <div class="col-md-12 col-sm-12 ">
+                                <br /><br /><br /><br /><br /><br />
+                                <div class="section-title">
+                                    <h5>
+                                        @*{{viewcamp[0].Description}}*@
+                                    </h5>
+
+                                    <table>
+                                        <tbody ng-repeat="field in viewlab  | unique:'CategoryName'">
+                                            <tr>
+                                                <td> {{field.CategoryName}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <p>
+                                        Sevice No:{{viewlab[0].ServiceNo}}
+                                        <br />Name:{{viewlab[0].Relationship=='SELF' ?  viewlab[0].RNK_NAME : '' }}  {{viewlab[0].Initials}}  {{viewlab[0].Surname}}
+                                        <br />Date:{{viewlab[0].RequestedTime | date:'dd/MM/yyyy HH:mm'  }}
+                                    </p>
+                                    <hr>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12   wow fadeInUp" data-wow-delay="0.5s">
+
+                                @*<h3>Patient Details</h3>*@
+
+
+
+
+
+                                <table name="sd" id="labtb">
+                                    <thead>
+                                        <tr>
+                                            <th width="30%" align="left">Test Name</th>
+                                            <th width="20%" align="left">Result</th>
+                                            <th width="20%" align="left"></th>
+                                            <th width="20%" align="left">Reference Range</th>
+                                            <th width="20%" align="left"></th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-repeat="field in viewlab">
+                                        <tr>
+                                            <td>
+
+                                                <div ng-if="field.CategoryName!=viewlab[$index - 1].CategoryName&&viewlab[$index - 1].CategoryName!=null"> <hr /></div>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+
+                                            <td width="30%" align="left"> {{field.SubCategoryName}}</td>
+                                            <td width="20%" align="left">
+
+
+                                                <div ng-show="isNumber(field.testResult)">{{  field.testResult-0 | number   }}</div>
+                                                <div ng-show="!isNumber(field.testResult)">{{  field.testResult   }}</div>
+
+                                            </td>
+
+                                            <td width="20%" align="left"> {{field.teststatus}}</td>
+                                            <td width="20%" align="left">{{ field.ReferenceRange }}</td>
+                                            <td width="20%" align="left"> {{field.ReferenceRangeUnit}}</td>
+
+
+                                        </tr>
+                                        
+                                    </tbody>
+                                   
+
+                                    @* <span ng-show="myForm.{{field.name}}.$dirty && myForm.{{field.name}}.$error.required">Required!</span>*@
+                                    @* <span ng-show="myForm.{{field.name}}.$dirty && myForm.{{field.name}}.$error.email">Not email!</span>*@
+                                </table>
+                                <input ng-click="acctest(viewlab[0].Testsid,viewlab[0].tubcat);" value="Accept" class="btn btn-default hidden-print" />
+                            </div>
+                            @*<button ng-disabled="myForm.$invalid">Submit</button>*@
+                            
+
+
+                            @*<div class="form-group">
+                                    @Html.Label("ServiceNo", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        <input type="text" ng-model="ServiceNo" ng-required="true" ng-blur="GetPatient(ServiceNo,Relationship.RTypeID)" />
+                                    </div>
+                                </div>
+                                <div ng-show="GetPatientDet.length > 1">
+                                    <div class="form-group">
+                                        @Html.Label("Child", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <select id="pdnew" ng-model="pidnew" ng-change="loadchild(pidnew)" ng-options="d as d.Initials for d in PatientDetdr">
+                                            <option value="">-- Select Child --</option>
+                                        </select>
+                                    </div>
+                                </div>*@
+
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+        </div>
+
+    </div>
+</div>
+<script>
+  $(function () {
+      $("#ladt").DataTable({
+          "ordering": false,
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#asdfhg_wrapper .col-md-6:eq(0)');
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });</script>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

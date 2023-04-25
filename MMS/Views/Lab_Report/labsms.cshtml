@@ -1,0 +1,241 @@
+﻿@*@model Lab_Report*@
+
+@{
+    ViewBag.Title = "MMS";
+
+}
+
+
+@using PagedList.Mvc;
+@using PagedList;
+
+@section scripts
+{
+    <script src="~/Scripts/Lab/Module.js"></script>
+    <script src="~/Scripts/Lab/Service.js"></script>
+    <script src="~/Scripts/Lab/Controller.js"></script>
+}
+
+<script src="~/Scripts/Angular/angular.js"></script>
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/angular-route.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+<script src="~/Scripts/js/jquery.js"></script>
+<script src="~/Scripts/js/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/js/metisMenu.min.js"></script>
+<script src="~/Scripts/js/sb-admin-2.js"></script>
+<script src="~/Scripts/js/dataTables.bootstrap.min.js"></script>
+<script src="~/Scripts/js/dataTables.responsive.js"></script>
+<script src="~/Scripts/Angular/angular.js"></script>
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/angular-route.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/ui-bootstrap-tpls-1.3.3.min.js"></script>
+<script src="~/Scripts/angular-filter.js"></script>
+<link rel="stylesheet" href="~/Scripts/css/bootstrap.min.css">
+<link rel="stylesheet" href="~/Scripts/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/Scripts/css/animate.min.css">
+<link rel="stylesheet" href="~/Scripts/css/et-line-font.css">
+<link rel="stylesheet" href="~/Scripts/css/nivo-lightbox.css">
+@*<link rel="stylesheet" href="~/Scripts/css/nivo_themes/default/default.css">*@
+<link rel="stylesheet" href="~/Scripts/css/style.css">
+@*<script src="~/Scripts/js/bootstrap.min.js"></script>*@
+<script src="~/Scripts/js/smoothscroll.js"></script>
+<script src="~/Scripts/js/isotope.js"></script>
+<script src="~/Scripts/js/imagesloaded.min.js"></script>
+<script src="~/Scripts/js/nivo-lightbox.min.js"></script>
+<script src="~/Scripts/js/jquery.backstretch.min.js"></script>
+<script src="~/Scripts/js/wow.min.js"></script>
+<script src="~/Scripts/js/custom.js"></script>
+
+
+
+<div ng-app="LabApp" class="container">
+
+    <div ng-controller="LabCntrl">
+
+        <div ng-show="divPor" class="form-horizontal">
+
+            <section class="navbar navbar-fixed-top custom-navbar" role="navigation">
+                <div class="container">
+
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li>
+                                <a href="@Url.Action("Index","Home")">HOME</a>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#about">HOME</a></li>
+                            <li><a href="#work">Lab Report</a></li>
+                            @*<li><a href="#about" class="smoothScroll">ABOUT</a></li>*@
+
+                            @*<li><a href="#portfolio" class="smoothScroll">PORTFOLIO</a></li>*@
+
+                        </ul>
+
+                    </div>
+
+
+
+                </div>
+            </section>
+
+            <section id="about">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-md-12 col-sm-12">
+                            <h3></h3>
+
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-7">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" style="color:blue" ng-model="SearchString" />
+                                </div><div class="col-md-2">
+                                    <a class="btn-primary btn text-uppercase" href="@Url.Action("Create","Lab_Report")?id={{SearchString}}">Search</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-horizontal" style="border:1px solid #0094ff; overflow-y:hidden">
+                            @if (ViewBag.OnePageOfProducts.Count > 0)
+                            {
+                                <table class="table table-striped">
+                                    <tr>
+                                        <th>
+                                            Service No
+                                        </th>
+                                        <th>
+                                            Name
+                                        </th>
+                                        <th>
+                                            Test Name
+                                        </th>
+
+
+
+                                    </tr>
+
+                                    @foreach (var item in ViewBag.OnePageOfProducts)
+                                    {
+                                        <tr>
+                                            <td align="left">
+
+                                                <a href="#work" ng-click="loadlabtest('@item.PDID','@item.Lab_SubCategory.Lab_MainCategory.CategoryID');">@item.Patient_Detail.Patient.ServiceNo </a>
+                                            </td>
+                                            <td align="left">
+                                                <a href="#work" ng-click="loadlabtest('@item.PDID','@item.Lab_SubCategory.Lab_MainCategory.CategoryID');">@item.Patient_Detail.Patient.rank1.RNK_NAME @item.Patient_Detail.Patient.Initials @item.Patient_Detail.Patient.Surname </a>
+                                            </td>
+                                            <td align="left">
+                                                @item.Lab_SubCategory.Lab_MainCategory.CategoryName
+                                            </td>
+
+
+                                        </tr>
+                                    }
+
+                                </table>
+                            }
+                            else
+                            {
+                                //Response.Redirect("~/Home/Index/");
+                                <div><ce3ter>No Results</ce3ter></div>
+                            }
+                            @Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("Create", new { page }))
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section id="work">
+                <div class="container">
+                    <div class="row">
+
+
+
+                        <div class="col-md-12 col-sm-12">
+                            <div class="section-title">
+                                <strong>01</strong>
+                                <h1 class="heading bold">Lab Report</h1>
+                                <hr>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12   wow fadeInUp" data-wow-delay="0.1s">
+
+                            @*<h3>Patient Details</h3>*@
+
+
+                            <div class="form-group " align="center">
+                                <table class="table table-striped" name="sd">
+
+                                    <thead>
+                                        <tr>
+                                            <th width="20%" align="left">Test Name</th>
+                                            <th width="20%" align="left">Result</th>
+                                            <th width="20%" align="left">Reference Range Unit</th>
+                                            <th width="20%" align="left">Reference Range</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-repeat="field in loadlab">
+                                        <tr>
+                                            <td width="20%" align="left"> {{field.SubCategoryName}}</td>
+                                            <td width="20%" align="left">
+                                                <input dynamic-name="field.SubCategoryName"
+                                                       type="text"
+                                                       placeholder="{{ field.ReferenceRangeUnit }}"
+                                                       ng-blur="addItem(filters[field.SubCategoryName],field.Lab_Index)"
+                                                       ng-model="filters[field.SubCategoryName]">
+                                            </td>
+                                            <td width="20%" align="left">{{ field.ReferenceRangeUnit }}</td>
+                                            <td width="20%" align="left"> {{field.ReferenceRange}}</td>
+                                        </tr>
+                                    </tbody>
+                                    @* <span ng-show="myForm.{{field.name}}.$dirty && myForm.{{field.name}}.$error.required">Required!</span>*@
+                                    @* <span ng-show="myForm.{{field.name}}.$dirty && myForm.{{field.name}}.$error.email">Not email!</span>*@
+                                </table>
+                                @*<button ng-disabled="myForm.$invalid">Submit</button>*@
+
+                            </div>
+
+                            @*<div class="form-group">
+                                    @Html.Label("ServiceNo", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        <input type="text" ng-model="ServiceNo" ng-required="true" ng-blur="GetPatient(ServiceNo,Relationship.RTypeID)" />
+                                    </div>
+                                </div>
+                                <div ng-show="GetPatientDet.length > 1">
+                                    <div class="form-group">
+                                        @Html.Label("Child", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <select id="pdnew" ng-model="pidnew" ng-change="loadchild(pidnew)" ng-options="d as d.Initials for d in PatientDetdr">
+                                            <option value="">-- Select Child --</option>
+                                        </select>
+                                    </div>
+                                </div>*@
+
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <div style="position:fixed;left:30px;top:50%;">
+
+                <input type="submit" ng-click="Savereport();" value="Save" class="btn-lg btn-primary" />
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

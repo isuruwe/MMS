@@ -1,0 +1,202 @@
+﻿@model MMS.SurgeryMaster
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SurgeryMaster</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PDID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PDID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TheaterTable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TheaterTable)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProcedureName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProcedureName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnesthesiaType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AnesthesiaType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateodProcedure)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateodProcedure)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Indication)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Indication)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Surgeon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Surgeon)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AssistedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssistedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Anesthetist)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Anesthetist)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MOAnesthesia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MOAnesthesia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AntibioticP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AntibioticP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Positioning)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Positioning)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DurationofSurgery)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DurationofSurgery)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Incision)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Incision)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrcedureDetail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrcedureDetail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DrainsInserted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DrainsInserted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BloodLoss)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BloodLoss)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClosureMethod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClosureMethod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SutureMaterials)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SutureMaterials)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MonitoringInstruct)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MonitoringInstruct)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nutrition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nutrition)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SpecialIntruct)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SpecialIntruct)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SGID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

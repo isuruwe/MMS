@@ -1,0 +1,121 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@*<link href="~/Content/tb.css" rel="stylesheet" type="text/css" />*@
+
+@{
+    ViewBag.Title = "MMS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts
+{
+    <script src="~/Scripts/Episode/v6/Module.js"></script>
+    <script src="~/Scripts/Episode/v6/Service.js"></script>
+    <script src="~/Scripts/Episode/v6/Controller.js"></script>
+}
+
+<script src="~/Scripts/Angular/angular.js"></script>
+<script src="~/Scripts/Angular/angular-sanitize.js"></script>
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/angular-route.js"></script>
+<script src="~/Scripts/js/jquery.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/ui-bootstrap-tpls-1.3.3.min.js"></script>
+<link rel="stylesheet" href="~/Scripts/css/bootstrap.min.css">
+<link rel="stylesheet" href="~/Scripts/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/Scripts/css/animate.min.css">
+<link rel="stylesheet" href="~/Scripts/css/et-line-font.css">
+<link rel="stylesheet" href="~/Scripts/css/nivo-lightbox.css">
+@*<link rel="stylesheet" href="~/Scripts/css/nivo_themes/default/default.css">*@
+<link rel="stylesheet" href="~/Scripts/css/style.css">
+
+
+@*<script src="~/Scripts/js/bootstrap.min.js"></script>*@
+<script src="~/Scripts/js/smoothscroll.js"></script>
+<script src="~/Scripts/js/isotope.js"></script>
+<script src="~/Scripts/js/imagesloaded.min.js"></script>
+<script src="~/Scripts/js/nivo-lightbox.min.js"></script>
+<script src="~/Scripts/js/jquery.backstretch.min.js"></script>
+<script src="~/Scripts/js/wow.min.js"></script>
+<script src="~/Scripts/js/custom.js"></script>
+<div ng-app="EpisodeApp" class="container">
+
+    <div ng-controller="EpisodeCntrl" id="epicontrol" ng-init="">
+
+        <div ng-show="divPor" class="form-horizontal">
+            <section class="navbar navbar-fixed-top custom-navbar" role="navigation">
+                <div class="container">
+
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li>
+                                <a href="@Url.Action("Index","Home")">HOME</a>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right"></ul>
+
+
+                    </div>
+
+
+
+                </div>
+            </section>
+
+            
+            <div class="form-group">
+                <div class="col-md-7">
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" style="color:blue" ng-model="SearchString" />
+                    </div> <div class="col-md-2">
+                        <a class="btn-primary btn text-uppercase " href="@Url.Action("Index","Users")?id={{SearchString}}">Search</a>
+                    </div>
+
+                </div>
+                <table class="table " width="1">
+                    <tr>
+
+                        <th>
+                            UserName
+                        </th>
+                        <th>
+                            Location
+                        </th>
+                        <th>
+                            
+                        </th>
+                    </tr>
+
+                    @foreach (var item in ViewBag.OnePageOfProducts)
+                    {
+                        <tr>
+
+                            <td width="5%">
+                                @item.UserName
+                            </td>
+                            <td width="5%">
+                                @item.LocationID
+                            </td>
+
+<td width="5%">
+  <a class="btn-danger btn text-uppercase " onclick="validate(@item.UserID);">Reset Password</a>
+                        </td>
+
+                        </tr>
+                    }
+
+                </table>
+                <br />
+                @Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function validate(id) {
+        if (confirm("Do Yoy want to reset password")) {
+            window.location.href = "/MMS/Users/resetpass/" + id + "";
+        }
+    }
+
+</script>

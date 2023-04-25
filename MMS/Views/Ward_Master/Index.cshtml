@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Ward_Master>
+
+@{
+    ViewBag.Title = "MMS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Location.STN_CODE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CurrentBedCount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaxPatients)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bed_Count)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ward_Type)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Location.STN_CODE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CurrentBedCount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaxPatients)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bed_Count)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ward_Type)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Ward_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Ward_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Ward_ID })
+        </td>
+    </tr>
+}
+
+</table>

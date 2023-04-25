@@ -1,0 +1,80 @@
+﻿@model MMS.DrugStockTransection
+
+@{
+    ViewBag.Title = "MMS";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>DrugStockTransection</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StockID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StockID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IssuedTo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssuedTo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IssuedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssuedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BatchID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BatchID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TransectionQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TransectionQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IssuedUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IssuedUser)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
